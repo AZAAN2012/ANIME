@@ -1,0 +1,233 @@
+<html>
+    <head>
+        <title>ANIMES WATCHED</title>
+   <style>
+    :root {
+        --bg1: #050816;
+        --bg2: #0b1120;
+        --bg3: #140d2d;
+        --panel: rgba(15, 23, 42, 0.8);
+        --line: #5eead4;
+        --line-2: #a78bfa;
+        --text: #e2e8f0;
+        --heading: #f8fafc;
+        --pink: #ff4fd8;
+        --purple: #8b5cf6;
+        --cyan: #22d3ee;
+        --green: #67f0a4;
+        --gold: #fbbf24;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: radial-gradient(circle at top, rgba(34, 211, 238, 0.18), transparent 30%), linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+        color: var(--text);
+        padding: 30px 20px;
+    }
+
+    p {
+        font-size: 1.3rem;
+        color: var(--heading);
+        text-align: center;
+        letter-spacing: 0.08em;
+        margin-bottom: 22px;
+        text-shadow: 0 0 12px rgba(34, 211, 238, 0.9), 0 0 22px rgba(168, 85, 247, 0.8);
+    }
+
+    ol {
+        max-width: 560px;
+        margin: 0 auto 28px auto;
+        background: rgba(12, 18, 35, 0.8);
+        border: 1px solid rgba(94, 234, 212, 0.8);
+        border-radius: 16px;
+        padding: 22px 30px;
+        box-shadow: 0 0 15px rgba(34, 211, 238, 0.6), 0 0 30px rgba(168, 85, 247, 0.35);
+    }
+
+    li {
+        color: var(--heading);
+        margin: 10px 0;
+        font-weight: 700;
+        text-shadow: 0 0 10px rgba(255, 79, 216, 0.35);
+    }
+
+    table {
+        width: 100%;
+        max-width: 1150px;
+        margin: 0 auto 30px auto;
+        border-collapse: collapse;
+        background: rgba(10, 15, 30, 0.82);
+        border: 1px solid rgba(94, 234, 212, 0.9);
+        box-shadow: 0 0 18px rgba(34, 211, 238, 0.45), 0 0 28px rgba(168, 85, 247, 0.32);
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    th, td {
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        padding: 15px 12px;
+        text-align: center;
+    }
+
+    th {
+        background: linear-gradient(135deg, var(--pink), var(--purple), var(--cyan));
+        color: #ffffff;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    }
+
+    tr:nth-child(even) td {
+        background: rgba(34, 211, 238, 0.08);
+    }
+
+    tr:nth-child(odd) td {
+        background: rgba(15, 23, 42, 0.92);
+    }
+
+    h2 {
+        text-align: center;
+        color: var(--green);
+        text-shadow: 0 0 15px rgba(103, 240, 164, 0.75);
+    }
+
+    h3 {
+        text-align: left;
+        color: #dbeafe;
+        margin-top: 25px;
+        padding: 12px 16px;
+        background: rgba(12, 18, 35, 0.8);
+        border-left: 4px solid var(--gold);
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(251, 191, 36, 0.25);
+        text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+    }
+
+    .image-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        max-width: 980px;
+        margin: 22px auto 30px;
+    }
+
+    img {
+        width: min(100%, 900px);
+        max-width: 900px;
+        height: auto;
+        object-fit: contain;
+        margin: 0;
+        border-radius: 18px;
+        border: 3px solid rgba(94, 234, 212, 0.9);
+        box-shadow: 0 0 15px rgba(34, 211, 238, 0.8), 0 0 25px rgba(168, 85, 247, 0.6), 0 15px 28px rgba(0, 0, 0, 0.45);
+        display: block;
+        background: rgba(15, 23, 42, 0.7);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    img:hover {
+        transform: scale(1.015);
+        border-color: var(--pink);
+        box-shadow: 0 0 18px rgba(255, 79, 216, 0.9), 0 0 35px rgba(168, 85, 247, 0.7), 0 18px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .audio-player {
+        max-width: 550px;
+        margin: 0 auto 22px;
+        text-align: center;
+        background: rgba(12, 18, 35, 0.8);
+        border: 1px solid rgba(94, 234, 212, 0.7);
+        border-radius: 12px;
+        padding: 12px 14px;
+        box-shadow: 0 0 15px rgba(34, 211, 238, 0.35), 0 0 25px rgba(168, 85, 247, 0.25);
+    }
+
+    .audio-player label {
+        display: block;
+        margin-bottom: 8px;
+        color: #ecfeff;
+        font-weight: bold;
+        letter-spacing: 0.04em;
+        text-shadow: 0 0 12px rgba(34, 211, 238, 0.7);
+    }
+
+    .audio-player audio {
+        display: block;
+        width: 100%;
+        margin-top: 8px;
+        border-radius: 8px;
+        filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.5));
+    }
+   </style>
+    </head>
+    <body> 
+        <p> THE ANIMES I HAVE WATCHED FROM 2026,FEB</p>
+        <ul>
+           <li>ATTACK ON TITAN(REMAININIG)</li>
+            <li>SOLO LEVELING</li>
+           <li>JUJUTSU KAISEN</li>
+        </ul>
+        <table>
+            <tr>
+                   <th>ANIME NAME</th>
+                   <th>STARTED</th>
+                   <th>FINISHED</th>
+                   <th>RATING</th>
+                   <th>FAVOURITE CHARACTER</th>
+            </tr>
+            <tr>
+                <td>ATTACK ON TITAN</td>
+                <td>FEB,26,2026</td>
+                <td>2 SEASONS(PAUSED)</td>
+                <td>8/10</td>
+                <td>EREN JAEGER</td>
+            </tr>
+            <tr>
+                <td>SOLO LEVELING</td>
+                <td>MAR,22,2026</td>
+                <td>APR,18,2026</td>
+                <td>11/10</td>
+                <td>SUNG JIN WOO</td>
+            </tr>
+            <tr>
+                <td>JUJUTSU KAISEN</td>
+                <td>JUL,3,2026</td>
+                <td>AUG,20,2026</td>
+                <td>10/10</td>
+                <td>RYOMEN SUKUNA</td>  
+            </tr>      
+        </table>
+        <div class="image-row">
+            <img src="eren and founding Titan.jfif" alt="Attack on Titan">
+            <img src="2026-02-26 (18).png" alt="Solo Leveling">
+            <img src="Untitled.png" alt="Jujutsu Kaisen">
+        </div>
+    <h3>ORIGINAL WORK BELONGS TO MUHAMMAD AZAAN YOUSAF</h3>
+
+    <div class="audio-player">
+        <label>EREN JAEGER</label>
+        <audio controls>
+            <source src="tatakae-eren.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+   <div class="audio-player">
+    <label>SUNG JIN WOO</label>
+
+    <audio controls preload="auto" src="./jinwoo.mp3?v=2">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+    </div>
+
+    <div class="audio-player">
+        <label>RYOMEN SUKUNA</label>
+        <audio controls>
+            <source src="sukuna.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    </body>
+</html>
