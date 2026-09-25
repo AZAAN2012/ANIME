@@ -1,681 +1,749 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANIMES WATCHED</title>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const overlay = document.createElement("div");
-            overlay.className = "custom-alert-overlay show";
-            overlay.innerHTML = `
-                <div class="custom-alert-box" role="alert" aria-live="assertive">
-                    <div class="alert-badge">NOTICE</div>
-                    <h3>Original Work</h3>
-                    <p>ORIGINAL WORK OF MUHAMMAD AZAAN</p>
-                    <button class="alert-close">UNDERSTOOD <br> DONT COPY!!</button>
-                </div>
-            `;
-            document.body.appendChild(overlay);
-
-            const closeButton = overlay.querySelector(".alert-close");
-            closeButton.addEventListener("click", function () {
-                overlay.classList.remove("show");
-                setTimeout(function () {
-                    overlay.remove();
-                }, 250);
-            });
-        });
-    </script>
-
-    <style>
-        :root {
-            --bg1: #030a18;
-            --bg2: #08192f;
-            --bg3: #120d2a;
-            --panel: rgba(10, 15, 30, 0.82);
-            --line: #6ef2ff;
-            --line-2: #6cb8ff;
-            --text: #e2e8f0;
-            --heading: #f8fafc;
-            --pink: #ff57d8;
-            --purple: #7c6cff;
-            --cyan: #3fd7ff;
-            --green: #67f0a4;
-            --gold: #fbbf24;
-            --anime-red: #ff5f7a;
-            --anime-blue: #4ce1ff;
-            --anime-pink: #ff5ae0;
-            --anime-violet: #7b6fff;
-            --anime-gold: #ffd166;
-            --hero-glow: #4ce1ff;
-            --hero-glow-2: #7bbcff;
-            --list-glow: #7bcfff;
-            --list-alt: #8af3d8;
-            --table-glow: #5fe8ff;
-            --table-glow-2: #8fb8ff;
-            --card-glow: #5fe8ff;
-            --card-glow-2: #6aa8ff;
-            --audio-glow: #8ef0d1;
-            --audio-glow-2: #9ac7ff;
-            --popup-glow: #5ec8ff;
-            --popup-glow-2: #88a8ff;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            color: var(--text);
-            min-height: 100vh;
-            padding: 35px 20px 60px;
-            background:
-                radial-gradient(circle at 15% 15%, rgba(76,225,255,.24), transparent 22%),
-                radial-gradient(circle at 80% 18%, rgba(84,140,255,.22), transparent 25%),
-                radial-gradient(circle at 50% 90%, rgba(123,111,255,.24), transparent 35%),
-                linear-gradient(135deg, #030a18 0%, #091b2f 35%, #120d2a 100%);
-            overflow-x: hidden;
-        }
-
-        body::before,
-        body::after {
-            content: "";
-            position: fixed;
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: .18;
-            pointer-events: none;
-            z-index: -1;
-            animation: floatGlow 7s ease-in-out infinite alternate;
-        }
-
-        body::before {
-            background: var(--anime-blue);
-            top: 10%;
-            left: -100px;
-            box-shadow: 0 0 90px rgba(76,225,255,.75);
-        }
-
-        body::after {
-            background: #6aa8ff;
-            right: -100px;
-            bottom: 10%;
-            animation-delay: 2s;
-            box-shadow: 0 0 90px rgba(106,168,255,.7);
-        }
-
-        @keyframes floatGlow {
-            from { transform: translateY(0) scale(1); }
-            to { transform: translateY(50px) scale(1.15); }
-        }
-
-        /* TOP TITLE */
-        .hero {
-            max-width: 1150px;
-            margin: 0 auto 30px;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 7px 15px;
-            border: 1px solid rgba(76,225,255,.95);
-            border-radius: 999px;
-            color: var(--hero-glow);
-            background: rgba(76,225,255,.08);
-            font-size: .75rem;
-            font-weight: 800;
-            letter-spacing: .16em;
-            margin-bottom: 12px;
-            box-shadow: 0 0 18px rgba(76,225,255,.45), 0 0 28px rgba(106,168,255,.22);
-        }
-
-        h1 {
-            margin: 0;
-            font-size: clamp(2.5rem, 7vw, 5.5rem);
-            line-height: 1;
-            font-weight: 900;
-            letter-spacing: .05em;
-            background: linear-gradient(90deg, var(--anime-blue), #eafcff, #8bb9ff, #68d8ff, var(--anime-blue));
-            background-size: 300% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: titleShine 6s linear infinite;
-            text-shadow: 0 0 35px rgba(76,225,255,.25), 0 0 45px rgba(107,160,255,.18);
-        }
-
-        @keyframes titleShine {
-            to { background-position: 300% center; }
-        }
-
-        .hero::after {
-            content: "";
-            display: block;
-            width: min(420px, 70%);
-            height: 2px;
-            margin: 22px auto 0;
-            background: linear-gradient(90deg, transparent, var(--anime-blue), #8bb9ff, var(--anime-blue), transparent);
-            box-shadow: 0 0 14px rgba(76,225,255,.9), 0 0 18px rgba(107,160,255,.7);
-            animation: linePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes linePulse {
-            0%, 100% { opacity: .55; transform: scaleX(.8); }
-            50% { opacity: 1; transform: scaleX(1); }
-        }
-
-        .subtitle {
-            margin: 15px auto 0;
-            max-width: 700px;
-            font-size: 1rem;
-            color: #cbd5e1;
-            letter-spacing: .08em;
-        }
-
-        /* INTRO LIST */
-        .watched-list {
-            max-width: 700px;
-            margin: 0 auto 35px;
-            padding: 20px 25px 20px 45px;
-            background: rgba(12,18,35,.72);
-            border: 1px solid rgba(92,220,255,.9);
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(92,220,255,.2), 0 0 30px rgba(107,160,255,.15), inset 0 0 25px rgba(92,220,255,.08);
-        }
-
-        .watched-list li {
-            margin: 9px 0;
-            font-weight: 700;
-            color: #f8fafc;
-        }
-
-        .watched-list li::marker {
-            color: var(--anime-blue);
-        }
-
-        /* TABLE */
-        .table-wrap {
-            max-width: 1150px;
-            margin: 0 auto 40px;
-            overflow-x: auto;
-            border-radius: 20px;
-            box-shadow: 0 0 25px rgba(76,225,255,.22), 0 0 35px rgba(107,160,255,.18);
-        }
-
-        table {
-            width: 100%;
-            min-width: 760px;
-            border-collapse: collapse;
-            background: rgba(10,15,30,.88);
-            border: 1px solid rgba(122,247,255,.9);
-            overflow: hidden;
-        }
-
-        th, td {
-            border: 1px solid rgba(148,163,184,.25);
-            padding: 15px 12px;
-            text-align: center;
-        }
-
-        th {
-            background: linear-gradient(135deg, #3a7cff, #5dc7ff, #75eaff);
-            color: white;
-            font-size: .95rem;
-            letter-spacing: .05em;
-            text-shadow: 0 0 10px rgba(255,255,255,.35);
-        }
-
-        tr:nth-child(even) td {
-            background: rgba(34,211,238,.07);
-        }
-
-        tr:nth-child(odd) td {
-            background: rgba(15,23,42,.94);
-        }
-
-        tr {
-            transition: transform .2s ease, background .2s ease;
-        }
-
-        tbody tr:hover {
-            transform: scale(1.008);
-            box-shadow: inset 0 0 20px rgba(34,211,238,.08);
-        }
-
-        /* SECTION TITLE */
-        .section-title {
-            text-align: center;
-            margin: 35px 0 20px;
-            color: #9ef8ff;
-            font-size: 1.8rem;
-            text-shadow: 0 0 15px rgba(158,248,255,.9), 0 0 22px rgba(92,220,255,.45);
-        }
-
-        .section-title span {
-            color: #7ab7ff;
-            text-shadow: 0 0 15px rgba(122,183,255,.8), 0 0 22px rgba(92,220,255,.35);
-        }
-
-        /* ANIME CARDS */
-        .anime-grid {
-            max-width: 1150px;
-            margin: 0 auto 45px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-        }
-
-        .anime-card {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(92,220,255,.8);
-            border-radius: 22px;
-            background: linear-gradient(145deg, rgba(12,18,32,.96), rgba(16,22,42,.94));
-            box-shadow: 0 12px 30px rgba(0,0,0,.35), 0 0 18px rgba(92,220,255,.2), 0 0 26px rgba(107,160,255,.14);
-            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-        }
-
-        .anime-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                120deg,
-                transparent 20%,
-                rgba(255,255,255,.08) 45%,
-                transparent 70%
-            );
-            transform: translateX(-120%);
-            transition: transform .7s ease;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .anime-card:hover::before {
-            transform: translateX(120%);
-        }
-
-        .anime-card:hover {
-            transform: translateY(-9px) scale(1.015);
-            border-color: var(--anime-blue);
-            box-shadow: 0 18px 35px rgba(0,0,0,.45),
-                        0 0 25px rgba(92,220,255,.46),
-                        0 0 45px rgba(107,160,255,.24);
-        }
-
-        .anime-image {
-            width: 100%;
-            height: 330px;
-            object-fit: cover;
-            display: block;
-            border: 0;
-            border-radius: 0;
-            margin: 0;
-            box-shadow: none;
-            transition: transform .45s ease;
-        }
-
-        .anime-card:hover .anime-image {
-            transform: scale(1.045);
-        }
-
-        .anime-info {
-            padding: 18px;
-            position: relative;
-            z-index: 3;
-        }
-
-        .anime-info::before {
-            content: "";
-            display: block;
-            width: 45px;
-            height: 3px;
-            margin-bottom: 13px;
-            border-radius: 10px;
-            background: linear-gradient(90deg, var(--anime-blue), #6ba7ff);
-            box-shadow: 0 0 10px rgba(92,220,255,.8), 0 0 12px rgba(107,160,255,.6);
-        }
-
-        .anime-name {
-            margin: 0 0 9px;
-            color: white;
-            font-size: 1.3rem;
-            font-weight: 900;
-            letter-spacing: .04em;
-        }
-
-        .anime-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-bottom: 13px;
-        }
-
-        .badge {
-            padding: 5px 9px;
-            border-radius: 999px;
-            font-size: .72rem;
-            font-weight: 800;
-            letter-spacing: .04em;
-            background: rgba(92,220,255,.12);
-            border: 1px solid rgba(92,220,255,.4);
-            color: #cffafe;
-            box-shadow: 0 0 12px rgba(92,220,255,.15);
-        }
-
-        .badge.rating {
-            background: rgba(107,160,255,.12);
-            border-color: rgba(107,160,255,.45);
-            color: #dfeaff;
-            box-shadow: 0 0 12px rgba(107,160,255,.12);
-        }
-
-        .character {
-            color: #cbd5e1;
-            font-size: .92rem;
-        }
-
-        .character strong {
-            color: var(--pink);
-        }
-
-        /* AUDIO */
-        .audio-grid {
-            max-width: 1150px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .audio-player {
-            background: rgba(12,18,35,.82);
-            border: 1px solid rgba(92,220,255,.75);
-            border-radius: 18px;
-            padding: 17px;
-            box-shadow: 0 0 18px rgba(92,220,255,.18), 0 0 20px rgba(107,160,255,.12);
-            transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-        }
-
-        .audio-player:hover {
-            transform: translateY(-5px);
-            border-color: #7bbcff;
-            box-shadow: 0 0 22px rgba(123,188,255,.3), 0 0 26px rgba(92,220,255,.22);
-        }
-
-        .audio-player label {
-            display: block;
-            margin-bottom: 10px;
-            color: #ecfeff;
-            font-weight: 900;
-            letter-spacing: .06em;
-            text-shadow: 0 0 10px rgba(92,220,255,.72), 0 0 12px rgba(123,188,255,.35);
-        }
-
-        .audio-player audio {
-            display: block;
-            width: 100%;
-            margin-top: 8px;
-            border-radius: 8px;
-        }
-
-        /* FOOTER */
-        footer {
-            max-width: 1150px;
-            margin: 50px auto 0;
-            padding-top: 20px;
-            text-align: center;
-            color: #94a3b8;
-            border-top: 1px solid rgba(148,163,184,.18);
-            font-size: .85rem;
-            letter-spacing: .06em;
-        }
-
-        /* POPUP */
-        .custom-alert-overlay {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(2,6,23,.76);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity .25s ease, visibility .25s ease;
-        }
-
-        .custom-alert-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .custom-alert-box {
-            width: min(420px, 88vw);
-            background: linear-gradient(135deg, rgba(12,18,32,.97), rgba(25,44,78,.95));
-            border: 1px solid rgba(92,220,255,.9);
-            border-radius: 22px;
-            box-shadow: 0 0 22px rgba(92,220,255,.72), 0 0 38px rgba(107,160,255,.52);
-            padding: 26px 24px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            animation: alertFloat .35s ease-out;
-        }
-
-        .alert-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #52d6ff, #6aa8ff, #9ae5ff);
-            color: white;
-            font-size: .72rem;
-            font-weight: 700;
-            letter-spacing: .12em;
-            margin-bottom: 10px;
-            box-shadow: 0 0 12px rgba(82,214,255,.65), 0 0 18px rgba(106,168,255,.4);
-        }
-
-        .custom-alert-box h3 {
-            margin: 0 0 10px;
-            color: white;
-            font-size: 1.8rem;
-            text-shadow: 0 0 12px rgba(34,211,238,.7);
-        }
-
-        .custom-alert-box p {
-            margin: 0 0 22px;
-            font-size: 1.05rem;
-            color: #fdf2f8;
-            letter-spacing: .05em;
-        }
-
-        .alert-close {
-            border: none;
-            border-radius: 12px;
-            padding: 12px 26px;
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: .08em;
-            color: white;
-            cursor: pointer;
-            background: linear-gradient(135deg, #5ee4ff, #7f8eff, #8abaff);
-            box-shadow: 0 0 16px rgba(92,220,255,.55), 0 0 20px rgba(107,160,255,.45);
-            transition: transform .2s ease, box-shadow .2s ease;
-        }
-
-        .alert-close:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 0 25px rgba(34,211,238,.7);
-        }
-
-        @keyframes alertFloat {
-            from { opacity: 0; transform: translateY(18px) scale(.96); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* PHONE */
-        @media (max-width: 850px) {
-            .anime-grid,
-            .audio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .anime-image {
-                height: 390px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 25px 12px 45px;
-            }
-
-            .anime-image {
-                height: 330px;
-            }
-
-            h1 {
-                font-size: 2.7rem;
-            }
-
-            .subtitle {
-                font-size: .85rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070b18">
+<title>ANIMES WATCHED</title>
+
+<style>
+:root{
+    --bg:#050816;
+    --panel:rgba(10,15,30,.82);
+    --panel2:rgba(15,23,42,.9);
+    --cyan:#22d3ee;
+    --teal:#5eead4;
+    --pink:#ff4fd8;
+    --purple:#8b5cf6;
+    --green:#67f0a4;
+    --gold:#fbbf24;
+    --text:#e2e8f0;
+    --muted:#94a3b8;
+    --white:#f8fafc;
+}
+
+*{box-sizing:border-box}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(circle at 12% 10%,rgba(34,211,238,.18),transparent 24%),
+      radial-gradient(circle at 88% 18%,rgba(255,79,216,.13),transparent 24%),
+      radial-gradient(circle at 50% 90%,rgba(139,92,246,.17),transparent 30%),
+      linear-gradient(135deg,#050816,#0b1120,#140d2d);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:.14;
+    pointer-events:none;
+    z-index:-1;
+    animation:floatGlow 8s ease-in-out infinite alternate;
+}
+body::before{background:var(--cyan);left:-130px;top:12%}
+body::after{background:var(--pink);right:-130px;bottom:8%;animation-delay:2s}
+
+@keyframes floatGlow{
+    from{transform:translateY(0) scale(1)}
+    to{transform:translateY(55px) scale(1.18)}
+}
+
+.container{
+    width:min(1180px,calc(100% - 28px));
+    margin:auto;
+}
+
+/* POPUP */
+.custom-alert-overlay{
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(2,6,23,.78);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    z-index:9999;
+    opacity:0;
+    visibility:hidden;
+    transition:.25s ease;
+}
+.custom-alert-overlay.show{opacity:1;visibility:visible}
+.custom-alert-box{
+    width:min(430px,88vw);
+    padding:28px 24px 22px;
+    text-align:center;
+    border:1px solid rgba(94,234,212,.9);
+    border-radius:24px;
+    background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(88,28,135,.95));
+    box-shadow:0 0 25px rgba(34,211,238,.65),0 0 45px rgba(168,85,247,.45);
+    animation:popupIn .35s ease-out;
+}
+.alert-badge{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:999px;
+    background:linear-gradient(135deg,var(--pink),var(--purple),var(--cyan));
+    color:#fff;
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:.13em;
+}
+.custom-alert-box h3{
+    margin:13px 0 9px;
+    color:#fff;
+    font-size:1.8rem;
+}
+.custom-alert-box p{
+    margin:0 0 20px;
+    color:#fdf2f8;
+    letter-spacing:.04em;
+}
+.alert-close{
+    border:0;
+    border-radius:12px;
+    padding:12px 26px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--cyan),var(--purple));
+    font-weight:800;
+    letter-spacing:.08em;
+    cursor:pointer;
+    box-shadow:0 0 16px rgba(34,211,238,.45);
+}
+@keyframes popupIn{
+    from{opacity:0;transform:translateY(18px) scale(.96)}
+    to{opacity:1;transform:none}
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:35px 0 28px;
+}
+.hero-badge{
+    display:inline-block;
+    padding:7px 15px;
+    border:1px solid rgba(94,234,212,.65);
+    border-radius:999px;
+    color:var(--cyan);
+    background:rgba(34,211,238,.07);
+    font-size:.72rem;
+    font-weight:900;
+    letter-spacing:.16em;
+    box-shadow:0 0 18px rgba(34,211,238,.2);
+}
+.hero h1{
+    margin:15px 0 0;
+    font-size:clamp(2.8rem,8vw,6.5rem);
+    line-height:.95;
+    font-weight:950;
+    letter-spacing:.045em;
+    background:linear-gradient(90deg,var(--cyan),#fff,var(--pink),var(--purple),var(--cyan));
+    background-size:300% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:titleShine 6s linear infinite;
+}
+@keyframes titleShine{to{background-position:300% center}}
+.hero-line{
+    width:min(520px,75%);
+    height:2px;
+    margin:22px auto 17px;
+    background:linear-gradient(90deg,transparent,var(--cyan),var(--pink),var(--cyan),transparent);
+    box-shadow:0 0 14px rgba(34,211,238,.65);
+}
+.subtitle{
+    max-width:720px;
+    margin:auto;
+    color:#cbd5e1;
+    font-size:.95rem;
+    letter-spacing:.08em;
+}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin:15px auto 35px;
+}
+.stat{
+    padding:20px 12px;
+    text-align:center;
+    border:1px solid rgba(94,234,212,.38);
+    border-radius:18px;
+    background:linear-gradient(145deg,rgba(15,23,42,.84),rgba(30,18,55,.72));
+    box-shadow:0 0 20px rgba(34,211,238,.08);
+    transition:.25s ease;
+}
+.stat:hover{
+    transform:translateY(-5px);
+    border-color:var(--pink);
+    box-shadow:0 0 22px rgba(255,79,216,.18);
+}
+.stat-number{
+    display:block;
+    color:#fff;
+    font-size:1.9rem;
+    font-weight:950;
+}
+.stat-label{
+    display:block;
+    margin-top:5px;
+    color:var(--muted);
+    font-size:.7rem;
+    font-weight:800;
+    letter-spacing:.12em;
+}
+
+/* SECTION */
+.section{
+    scroll-margin-top:90px;
+    margin:0 auto 55px;
+}
+.section-heading{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
+}
+.section-title{
+    margin:0;
+    color:var(--green);
+    font-size:1.75rem;
+    text-shadow:0 0 15px rgba(103,240,164,.5);
+    letter-spacing:.04em;
+}
+.section-title span{color:var(--pink)}
+.section-kicker{
+    color:var(--muted);
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:.16em;
+}
+
+/* QUICK LIST */
+.watched-list{
+    margin:0 auto 30px;
+    padding:18px 24px 18px 42px;
+    max-width:760px;
+    border:1px solid rgba(94,234,212,.45);
+    border-radius:20px;
+    background:rgba(12,18,35,.7);
+    box-shadow:0 0 22px rgba(34,211,238,.12);
+}
+.watched-list li{
+    margin:8px 0;
+    color:#f8fafc;
+    font-weight:800;
+}
+.watched-list li::marker{color:var(--pink)}
+
+/* TABLE */
+.table-wrap{
+    overflow-x:auto;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(34,211,238,.16);
+}
+table{
+    width:100%;
+    min-width:760px;
+    border-collapse:collapse;
+    background:rgba(10,15,30,.88);
+    border:1px solid rgba(94,234,212,.75);
+}
+th,td{
+    padding:15px 12px;
+    text-align:center;
+    border:1px solid rgba(148,163,184,.22);
+}
+th{
+    background:linear-gradient(135deg,var(--pink),var(--purple),var(--cyan));
+    color:#fff;
+    font-size:.84rem;
+    letter-spacing:.06em;
+}
+tbody tr:nth-child(even) td{background:rgba(34,211,238,.055)}
+tbody tr:nth-child(odd) td{background:rgba(15,23,42,.94)}
+tbody tr{transition:.2s ease}
+tbody tr:hover{
+    transform:scale(1.008);
+    box-shadow:inset 0 0 20px rgba(34,211,238,.08);
+}
+
+/* ANIME CARDS */
+.anime-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+.anime-card{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(94,234,212,.55);
+    border-radius:23px;
+    background:linear-gradient(145deg,rgba(15,23,42,.95),rgba(30,18,55,.9));
+    box-shadow:0 14px 32px rgba(0,0,0,.34),0 0 18px rgba(34,211,238,.13);
+    transition:.3s ease;
+}
+.anime-card:hover{
+    transform:translateY(-9px);
+    border-color:var(--pink);
+    box-shadow:0 20px 40px rgba(0,0,0,.45),0 0 28px rgba(255,79,216,.28);
+}
+.anime-image-wrap{
+    position:relative;
+    height:330px;
+    overflow:hidden;
+}
+.anime-image{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    transition:.45s ease;
+}
+.anime-card:hover .anime-image{transform:scale(1.06)}
+.image-shade{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(5,8,22,.88),transparent 48%);
+    pointer-events:none;
+}
+.status-chip{
+    position:absolute;
+    top:13px;
+    left:13px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(5,8,22,.76);
+    border:1px solid rgba(255,255,255,.25);
+    color:#fff;
+    font-size:.66rem;
+    font-weight:900;
+    letter-spacing:.1em;
+    backdrop-filter:blur(8px);
+}
+.card-number{
+    position:absolute;
+    right:14px;
+    bottom:10px;
+    color:rgba(255,255,255,.14);
+    font-size:4.5rem;
+    font-weight:950;
+    line-height:1;
+}
+.anime-info{padding:18px}
+.anime-name{
+    margin:0 0 10px;
+    color:#fff;
+    font-size:1.32rem;
+    font-weight:950;
+    letter-spacing:.04em;
+}
+.anime-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:13px;
+}
+.badge{
+    padding:5px 9px;
+    border-radius:999px;
+    background:rgba(34,211,238,.1);
+    border:1px solid rgba(34,211,238,.34);
+    color:#cffafe;
+    font-size:.68rem;
+    font-weight:900;
+}
+.badge.rating{
+    background:rgba(251,191,36,.1);
+    border-color:rgba(251,191,36,.35);
+    color:#fde68a;
+}
+.character{
+    color:#cbd5e1;
+    font-size:.9rem;
+}
+.character strong{color:var(--pink)}
+.card-divider{
+    height:1px;
+    margin:16px 0 13px;
+    background:linear-gradient(90deg,rgba(94,234,212,.5),transparent);
+}
+.date-row{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    color:var(--muted);
+    font-size:.7rem;
+    font-weight:800;
+}
+.date-row strong{color:#e2e8f0}
+
+/* RATING */
+.rating-box{
+    margin-top:16px;
+}
+.rating-head{
+    display:flex;
+    justify-content:space-between;
+    color:#cbd5e1;
+    font-size:.68rem;
+    font-weight:900;
+    letter-spacing:.08em;
+}
+.rating-track{
+    height:7px;
+    margin-top:7px;
+    overflow:hidden;
+    border-radius:999px;
+    background:rgba(148,163,184,.15);
+}
+.rating-fill{
+    height:100%;
+    border-radius:999px;
+    background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+    box-shadow:0 0 12px rgba(34,211,238,.45);
+}
+
+/* SOUNDS */
+.audio-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+.audio-player{
+    position:relative;
+    padding:19px;
+    border:1px solid rgba(94,234,212,.55);
+    border-radius:20px;
+    background:linear-gradient(145deg,rgba(12,18,35,.88),rgba(30,18,55,.78));
+    box-shadow:0 0 18px rgba(34,211,238,.11);
+    transition:.25s ease;
+}
+.audio-player:hover{
+    transform:translateY(-5px);
+    border-color:var(--pink);
+    box-shadow:0 0 24px rgba(255,79,216,.2);
+}
+.audio-label{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:10px;
+}
+.audio-label span:first-child{
+    color:#ecfeff;
+    font-weight:950;
+    letter-spacing:.06em;
+}
+.sound-number{
+    color:rgba(255,255,255,.18);
+    font-weight:950;
+}
+.audio-player audio{
+    display:block;
+    width:100%;
+    margin-top:8px;
+    border-radius:9px;
+}
+.audio-note{
+    margin:9px 0 0;
+    color:var(--muted);
+    font-size:.67rem;
+    letter-spacing:.05em;
+}
+
+/* SCROLL REVEAL */
+.reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity .65s ease,transform .65s ease;
+}
+.reveal.visible{
+    opacity:1;
+    transform:none;
+}
+
+/* FOOTER */
+footer{
+    margin:25px auto 45px;
+    padding-top:18px;
+    text-align:center;
+    border-top:1px solid rgba(148,163,184,.16);
+    color:#64748b;
+    font-size:.72rem;
+    letter-spacing:.09em;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .anime-grid,.audio-grid{grid-template-columns:1fr}
+    .anime-image-wrap{height:390px}
+}
+@media(max-width:600px){
+    .container{width:min(100% - 20px,1180px)}
+    .navbar{width:calc(100% - 20px)}
+    .hero{padding-top:20px}
+    .hero h1{font-size:2.8rem}
+    .subtitle{font-size:.8rem}
+    .stats{gap:9px}
+    .stat{padding:15px 8px}
+    .stat-number{font-size:1.5rem}
+    .section-heading{display:block}
+    .section-kicker{margin-top:5px}
+    .anime-image-wrap{height:330px}
+}
+</style>
 </head>
 
 <body>
 
-    <header class="hero">
-        <div class="hero-badge">MY ANIME ARCHIVE • 2026</div>
-        <h1>ANIMES WATCHED</h1>
-        <div class="subtitle">A personal collection of anime, favourite characters, ratings & iconic sounds </div>
-    </header>
-    <ul class="watched-list">
-        <li>ATTACK ON TITAN (REMAINING)</li>
-        <li>SOLO LEVELING</li>
-        <li>JUJUTSU KAISEN</li>
-    </ul>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+    const overlay = document.createElement("div");
+    overlay.className = "custom-alert-overlay show";
+    overlay.innerHTML = `
+        <div class="custom-alert-box" role="alert" aria-live="assertive">
+            <div class="alert-badge">NOTICE</div>
+            <h3>Original Work</h3>
+            <p>ORIGINAL WORK OF MUHAMMAD AZAAN</p>
+            <button class="alert-close">UNDERSTOOD<br>DONT COPY!!</button>
+        </div>
+    `;
+    document.body.appendChild(overlay);
 
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>ANIME NAME</th>
-                    <th>STARTED</th>
-                    <th>FINISHED</th>
-                    <th>RATING</th>
-                    <th>FAVOURITE CHARACTER</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>ATTACK ON TITAN</td>
-                    <td>FEB, 26, 2026</td>
-                    <td>2 SEASONS (PAUSED)</td>
-                    <td>8/10 </td>
-                    <td>EREN JAEGER</td>
-                </tr>
-                <tr>
-                    <td>SOLO LEVELING</td>
-                    <td>MAR, 22, 2026</td>
-                    <td>APR, 18, 2026</td>
-                    <td>11/10 </td>
-                    <td>SUNG JIN WOO</td>
-                </tr>
-                <tr>
-                    <td>JUJUTSU KAISEN</td>
-                    <td>JUL, 3, 2026</td>
-                    <td>AUG, 20, 2026</td>
-                    <td>10/10 </td>
-                    <td>RYOMEN SUKUNA</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    overlay.querySelector(".alert-close").addEventListener("click", function(){
+        overlay.classList.remove("show");
+        setTimeout(() => overlay.remove(), 250);
+    });
 
-    <h2 class="section-title"> MY <span>ANIME COLLECTION</span></h2>
+    const revealItems = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {threshold:.12});
 
-    <div class="anime-grid">
+    revealItems.forEach(item => observer.observe(item));
 
-        <article class="anime-card">
-            <img class="anime-image" src="eren and founding Titan.jfif" alt="Attack on Titan">
-            <div class="anime-info">
-                <h3 class="anime-name">ATTACK ON TITAN</h3>
-                <div class="anime-meta">
-                    <span class="badge"> PAUSED</span>
-                    <span class="badge rating"> 8/10</span>
-                </div>
-                <div class="character">Favourite: <strong>EREN JAEGER</strong></div>
-            </div>
-        </article>
 
-        <article class="anime-card">
-            <img class="anime-image" src="2026-02-26 (18).png" alt="Solo Leveling">
-            <div class="anime-info">
-                <h3 class="anime-name">SOLO LEVELING</h3>
-                <div class="anime-meta">
-                    <span class="badge"> FINISHED</span>
-                    <span class="badge rating"> 11/10</span>
-                </div>
-                <div class="character">Favourite: <strong>SUNG JIN WOO</strong></div>
-            </div>
-        </article>
+});
+</script>
 
-        <article class="anime-card">
-            <img class="anime-image" src="2026-08-23 (5).png" alt="Jujutsu Kaisen">
-            <div class="anime-info">
-                <h3 class="anime-name">JUJUTSU KAISEN</h3>
-                <div class="anime-meta">
-                    <span class="badge"> FINISHED</span>
-                    <span class="badge rating"> 10/10</span>
-                </div>
-                <div class="character">Favourite: <strong>RYOMEN SUKUNA</strong></div>
-            </div>
-        </article>
 
-    </div>
-    <div class="audio-grid">
 
-        <div class="audio-player">
-            <label> EREN JAEGER</label>
-            <audio controls>
-                <source src="tatakae-eren.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
+<header class="hero container" id="home">
+    <h1>ANIMES WATCHED</h1>
+    <div class="hero-line"></div>
+</header>
+
+<main class="container">
+
+    <section class="section reveal" id="collection">
+        <div class="section-heading">
+            <h2 class="section-title">MY <span>ANIME COLLECTION</span></h2>
+            <div class="section-kicker">ANIME LOG / 2026</div>
         </div>
 
-        <div class="audio-player">
-            <label> SUNG JIN WOO</label>
-            <audio controls preload="auto" src="./jinwoo.mp3?v=2">
-                Your browser does not support the audio element.
-            </audio>
+        <ul class="watched-list">
+            <li>ATTACK ON TITAN (REMAINING)</li>
+            <li>SOLO LEVELING</li>
+            <li>JUJUTSU KAISEN</li>
+        </ul>
+
+        <div class="anime-grid">
+
+            <article class="anime-card">
+                <div class="anime-image-wrap">
+                    <img class="anime-image" src="eren and founding Titan.jfif" alt="Attack on Titan">
+                    <div class="image-shade"></div>
+                    <div class="status-chip">PAUSED</div>
+                    <div class="card-number">01</div>
+                </div>
+                <div class="anime-info">
+                    <h3 class="anime-name">ATTACK ON TITAN</h3>
+                    <div class="anime-meta">
+                        <span class="badge">2 SEASONS</span>
+                        <span class="badge rating">8/10</span>
+                    </div>
+                    <div class="character">Favourite: <strong>EREN JAEGER</strong></div>
+                    <div class="card-divider"></div>
+                    <div class="date-row">
+                        <span>STARTED<br><strong>FEB 26, 2026</strong></span>
+                        <span>STATUS<br><strong>PAUSED</strong></span>
+                    </div>
+                    <div class="rating-box">
+                        <div class="rating-head"><span>RATING</span><span>8/10</span></div>
+                        <div class="rating-track"><div class="rating-fill" style="width:80%"></div></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="anime-card">
+                <div class="anime-image-wrap">
+                    <img class="anime-image" src="2026-02-26 (18).png" alt="Solo Leveling">
+                    <div class="image-shade"></div>
+                    <div class="status-chip">FINISHED</div>
+                    <div class="card-number">02</div>
+                </div>
+                <div class="anime-info">
+                    <h3 class="anime-name">SOLO LEVELING</h3>
+                    <div class="anime-meta">
+                        <span class="badge">FINISHED</span>
+                        <span class="badge rating">11/10</span>
+                    </div>
+                    <div class="character">Favourite: <strong>SUNG JIN WOO</strong></div>
+                    <div class="card-divider"></div>
+                    <div class="date-row">
+                        <span>STARTED<br><strong>MAR 22, 2026</strong></span>
+                        <span>FINISHED<br><strong>APR 18, 2026</strong></span>
+                    </div>
+                    <div class="rating-box">
+                        <div class="rating-head"><span>RATING</span><span>11/10</span></div>
+                        <div class="rating-track"><div class="rating-fill" style="width:100%"></div></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="anime-card">
+                <div class="anime-image-wrap">
+                    <img class="anime-image" src="2026-08-23 (5).png" alt="Jujutsu Kaisen">
+                    <div class="image-shade"></div>
+                    <div class="status-chip">FINISHED</div>
+                    <div class="card-number">03</div>
+                </div>
+                <div class="anime-info">
+                    <h3 class="anime-name">JUJUTSU KAISEN</h3>
+                    <div class="anime-meta">
+                        <span class="badge">FINISHED</span>
+                        <span class="badge rating">10/10</span>
+                    </div>
+                    <div class="character">Favourite: <strong>RYOMEN SUKUNA</strong></div>
+                    <div class="card-divider"></div>
+                    <div class="date-row">
+                        <span>STARTED<br><strong>JUL 3, 2026</strong></span>
+                        <span>FINISHED<br><strong>AUG 20, 2026</strong></span>
+                    </div>
+                    <div class="rating-box">
+                        <div class="rating-head"><span>RATING</span><span>10/10</span></div>
+                        <div class="rating-track"><div class="rating-fill" style="width:100%"></div></div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="section reveal" id="ratings">
+        <div class="section-heading">
+            <h2 class="section-title">ANIME <span>RECORD</span></h2>
+            <div class="section-kicker">YOUR ORIGINAL DATA</div>
         </div>
 
-        <div class="audio-player">
-            <label> RYOMEN SUKUNA</label>
-            <audio controls preload="auto" src="./sukuna.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ANIME NAME</th>
+                        <th>STARTED</th>
+                        <th>FINISHED</th>
+                        <th>RATING</th>
+                        <th>FAVOURITE CHARACTER</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ATTACK ON TITAN</td>
+                        <td>FEB, 26, 2026</td>
+                        <td>2 SEASONS (PAUSED)</td>
+                        <td>8/10</td>
+                        <td>EREN JAEGER</td>
+                    </tr>
+                    <tr>
+                        <td>SOLO LEVELING</td>
+                        <td>MAR, 22, 2026</td>
+                        <td>APR, 18, 2026</td>
+                        <td>11/10</td>
+                        <td>SUNG JIN WOO</td>
+                    </tr>
+                    <tr>
+                        <td>JUJUTSU KAISEN</td>
+                        <td>JUL, 3, 2026</td>
+                        <td>AUG, 20, 2026</td>
+                        <td>10/10</td>
+                        <td>RYOMEN SUKUNA</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="section reveal" id="sounds">
+        <div class="section-heading">
+            <h2 class="section-title">ICONIC <span>ANIME SOUNDS</span></h2>
+            <div class="section-kicker">AUDIO ARCHIVE</div>
         </div>
 
-    </div>
+        <div class="audio-grid">
 
+            <div class="audio-player">
+                <div class="audio-label">
+                    <span>EREN JAEGER</span>
+                    <span class="sound-number">01</span>
+                </div>
+                <audio controls preload="metadata" src="./tatakae-eren.mp3">
+                    Your browser does not support the audio element.
+                </audio>
+                <p class="audio-note">ATTACK ON TITAN</p>
+            </div>
 
+            <div class="audio-player">
+                <div class="audio-label">
+                    <span>SUNG JIN WOO</span>
+                    <span class="sound-number">02</span>
+                </div>
+                <audio controls preload="metadata" src="./jinwoo.mp3?v=3">
+                    Your browser does not support the audio element.
+                </audio>
+                <p class="audio-note">SOLO LEVELING</p>
+            </div>
+
+            <div class="audio-player">
+                <div class="audio-label">
+                    <span>RYOMEN SUKUNA</span>
+                    <span class="sound-number">03</span>
+                </div>
+                <audio controls preload="metadata" src="./sukuna.mp3?v=4">
+                    Your browser does not support the audio element.
+                </audio>
+                <p class="audio-note">JUJUTSU KAISEN</p>
+            </div>
+
+        </div>
+    </section>
+</main>
 </body>
 </html>
