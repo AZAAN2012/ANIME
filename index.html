@@ -1,6 +1,30 @@
 <html>
     <head>
         <title>ANIMES WATCHED</title>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const overlay = document.createElement("div");
+                overlay.className = "custom-alert-overlay show";
+                overlay.innerHTML = `
+                    <div class="custom-alert-box" role="alert" aria-live="assertive">
+                        <div class="alert-badge">NOTICE</div>
+                        <h3>Original Work</h3>
+                        <p>ORIGINAL WORK OF MUHAMMAD AZAAN</p>
+                        <button class="alert-close">UNDERSTOOD</button>
+                    </div>
+                `;
+
+                document.body.appendChild(overlay);
+
+                const closeButton = overlay.querySelector(".alert-close");
+                closeButton.addEventListener("click", function () {
+                    overlay.classList.remove("show");
+                    setTimeout(function () {
+                        overlay.remove();
+                    }, 250);
+                });
+            });
+        </script>
    <style>
     :root {
         --bg1: #050816;
@@ -16,6 +40,111 @@
         --cyan: #22d3ee;
         --green: #67f0a4;
         --gold: #fbbf24;
+    }
+
+    .custom-alert-overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(2, 6, 23, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .custom-alert-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .custom-alert-box {
+        width: min(420px, 88vw);
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(88, 28, 135, 0.92));
+        border: 1px solid rgba(94, 234, 212, 0.9);
+        border-radius: 22px;
+        box-shadow: 0 0 22px rgba(34, 211, 238, 0.7), 0 0 38px rgba(168, 85, 247, 0.5), 0 18px 40px rgba(0, 0, 0, 0.42);
+        padding: 26px 24px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        animation: alertFloat 0.35s ease-out;
+    }
+
+    .custom-alert-box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.12) 45%, transparent 100%);
+        transform: translateX(-100%);
+        animation: shimmer 2.5s ease-in-out infinite;
+    }
+
+    .alert-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--pink), var(--purple), var(--cyan));
+        color: white;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        box-shadow: 0 0 18px rgba(255, 79, 216, 0.5);
+        margin-bottom: 10px;
+    }
+
+    .custom-alert-box h3 {
+        margin: 0 0 10px;
+        color: var(--heading);
+        font-size: 1.8rem;
+        text-shadow: 0 0 12px rgba(34, 211, 238, 0.7);
+    }
+
+    .custom-alert-box p {
+        margin: 0 0 22px;
+        font-size: 1.1rem;
+        color: #fdf2f8;
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 12px rgba(255, 79, 216, 0.7);
+    }
+
+    .alert-close {
+        border: none;
+        border-radius: 12px;
+        padding: 12px 26px;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: white;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        box-shadow: 0 0 16px rgba(34, 211, 238, 0.5), 0 0 20px rgba(168, 85, 247, 0.45);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .alert-close:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 0 18px rgba(34, 211, 238, 0.7), 0 0 28px rgba(168, 85, 247, 0.6);
+    }
+
+    @keyframes alertFloat {
+        from {
+            opacity: 0;
+            transform: translateY(18px) scale(0.96);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    @keyframes shimmer {
+        0% { transform: translateX(-110%); }
+        60%, 100% { transform: translateX(110%); }
     }
 
     body {
@@ -91,19 +220,6 @@
         color: var(--green);
         text-shadow: 0 0 15px rgba(103, 240, 164, 0.75);
     }
-
-    h3 {
-        text-align: left;
-        color: #dbeafe;
-        margin-top: 25px;
-        padding: 12px 16px;
-        background: rgba(12, 18, 35, 0.8);
-        border-left: 4px solid var(--gold);
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(251, 191, 36, 0.25);
-        text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
-    }
-
     .image-row {
         display: flex;
         flex-direction: column;
@@ -204,8 +320,6 @@
             <img src="2026-02-26 (18).png" alt="Solo Leveling">
             <img src="2026-08-23 (5).png" alt="Jujutsu Kaisen">
         </div>
-    <h3>ORIGINAL WORK BELONGS TO MUHAMMAD AZAAN YOUSAF</h3>
-
     <div class="audio-player">
         <label>EREN JAEGER</label>
         <audio controls>
