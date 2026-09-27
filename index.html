@@ -8,29 +8,20 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const overlay = document.createElement("div");
-
             overlay.className = "custom-alert-overlay show";
-
             overlay.innerHTML = `
                 <div class="custom-alert-box" role="alert" aria-live="assertive">
                     <div class="alert-badge">NOTICE</div>
                     <h3>Original Work</h3>
                     <p>ORIGINAL WORK OF MUHAMMAD AZAAN</p>
-
-                    <button class="alert-close">
-                        UNDERSTOOD <br>
-                        DONT COPY!!
-                    </button>
+                    <button class="alert-close">UNDERSTOOD <br> DONT COPY</button>
                 </div>
             `;
-
             document.body.appendChild(overlay);
 
             const closeButton = overlay.querySelector(".alert-close");
-
             closeButton.addEventListener("click", function () {
                 overlay.classList.remove("show");
-
                 setTimeout(function () {
                     overlay.remove();
                 }, 250);
@@ -39,47 +30,35 @@
     </script>
 
     <style>
-
         :root {
             --bg1: #030a18;
             --bg2: #08192f;
             --bg3: #120d2a;
-
             --panel: rgba(10, 15, 30, 0.82);
-
             --line: #6ef2ff;
             --line-2: #6cb8ff;
-
             --text: #e2e8f0;
             --heading: #f8fafc;
-
             --pink: #ff57d8;
             --purple: #7c6cff;
             --cyan: #3fd7ff;
             --green: #67f0a4;
             --gold: #fbbf24;
-
             --anime-red: #ff5f7a;
             --anime-blue: #4ce1ff;
             --anime-pink: #ff5ae0;
             --anime-violet: #7b6fff;
             --anime-gold: #ffd166;
-
             --hero-glow: #4ce1ff;
             --hero-glow-2: #7bbcff;
-
             --list-glow: #7bcfff;
             --list-alt: #8af3d8;
-
             --table-glow: #5fe8ff;
             --table-glow-2: #8fb8ff;
-
             --card-glow: #5fe8ff;
             --card-glow-2: #6aa8ff;
-
             --audio-glow: #8ef0d1;
             --audio-glow-2: #9ac7ff;
-
             --popup-glow: #5ec8ff;
             --popup-glow-2: #88a8ff;
         }
@@ -97,1056 +76,505 @@
             font-family: Arial, sans-serif;
             color: var(--text);
             min-height: 100vh;
-
             padding: 35px 20px 60px;
-
             background:
-                radial-gradient(
-                    circle at 15% 15%,
-                    rgba(76,225,255,.24),
-                    transparent 22%
-                ),
-
-                radial-gradient(
-                    circle at 80% 18%,
-                    rgba(84,140,255,.22),
-                    transparent 25%
-                ),
-
-                radial-gradient(
-                    circle at 50% 90%,
-                    rgba(123,111,255,.24),
-                    transparent 35%
-                ),
-
-                linear-gradient(
-                    135deg,
-                    #030a18 0%,
-                    #091b2f 35%,
-                    #120d2a 100%
-                );
-
+                radial-gradient(circle at 15% 15%, rgba(76,225,255,.24), transparent 22%),
+                radial-gradient(circle at 80% 18%, rgba(84,140,255,.22), transparent 25%),
+                radial-gradient(circle at 50% 90%, rgba(123,111,255,.24), transparent 35%),
+                linear-gradient(135deg, #030a18 0%, #091b2f 35%, #120d2a 100%);
             overflow-x: hidden;
         }
-
-
-        /* GLOWING BACKGROUND */
 
         body::before,
         body::after {
             content: "";
-
             position: fixed;
-
             width: 250px;
             height: 250px;
-
             border-radius: 50%;
-
             filter: blur(80px);
-
             opacity: .18;
-
             pointer-events: none;
-
             z-index: -1;
-
-            animation:
-                floatGlow
-                7s
-                ease-in-out
-                infinite
-                alternate;
+            animation: floatGlow 7s ease-in-out infinite alternate;
         }
 
         body::before {
             background: var(--anime-blue);
-
             top: 10%;
             left: -100px;
-
-            box-shadow:
-                0 0 90px rgba(76,225,255,.75);
+            box-shadow: 0 0 90px rgba(76,225,255,.75);
         }
 
         body::after {
             background: #6aa8ff;
-
             right: -100px;
             bottom: 10%;
-
             animation-delay: 2s;
-
-            box-shadow:
-                0 0 90px rgba(106,168,255,.7);
+            box-shadow: 0 0 90px rgba(106,168,255,.7);
         }
 
         @keyframes floatGlow {
-
-            from {
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-
-            to {
-                transform:
-                    translateY(50px)
-                    scale(1.15);
-            }
+            from { transform: translateY(0) scale(1); }
+            to { transform: translateY(50px) scale(1.15); }
         }
 
-
-        /* HERO */
-
+        /* TOP TITLE */
         .hero {
             max-width: 1150px;
-
-            margin:
-                0 auto 30px;
-
+            margin: 0 auto 30px;
             text-align: center;
         }
 
         .hero-badge {
             display: inline-block;
-
-            padding:
-                7px 15px;
-
-            border:
-                1px solid
-                rgba(76,225,255,.95);
-
+            padding: 7px 15px;
+            border: 1px solid rgba(76,225,255,.95);
             border-radius: 999px;
-
             color: var(--hero-glow);
-
-            background:
-                rgba(76,225,255,.08);
-
+            background: rgba(76,225,255,.08);
             font-size: .75rem;
-
             font-weight: 800;
-
             letter-spacing: .16em;
-
             margin-bottom: 12px;
-
-            box-shadow:
-                0 0 18px rgba(76,225,255,.45),
-                0 0 28px rgba(106,168,255,.22);
+            box-shadow: 0 0 18px rgba(76,225,255,.45), 0 0 28px rgba(106,168,255,.22);
         }
 
         h1 {
             margin: 0;
-
-            font-size:
-                clamp(
-                    2.5rem,
-                    7vw,
-                    5.5rem
-                );
-
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
             line-height: 1;
-
             font-weight: 900;
-
             letter-spacing: .05em;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--anime-blue),
-                    #eafcff,
-                    #8bb9ff,
-                    #68d8ff,
-                    var(--anime-blue)
-                );
-
+            background: linear-gradient(90deg, var(--anime-blue), #eafcff, #8bb9ff, #68d8ff, var(--anime-blue));
             background-size: 300% auto;
-
             -webkit-background-clip: text;
             background-clip: text;
-
             color: transparent;
-
-            animation:
-                titleShine
-                6s
-                linear
-                infinite;
-
-            text-shadow:
-                0 0 35px rgba(76,225,255,.25),
-                0 0 45px rgba(107,160,255,.18);
+            animation: titleShine 6s linear infinite;
+            text-shadow: 0 0 35px rgba(76,225,255,.25), 0 0 45px rgba(107,160,255,.18);
         }
 
         @keyframes titleShine {
-
-            to {
-                background-position:
-                    300%
-                    center;
-            }
+            to { background-position: 300% center; }
         }
 
         .hero::after {
             content: "";
-
             display: block;
-
-            width:
-                min(
-                    420px,
-                    70%
-                );
-
+            width: min(420px, 70%);
             height: 2px;
-
-            margin:
-                22px auto 0;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    var(--anime-blue),
-                    #8bb9ff,
-                    var(--anime-blue),
-                    transparent
-                );
-
-            box-shadow:
-                0 0 14px rgba(76,225,255,.9),
-                0 0 18px rgba(107,160,255,.7);
-
-            animation:
-                linePulse
-                3s
-                ease-in-out
-                infinite;
+            margin: 22px auto 0;
+            background: linear-gradient(90deg, transparent, var(--anime-blue), #8bb9ff, var(--anime-blue), transparent);
+            box-shadow: 0 0 14px rgba(76,225,255,.9), 0 0 18px rgba(107,160,255,.7);
+            animation: linePulse 3s ease-in-out infinite;
         }
 
         @keyframes linePulse {
-
-            0%, 100% {
-                opacity: .55;
-                transform: scaleX(.8);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scaleX(1);
-            }
+            0%, 100% { opacity: .55; transform: scaleX(.8); }
+            50% { opacity: 1; transform: scaleX(1); }
         }
 
         .subtitle {
-            margin:
-                15px auto 0;
-
+            margin: 15px auto 0;
             max-width: 700px;
-
             font-size: 1rem;
-
             color: #cbd5e1;
-
             letter-spacing: .08em;
         }
 
-
-        /* WATCHED LIST */
-
+        /* INTRO LIST */
         .watched-list {
             max-width: 700px;
-
-            margin:
-                0 auto 35px;
-
-            padding:
-                20px 25px 20px 45px;
-
-            background:
-                rgba(12,18,35,.72);
-
-            border:
-                1px solid
-                rgba(92,220,255,.9);
-
+            margin: 0 auto 35px;
+            padding: 20px 25px 20px 45px;
+            background: rgba(12,18,35,.72);
+            border: 1px solid rgba(92,220,255,.9);
             border-radius: 20px;
-
-            box-shadow:
-                0 0 20px rgba(92,220,255,.2),
-                0 0 30px rgba(107,160,255,.15),
-                inset 0 0 25px rgba(92,220,255,.08);
+            box-shadow: 0 0 20px rgba(92,220,255,.2), 0 0 30px rgba(107,160,255,.15), inset 0 0 25px rgba(92,220,255,.08);
         }
 
         .watched-list li {
             margin: 9px 0;
-
             font-weight: 700;
-
             color: #f8fafc;
         }
 
         .watched-list li::marker {
-            color:
-                var(--anime-blue);
+            color: var(--anime-blue);
         }
 
-
         /* TABLE */
-
         .table-wrap {
             max-width: 1150px;
-
-            margin:
-                0 auto 40px;
-
+            margin: 0 auto 40px;
             overflow-x: auto;
-
             border-radius: 20px;
-
-            box-shadow:
-                0 0 25px rgba(76,225,255,.22),
-                0 0 35px rgba(107,160,255,.18);
+            box-shadow: 0 0 25px rgba(76,225,255,.22), 0 0 35px rgba(107,160,255,.18);
         }
 
         table {
             width: 100%;
-
             min-width: 760px;
-
             border-collapse: collapse;
-
-            background:
-                rgba(10,15,30,.88);
-
-            border:
-                1px solid
-                rgba(122,247,255,.9);
-
+            background: rgba(10,15,30,.88);
+            border: 1px solid rgba(122,247,255,.9);
             overflow: hidden;
         }
 
-        th,
-        td {
-            border:
-                1px solid
-                rgba(148,163,184,.25);
-
-            padding:
-                15px 12px;
-
+        th, td {
+            border: 1px solid rgba(148,163,184,.25);
+            padding: 15px 12px;
             text-align: center;
         }
 
         th {
-            background:
-                linear-gradient(
-                    135deg,
-                    #3a7cff,
-                    #5dc7ff,
-                    #75eaff
-                );
-
+            background: linear-gradient(135deg, #3a7cff, #5dc7ff, #75eaff);
             color: white;
-
             font-size: .95rem;
-
             letter-spacing: .05em;
-
-            text-shadow:
-                0 0 10px
-                rgba(255,255,255,.35);
+            text-shadow: 0 0 10px rgba(255,255,255,.35);
         }
 
         tr:nth-child(even) td {
-            background:
-                rgba(34,211,238,.07);
+            background: rgba(34,211,238,.07);
         }
 
         tr:nth-child(odd) td {
-            background:
-                rgba(15,23,42,.94);
+            background: rgba(15,23,42,.94);
         }
 
         tr {
-            transition:
-                transform .2s ease,
-                background .2s ease;
+            transition: transform .2s ease, background .2s ease;
         }
 
         tbody tr:hover {
-            transform:
-                scale(1.008);
-
-            box-shadow:
-                inset
-                0 0 20px
-                rgba(34,211,238,.08);
+            transform: scale(1.008);
+            box-shadow: inset 0 0 20px rgba(34,211,238,.08);
         }
 
-
         /* SECTION TITLE */
-
         .section-title {
             text-align: center;
-
-            margin:
-                35px 0 20px;
-
-            color:
-                #9ef8ff;
-
-            font-size:
-                1.8rem;
-
-            text-shadow:
-                0 0 15px rgba(158,248,255,.9),
-                0 0 22px rgba(92,220,255,.45);
+            margin: 35px 0 20px;
+            color: #9ef8ff;
+            font-size: 1.8rem;
+            text-shadow: 0 0 15px rgba(158,248,255,.9), 0 0 22px rgba(92,220,255,.45);
         }
 
         .section-title span {
-            color:
-                #7ab7ff;
-
-            text-shadow:
-                0 0 15px rgba(122,183,255,.8),
-                0 0 22px rgba(92,220,255,.35);
+            color: #7ab7ff;
+            text-shadow: 0 0 15px rgba(122,183,255,.8), 0 0 22px rgba(92,220,255,.35);
         }
 
-
         /* ANIME CARDS */
-
         .anime-grid {
             max-width: 1150px;
-
-            margin:
-                0 auto 45px;
-
+            margin: 0 auto 45px;
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 22px;
         }
 
         .anime-card {
             position: relative;
-
             overflow: hidden;
-
-            border:
-                1px solid
-                rgba(92,220,255,.8);
-
+            border: 1px solid rgba(92,220,255,.8);
             border-radius: 22px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(12,18,32,.96),
-                    rgba(16,22,42,.94)
-                );
-
-            box-shadow:
-                0 12px 30px rgba(0,0,0,.35),
-                0 0 18px rgba(92,220,255,.2),
-                0 0 26px rgba(107,160,255,.14);
-
-            transition:
-                transform .3s ease,
-                box-shadow .3s ease,
-                border-color .3s ease;
+            background: linear-gradient(145deg, rgba(12,18,32,.96), rgba(16,22,42,.94));
+            box-shadow: 0 12px 30px rgba(0,0,0,.35), 0 0 18px rgba(92,220,255,.2), 0 0 26px rgba(107,160,255,.14);
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
         }
 
         .anime-card::before {
             content: "";
-
             position: absolute;
-
             inset: 0;
-
-            background:
-                linear-gradient(
-                    120deg,
-                    transparent 20%,
-                    rgba(255,255,255,.08) 45%,
-                    transparent 70%
-                );
-
-            transform:
-                translateX(-120%);
-
-            transition:
-                transform .7s ease;
-
+            background: linear-gradient(
+                120deg,
+                transparent 20%,
+                rgba(255,255,255,.08) 45%,
+                transparent 70%
+            );
+            transform: translateX(-120%);
+            transition: transform .7s ease;
             pointer-events: none;
-
             z-index: 2;
         }
 
         .anime-card:hover::before {
-            transform:
-                translateX(120%);
+            transform: translateX(120%);
         }
 
         .anime-card:hover {
-            transform:
-                translateY(-9px)
-                scale(1.015);
-
-            border-color:
-                var(--anime-blue);
-
-            box-shadow:
-                0 18px 35px rgba(0,0,0,.45),
-                0 0 25px rgba(92,220,255,.46),
-                0 0 45px rgba(107,160,255,.24);
+            transform: translateY(-9px) scale(1.015);
+            border-color: var(--anime-blue);
+            box-shadow: 0 18px 35px rgba(0,0,0,.45),
+                        0 0 25px rgba(92,220,255,.46),
+                        0 0 45px rgba(107,160,255,.24);
         }
 
         .anime-image {
             width: 100%;
-
             height: 330px;
-
             object-fit: cover;
-
             display: block;
-
             border: 0;
-
             border-radius: 0;
-
             margin: 0;
-
             box-shadow: none;
-
-            transition:
-                transform .45s ease;
+            transition: transform .45s ease;
         }
 
         .anime-card:hover .anime-image {
-            transform:
-                scale(1.045);
+            transform: scale(1.045);
         }
 
         .anime-info {
             padding: 18px;
-
             position: relative;
-
             z-index: 3;
         }
 
         .anime-info::before {
             content: "";
-
             display: block;
-
             width: 45px;
-
             height: 3px;
-
             margin-bottom: 13px;
-
             border-radius: 10px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--anime-blue),
-                    #6ba7ff
-                );
-
-            box-shadow:
-                0 0 10px rgba(92,220,255,.8),
-                0 0 12px rgba(107,160,255,.6);
+            background: linear-gradient(90deg, var(--anime-blue), #6ba7ff);
+            box-shadow: 0 0 10px rgba(92,220,255,.8), 0 0 12px rgba(107,160,255,.6);
         }
 
         .anime-name {
-            margin:
-                0 0 9px;
-
+            margin: 0 0 9px;
             color: white;
-
             font-size: 1.3rem;
-
             font-weight: 900;
-
             letter-spacing: .04em;
         }
 
         .anime-meta {
             display: flex;
-
             flex-wrap: wrap;
-
             gap: 7px;
-
             margin-bottom: 13px;
         }
 
         .badge {
-            padding:
-                5px 9px;
-
+            padding: 5px 9px;
             border-radius: 999px;
-
             font-size: .72rem;
-
             font-weight: 800;
-
             letter-spacing: .04em;
-
-            background:
-                rgba(92,220,255,.12);
-
-            border:
-                1px solid
-                rgba(92,220,255,.4);
-
-            color:
-                #cffafe;
-
-            box-shadow:
-                0 0 12px
-                rgba(92,220,255,.15);
+            background: rgba(92,220,255,.12);
+            border: 1px solid rgba(92,220,255,.4);
+            color: #cffafe;
+            box-shadow: 0 0 12px rgba(92,220,255,.15);
         }
 
         .badge.rating {
-            background:
-                rgba(107,160,255,.12);
-
-            border-color:
-                rgba(107,160,255,.45);
-
-            color:
-                #dfeaff;
-
-            box-shadow:
-                0 0 12px
-                rgba(107,160,255,.12);
+            background: rgba(107,160,255,.12);
+            border-color: rgba(107,160,255,.45);
+            color: #dfeaff;
+            box-shadow: 0 0 12px rgba(107,160,255,.12);
         }
 
         .character {
-            color:
-                #cbd5e1;
-
-            font-size:
-                .92rem;
+            color: #cbd5e1;
+            font-size: .92rem;
         }
 
         .character strong {
-            color:
-                var(--pink);
+            color: var(--pink);
         }
-
 
         /* AUDIO */
-
-        .audio-section {
-            max-width: 1150px;
-
-            margin:
-                0 auto 45px;
-        }
-
         .audio-grid {
             max-width: 1150px;
-
-            margin:
-                0 auto;
-
+            margin: 0 auto;
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 18px;
         }
 
         .audio-player {
-            background:
-                rgba(12,18,35,.82);
-
-            border:
-                1px solid
-                rgba(92,220,255,.75);
-
+            background: rgba(12,18,35,.82);
+            border: 1px solid rgba(92,220,255,.75);
             border-radius: 18px;
-
             padding: 17px;
-
-            box-shadow:
-                0 0 18px rgba(92,220,255,.18),
-                0 0 20px rgba(107,160,255,.12);
-
-            transition:
-                transform .25s ease,
-                border-color .25s ease,
-                box-shadow .25s ease;
+            box-shadow: 0 0 18px rgba(92,220,255,.18), 0 0 20px rgba(107,160,255,.12);
+            transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
         }
 
         .audio-player:hover {
-            transform:
-                translateY(-5px);
-
-            border-color:
-                #7bbcff;
-
-            box-shadow:
-                0 0 22px rgba(123,188,255,.3),
-                0 0 26px rgba(92,220,255,.22);
+            transform: translateY(-5px);
+            border-color: #7bbcff;
+            box-shadow: 0 0 22px rgba(123,188,255,.3), 0 0 26px rgba(92,220,255,.22);
         }
 
         .audio-player label {
             display: block;
-
             margin-bottom: 10px;
-
-            color:
-                #ecfeff;
-
+            color: #ecfeff;
             font-weight: 900;
-
             letter-spacing: .06em;
-
-            text-shadow:
-                0 0 10px rgba(92,220,255,.72),
-                0 0 12px rgba(123,188,255,.35);
+            text-shadow: 0 0 10px rgba(92,220,255,.72), 0 0 12px rgba(123,188,255,.35);
         }
 
         .audio-player audio {
             display: block;
-
             width: 100%;
-
             margin-top: 8px;
-
             border-radius: 8px;
         }
 
-
         /* FOOTER */
-
         footer {
             max-width: 1150px;
-
-            margin:
-                50px auto 0;
-
+            margin: 50px auto 0;
             padding-top: 20px;
-
             text-align: center;
-
-            color:
-                #94a3b8;
-
-            border-top:
-                1px solid
-                rgba(148,163,184,.18);
-
-            font-size:
-                .85rem;
-
-            letter-spacing:
-                .06em;
+            color: #94a3b8;
+            border-top: 1px solid rgba(148,163,184,.18);
+            font-size: .85rem;
+            letter-spacing: .06em;
         }
 
-
         /* POPUP */
-
         .custom-alert-overlay {
             position: fixed;
-
             inset: 0;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
-            background:
-                rgba(2,6,23,.76);
-
-            backdrop-filter:
-                blur(10px);
-
-            -webkit-backdrop-filter:
-                blur(10px);
-
+            background: rgba(2,6,23,.76);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 9999;
-
             opacity: 0;
-
             visibility: hidden;
-
-            transition:
-                opacity .25s ease,
-                visibility .25s ease;
+            transition: opacity .25s ease, visibility .25s ease;
         }
 
         .custom-alert-overlay.show {
             opacity: 1;
-
             visibility: visible;
         }
 
         .custom-alert-box {
-            width:
-                min(420px, 88vw);
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(12,18,32,.97),
-                    rgba(25,44,78,.95)
-                );
-
-            border:
-                1px solid
-                rgba(92,220,255,.9);
-
+            width: min(420px, 88vw);
+            background: linear-gradient(135deg, rgba(12,18,32,.97), rgba(25,44,78,.95));
+            border: 1px solid rgba(92,220,255,.9);
             border-radius: 22px;
-
-            box-shadow:
-                0 0 22px rgba(92,220,255,.72),
-                0 0 38px rgba(107,160,255,.52);
-
-            padding:
-                26px 24px 20px;
-
+            box-shadow: 0 0 22px rgba(92,220,255,.72), 0 0 38px rgba(107,160,255,.52);
+            padding: 26px 24px 20px;
             text-align: center;
-
             position: relative;
-
             overflow: hidden;
-
-            animation:
-                alertFloat
-                .35s
-                ease-out;
+            animation: alertFloat .35s ease-out;
         }
 
         .alert-badge {
             display: inline-block;
-
-            padding:
-                6px 12px;
-
+            padding: 6px 12px;
             border-radius: 999px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #52d6ff,
-                    #6aa8ff,
-                    #9ae5ff
-                );
-
+            background: linear-gradient(135deg, #52d6ff, #6aa8ff, #9ae5ff);
             color: white;
-
             font-size: .72rem;
-
             font-weight: 700;
-
             letter-spacing: .12em;
-
             margin-bottom: 10px;
-
-            box-shadow:
-                0 0 12px rgba(82,214,255,.65),
-                0 0 18px rgba(106,168,255,.4);
+            box-shadow: 0 0 12px rgba(82,214,255,.65), 0 0 18px rgba(106,168,255,.4);
         }
 
         .custom-alert-box h3 {
-            margin:
-                0 0 10px;
-
+            margin: 0 0 10px;
             color: white;
-
-            font-size:
-                1.8rem;
-
-            text-shadow:
-                0 0 12px
-                rgba(34,211,238,.7);
+            font-size: 1.8rem;
+            text-shadow: 0 0 12px rgba(34,211,238,.7);
         }
 
         .custom-alert-box p {
-            margin:
-                0 0 22px;
-
-            font-size:
-                1.05rem;
-
-            color:
-                #fdf2f8;
-
-            letter-spacing:
-                .05em;
+            margin: 0 0 22px;
+            font-size: 1.05rem;
+            color: #fdf2f8;
+            letter-spacing: .05em;
         }
 
         .alert-close {
             border: none;
-
             border-radius: 12px;
+            padding: 12px 26px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            color: white;
+            cursor: pointer;
+            background: linear-gradient(135deg, #5ee4ff, #7f8eff, #8abaff);
+            box-shadow: 0 0 16px rgba(92,220,255,.55), 0 0 20px rgba(107,160,255,.45);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
 
-            padding:
-                12px 26px;
+        .alert-close:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 25px rgba(34,211,238,.7);
+        }
 
-            font-size:
-                1rem;
+        @keyframes alertFloat {
+            from { opacity: 0; transform: translateY(18px) scale(.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
 
-            font-weight:
-                700;
+        /* PHONE */
+        @media (max-width: 850px) {
+            .anime-grid,
+            .audio-grid {
+                grid-template-columns: 1fr;
+            }
 
-            letter-spacing:
-                .08em;
-    
-    color: white;
+            .anime-image {
+                height: 390px;
+            }
+        }
 
-    cursor: pointer;
+        @media (max-width: 600px) {
+            body {
+                padding: 25px 12px 45px;
+            }
 
-    background:
-        linear-gradient(
-            135deg,
-            #5ee4ff,
-            #7f8eff,
-            #8abaff
-        );
+            .anime-image {
+                height: 330px;
+            }
 
-    box-shadow:
-        0 0 16px rgba(92,220,255,.55),
-        0 0 20px rgba(107,160,255,.45);
+            h1 {
+                font-size: 2.7rem;
+            }
 
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-.alert-close:hover {
-    transform:
-        translateY(-2px)
-        scale(1.02);
-
-    box-shadow:
-        0 0 25px
-        rgba(34,211,238,.7);
-}
-
-@keyframes alertFloat {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateY(18px)
-            scale(.96);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-
-/* PHONE */
-
-@media (max-width: 850px) {
-
-    .anime-grid,
-    .audio-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .anime-image {
-        height: 390px;
-    }
-}
-
-@media (max-width: 600px) {
-
-    body {
-        padding:
-            25px 12px 45px;
-    }
-
-    .anime-image {
-        height: 330px;
-    }
-
-    h1 {
-        font-size:
-            2.7rem;
-    }
-
-    .subtitle {
-        font-size:
-            .85rem;
-    }
-}
-
-</style>
+            .subtitle {
+                font-size: .85rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- HERO -->
-
     <header class="hero">
-
-        <div class="hero-badge">
-            MY ANIME ARCHIVE • 2026
-        </div>
-
-        <h1>
-            ANIMES WATCHED
-        </h1>
-
-        <div class="subtitle">
-            A personal collection of anime,
-            favourite characters, ratings & iconic sounds
-        </div>
-
+        <div class="hero-badge">MY ANIME ARCHIVE • 2026</div>
+        <h1>ANIMES WATCHED</h1>
+        <div class="subtitle">A personal collection of anime, favourite characters, ratings & iconic sounds </div>
     </header>
-
-
-    <!-- WATCHED LIST -->
-
     <ul class="watched-list">
-
-        <li>
-            ATTACK ON TITAN (REMAINING)
-        </li>
-
-        <li>
-            SOLO LEVELING
-        </li>
-
-        <li>
-            JUJUTSU KAISEN
-        </li>
-
+        <li>ATTACK ON TITAN (REMAINING)</li>
+        <li>SOLO LEVELING</li>
+        <li>JUJUTSU KAISEN</li>
     </ul>
 
-
-    <!-- TABLE -->
-
     <div class="table-wrap">
-
         <table>
-
             <thead>
-
                 <tr>
                     <th>ANIME NAME</th>
                     <th>STARTED</th>
@@ -1154,260 +582,75 @@
                     <th>RATING</th>
                     <th>FAVOURITE CHARACTER</th>
                 </tr>
-
             </thead>
-
             <tbody>
-
                 <tr>
                     <td>ATTACK ON TITAN</td>
                     <td>FEB, 26, 2026</td>
                     <td>2 SEASONS (PAUSED)</td>
-                    <td>8/10</td>
+                    <td>8/10 </td>
                     <td>EREN JAEGER</td>
                 </tr>
-
                 <tr>
                     <td>SOLO LEVELING</td>
                     <td>MAR, 22, 2026</td>
                     <td>APR, 18, 2026</td>
-                    <td>11/10</td>
+                    <td>11/10 </td>
                     <td>SUNG JIN WOO</td>
                 </tr>
-
                 <tr>
                     <td>JUJUTSU KAISEN</td>
                     <td>JUL, 3, 2026</td>
                     <td>AUG, 20, 2026</td>
-                    <td>10/10</td>
+                    <td>10/10 </td>
                     <td>RYOMEN SUKUNA</td>
                 </tr>
-
             </tbody>
-
         </table>
-
     </div>
 
-
-    <!-- ANIME COLLECTION -->
-
-    <h2 class="section-title">
-        MY <span>ANIME COLLECTION</span>
-    </h2>
+    <h2 class="section-title"> MY <span>ANIME COLLECTION</span></h2>
 
     <div class="anime-grid">
 
-
-        <!-- ATTACK ON TITAN -->
-
         <article class="anime-card">
-
-            <img
-                class="anime-image"
-                src="eren and founding Titan.jfif"
-                alt="Attack on Titan"
-            >
-
+            <img class="anime-image" src="eren and founding Titan.jfif" alt="Attack on Titan">
             <div class="anime-info">
-
-                <h3 class="anime-name">
-                    ATTACK ON TITAN
-                </h3>
-
+                <h3 class="anime-name">ATTACK ON TITAN</h3>
                 <div class="anime-meta">
-
-                    <span class="badge">
-                        PAUSED
-                    </span>
-
-                    <span class="badge rating">
-                        8/10
-                    </span>
-
+                    <span class="badge"> PAUSED</span>
+                    <span class="badge rating"> 8/10</span>
                 </div>
-
-                <div class="character">
-                    Favourite:
-                    <strong>EREN JAEGER</strong>
-                </div>
-
+                <div class="character">Favourite: <strong>EREN JAEGER</strong></div>
             </div>
-
         </article>
 
-
-        <!-- SOLO LEVELING -->
-
         <article class="anime-card">
-
-            <img
-                class="anime-image"
-                src="2026-02-26 (18).png"
-                alt="Solo Leveling"
-            >
-
+            <img class="anime-image" src="2026-02-26 (18).png" alt="Solo Leveling">
             <div class="anime-info">
-
-                <h3 class="anime-name">
-                    SOLO LEVELING
-                </h3>
-
+                <h3 class="anime-name">SOLO LEVELING</h3>
                 <div class="anime-meta">
-
-                    <span class="badge">
-                        FINISHED
-                    </span>
-
-                    <span class="badge rating">
-                        11/10
-                    </span>
-
+                    <span class="badge"> FINISHED</span>
+                    <span class="badge rating"> 11/10</span>
                 </div>
-
-                <div class="character">
-                    Favourite:
-                    <strong>SUNG JIN WOO</strong>
-                </div>
-
+                <div class="character">Favourite: <strong>SUNG JIN WOO</strong></div>
             </div>
-
         </article>
 
-
-        <!-- JUJUTSU KAISEN -->
-
         <article class="anime-card">
-
-            <img
-                class="anime-image"
-                src="2026-08-23 (5).png"
-                alt="Jujutsu Kaisen"
-            >
-
+            <img class="anime-image" src="2026-08-23 (5).png" alt="Jujutsu Kaisen">
             <div class="anime-info">
-
-                <h3 class="anime-name">
-                    JUJUTSU KAISEN
-                </h3>
-
+                <h3 class="anime-name">JUJUTSU KAISEN</h3>
                 <div class="anime-meta">
-
-                    <span class="badge">
-                        FINISHED
-                    </span>
-
-                    <span class="badge rating">
-                        10/10
-                    </span>
-
+                    <span class="badge"> FINISHED</span>
+                    <span class="badge rating"> 10/10</span>
                 </div>
-
-                <div class="character">
-                    Favourite:
-                    <strong>RYOMEN SUKUNA</strong>
-                </div>
-
+                <div class="character">Favourite: <strong>RYOMEN SUKUNA</strong></div>
             </div>
-
         </article>
 
     </div>
+    <div class="audio-grid">
 
-
-    <!-- ICONIC SOUNDS -->
-
-    <h2 class="section-title">
-        ICONIC <span>SOUNDS</span>
-    </h2>
-
-    <section class="audio-section">
-
-        <div class="audio-grid">
-
-
-            <!-- EREN -->
-
-            <div class="audio-player">
-
-                <label>
-                    EREN JAEGER
-                </label>
-
-                <audio controls preload="metadata">
-
-                    <source
-                        src="tatakae-eren.mp3"
-                        type="audio/mpeg"
-                    >
-
-                    Your browser does not support
-                    the audio element.
-
-                </audio>
-
-            </div>
-
-
-            <!-- SUNG JIN WOO -->
-
-            <div class="audio-player">
-
-                <label>
-                     SUNG JIN WOO 
-                </label>
-
-                <audio controls preload="metadata">
-
-                    <source
-                        src="jinwoo.mp3"
-                        type="audio/mpeg"
-                    >
-
-                    Your browser does not support
-                    the audio element.
-
-                </audio>
-
-            </div>
-
-
-            <!-- SUKUNA -->
-
-            <div class="audio-player">
-
-                <label>
-                     SUKUNA 
-                </label>
-
-                <audio controls preload="metadata">
-
-                    <source
-                        src="sukuna.mp3"
-                        type="audio/mpeg"
-                    >
-
-                    Your browser does not support
-                    the audio element.
-
-                </audio>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        © 2026 MUHAMMAD AZAAN •
-        MY ANIME ARCHIVE
-
-    </footer>
-
-</body>
-</html>
+        <div class="audio-player">
+            
