@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#070b18">
-<title>ANIMES WATCHED</title>
+
+<meta name="theme-color" content="#050816">
+
+<title>ANIMES WATCHED V2</title>
 
 <style>
+
+/* =========================
+   ROOT
+========================= */
+
 :root{
     --bg:#050816;
     --panel:rgba(10,15,30,.82);
     --panel2:rgba(15,23,42,.9);
+
     --cyan:#22d3ee;
     --teal:#5eead4;
     --pink:#ff4fd8;
     --purple:#8b5cf6;
     --green:#67f0a4;
     --gold:#fbbf24;
+
     --text:#e2e8f0;
     --muted:#94a3b8;
     --white:#f8fafc;
 }
 
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 html{
     scroll-behavior:smooth;
@@ -30,720 +42,1584 @@ html{
 
 body{
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     color:var(--text);
+
     background:
-      radial-gradient(circle at 12% 10%,rgba(34,211,238,.18),transparent 24%),
-      radial-gradient(circle at 88% 18%,rgba(255,79,216,.13),transparent 24%),
-      radial-gradient(circle at 50% 90%,rgba(139,92,246,.17),transparent 30%),
-      linear-gradient(135deg,#050816,#0b1120,#140d2d);
+        radial-gradient(
+            circle at 12% 10%,
+            rgba(34,211,238,.18),
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 88% 18%,
+            rgba(255,79,216,.14),
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(139,92,246,.18),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #050816,
+            #0b1120,
+            #140d2d
+        );
+
     min-height:100vh;
+
     overflow-x:hidden;
 }
+
+
+/* =========================
+   FLOATING GLOW
+========================= */
 
 body::before,
 body::after{
     content:"";
+
     position:fixed;
+
     width:280px;
     height:280px;
+
     border-radius:50%;
+
     filter:blur(90px);
+
     opacity:.14;
+
     pointer-events:none;
+
     z-index:-1;
-    animation:floatGlow 8s ease-in-out infinite alternate;
+
+    animation:
+        floatGlow 8s ease-in-out infinite alternate;
 }
-body::before{background:var(--cyan);left:-130px;top:12%}
-body::after{background:var(--pink);right:-130px;bottom:8%;animation-delay:2s}
+
+body::before{
+    background:var(--cyan);
+
+    left:-130px;
+    top:12%;
+}
+
+body::after{
+    background:var(--pink);
+
+    right:-130px;
+    bottom:8%;
+
+    animation-delay:2s;
+}
 
 @keyframes floatGlow{
-    from{transform:translateY(0) scale(1)}
-    to{transform:translateY(55px) scale(1.18)}
+
+    from{
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    to{
+        transform:
+            translateY(55px)
+            scale(1.18);
+    }
 }
+
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
-    width:min(1180px,calc(100% - 28px));
+    width:min(
+        1180px,
+        calc(100% - 28px)
+    );
+
     margin:auto;
 }
 
-/* POPUP */
+
+/* =========================
+   POPUP
+========================= */
+
 .custom-alert-overlay{
+
     position:fixed;
+
     inset:0;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
-    background:rgba(2,6,23,.78);
+
+    background:
+        rgba(2,6,23,.78);
+
     backdrop-filter:blur(10px);
+
     -webkit-backdrop-filter:blur(10px);
+
     z-index:9999;
+
     opacity:0;
+
     visibility:hidden;
+
     transition:.25s ease;
 }
-.custom-alert-overlay.show{opacity:1;visibility:visible}
-.custom-alert-box{
-    width:min(430px,88vw);
-    padding:28px 24px 22px;
-    text-align:center;
-    border:1px solid rgba(94,234,212,.9);
-    border-radius:24px;
-    background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(88,28,135,.95));
-    box-shadow:0 0 25px rgba(34,211,238,.65),0 0 45px rgba(168,85,247,.45);
-    animation:popupIn .35s ease-out;
+
+.custom-alert-overlay.show{
+    opacity:1;
+    visibility:visible;
 }
+
+.custom-alert-box{
+
+    width:min(
+        430px,
+        88vw
+    );
+
+    padding:
+        28px
+        24px
+        22px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        rgba(94,234,212,.9);
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(15,23,42,.98),
+            rgba(88,28,135,.95)
+        );
+
+    box-shadow:
+
+        0 0 25px
+        rgba(34,211,238,.65),
+
+        0 0 45px
+        rgba(168,85,247,.45);
+
+    animation:
+        popupIn .35s ease-out;
+}
+
 .alert-badge{
+
     display:inline-block;
-    padding:6px 12px;
+
+    padding:
+        6px
+        12px;
+
     border-radius:999px;
-    background:linear-gradient(135deg,var(--pink),var(--purple),var(--cyan));
-    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--purple),
+            var(--cyan)
+        );
+
+    color:white;
+
     font-size:.72rem;
+
     font-weight:800;
+
     letter-spacing:.13em;
 }
+
 .custom-alert-box h3{
-    margin:13px 0 9px;
-    color:#fff;
+
+    margin:
+        13px 0
+        9px;
+
+    color:white;
+
     font-size:1.8rem;
 }
+
 .custom-alert-box p{
-    margin:0 0 20px;
+
+    margin:
+        0 0
+        20px;
+
     color:#fdf2f8;
+
     letter-spacing:.04em;
 }
+
 .alert-close{
+
     border:0;
+
     border-radius:12px;
-    padding:12px 26px;
-    color:#fff;
-    background:linear-gradient(135deg,var(--cyan),var(--purple));
+
+    padding:
+        12px
+        26px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan),
+            var(--purple)
+        );
+
     font-weight:800;
+
     letter-spacing:.08em;
+
     cursor:pointer;
-    box-shadow:0 0 16px rgba(34,211,238,.45);
-}
-@keyframes popupIn{
-    from{opacity:0;transform:translateY(18px) scale(.96)}
-    to{opacity:1;transform:none}
+
+    box-shadow:
+        0 0 16px
+        rgba(34,211,238,.45);
+
+    transition:.2s ease;
 }
 
-/* HERO */
+.alert-close:hover{
+    transform:scale(1.05);
+}
+
+@keyframes popupIn{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(18px)
+            scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+
+/* =========================
+   HERO
+========================= */
+
 .hero{
+
     text-align:center;
-    padding:35px 0 28px;
+
+    padding:
+        35px 0
+        28px;
 }
+
 .hero-badge{
+
     display:inline-block;
-    padding:7px 15px;
-    border:1px solid rgba(94,234,212,.65);
+
+    padding:
+        7px 15px;
+
+    border:
+        1px solid
+        rgba(94,234,212,.65);
+
     border-radius:999px;
+
     color:var(--cyan);
-    background:rgba(34,211,238,.07);
+
+    background:
+        rgba(34,211,238,.07);
+
     font-size:.72rem;
+
     font-weight:900;
+
     letter-spacing:.16em;
-    box-shadow:0 0 18px rgba(34,211,238,.2);
+
+    box-shadow:
+        0 0 18px
+        rgba(34,211,238,.2);
 }
+
 .hero h1{
-    margin:15px 0 0;
-    font-size:clamp(2.8rem,8vw,6.5rem);
+
+    margin:
+        15px 0
+        0;
+
+    font-size:
+        clamp(
+            2.8rem,
+            8vw,
+            6.5rem
+        );
+
     line-height:.95;
+
     font-weight:950;
+
     letter-spacing:.045em;
-    background:linear-gradient(90deg,var(--cyan),#fff,var(--pink),var(--purple),var(--cyan));
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            #fff,
+            var(--pink),
+            var(--purple),
+            var(--cyan)
+        );
+
     background-size:300% auto;
+
     -webkit-background-clip:text;
+
     background-clip:text;
+
     color:transparent;
-    animation:titleShine 6s linear infinite;
+
+    animation:
+        titleShine 6s linear infinite;
 }
-@keyframes titleShine{to{background-position:300% center}}
+
+@keyframes titleShine{
+    to{
+        background-position:
+            300% center;
+    }
+}
+
 .hero-line{
-    width:min(520px,75%);
+
+    width:min(
+        520px,
+        75%
+    );
+
     height:2px;
-    margin:22px auto 17px;
-    background:linear-gradient(90deg,transparent,var(--cyan),var(--pink),var(--cyan),transparent);
-    box-shadow:0 0 14px rgba(34,211,238,.65);
+
+    margin:
+        22px auto
+        17px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--cyan),
+            var(--pink),
+            var(--cyan),
+            transparent
+        );
+
+    box-shadow:
+        0 0 14px
+        rgba(34,211,238,.65);
 }
+
 .subtitle{
+
     max-width:720px;
+
     margin:auto;
+
     color:#cbd5e1;
+
     font-size:.95rem;
+
     letter-spacing:.08em;
 }
 
-/* STATS */
+
+/* =========================
+   STATS
+========================= */
+
 .stats{
+
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+        repeat(4,1fr);
+
     gap:14px;
-    margin:15px auto 35px;
+
+    margin:
+        15px auto
+        35px;
 }
+
 .stat{
-    padding:20px 12px;
+
+    padding:
+        20px 12px;
+
     text-align:center;
-    border:1px solid rgba(94,234,212,.38);
+
+    border:
+        1px solid
+        rgba(94,234,212,.38);
+
     border-radius:18px;
-    background:linear-gradient(145deg,rgba(15,23,42,.84),rgba(30,18,55,.72));
-    box-shadow:0 0 20px rgba(34,211,238,.08);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,23,42,.84),
+            rgba(30,18,55,.72)
+        );
+
+    box-shadow:
+        0 0 20px
+        rgba(34,211,238,.08);
+
     transition:.25s ease;
 }
+
 .stat:hover{
-    transform:translateY(-5px);
-    border-color:var(--pink);
-    box-shadow:0 0 22px rgba(255,79,216,.18);
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--pink);
+
+    box-shadow:
+        0 0 22px
+        rgba(255,79,216,.18);
 }
+
 .stat-number{
+
     display:block;
-    color:#fff;
+
+    color:white;
+
     font-size:1.9rem;
+
     font-weight:950;
 }
+
 .stat-label{
+
     display:block;
+
     margin-top:5px;
+
     color:var(--muted);
+
     font-size:.7rem;
+
     font-weight:800;
+
     letter-spacing:.12em;
 }
 
-/* SECTION */
+
+/* =========================
+   SECTION
+========================= */
+
 .section{
+
     scroll-margin-top:90px;
-    margin:0 auto 55px;
+
+    margin:
+        0 auto
+        55px;
 }
+
 .section-heading{
+
     display:flex;
+
     align-items:end;
+
     justify-content:space-between;
+
     gap:15px;
+
     margin-bottom:18px;
 }
+
 .section-title{
+
     margin:0;
+
     color:var(--green);
+
     font-size:1.75rem;
-    text-shadow:0 0 15px rgba(103,240,164,.5);
+
+    text-shadow:
+        0 0 15px
+        rgba(103,240,164,.5);
+
     letter-spacing:.04em;
 }
-.section-title span{color:var(--pink)}
+
+.section-title span{
+    color:var(--pink);
+}
+
 .section-kicker{
+
     color:var(--muted);
+
     font-size:.68rem;
+
     font-weight:800;
+
     letter-spacing:.16em;
 }
 
-/* QUICK LIST */
+
+/* =========================
+   WATCHED LIST
+========================= */
+
 .watched-list{
-    margin:0 auto 30px;
-    padding:18px 24px 18px 42px;
+
+    margin:
+        0 auto
+        30px;
+
+    padding:
+        18px 24px
+        18px 42px;
+
     max-width:760px;
-    border:1px solid rgba(94,234,212,.45);
+
+    border:
+        1px solid
+        rgba(94,234,212,.45);
+
     border-radius:20px;
-    background:rgba(12,18,35,.7);
-    box-shadow:0 0 22px rgba(34,211,238,.12);
+
+    background:
+        rgba(12,18,35,.7);
+
+    box-shadow:
+        0 0 22px
+        rgba(34,211,238,.12);
 }
+
 .watched-list li{
+
     margin:8px 0;
+
     color:#f8fafc;
+
     font-weight:800;
 }
-.watched-list li::marker{color:var(--pink)}
 
-/* TABLE */
-.table-wrap{
-    overflow-x:auto;
-    border-radius:20px;
-    box-shadow:0 0 25px rgba(34,211,238,.16);
-}
-table{
-    width:100%;
-    min-width:760px;
-    border-collapse:collapse;
-    background:rgba(10,15,30,.88);
-    border:1px solid rgba(94,234,212,.75);
-}
-th,td{
-    padding:15px 12px;
-    text-align:center;
-    border:1px solid rgba(148,163,184,.22);
-}
-th{
-    background:linear-gradient(135deg,var(--pink),var(--purple),var(--cyan));
-    color:#fff;
-    font-size:.84rem;
-    letter-spacing:.06em;
-}
-tbody tr:nth-child(even) td{background:rgba(34,211,238,.055)}
-tbody tr:nth-child(odd) td{background:rgba(15,23,42,.94)}
-tbody tr{transition:.2s ease}
-tbody tr:hover{
-    transform:scale(1.008);
-    box-shadow:inset 0 0 20px rgba(34,211,238,.08);
+.watched-list li::marker{
+    color:var(--pink);
 }
 
-/* ANIME CARDS */
+
+/* =========================
+   ANIME GRID
+========================= */
+
 .anime-grid{
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:22px;
 }
+
 .anime-card{
+
     position:relative;
+
     overflow:hidden;
-    border:1px solid rgba(94,234,212,.55);
+
+    border:
+        1px solid
+        rgba(94,234,212,.55);
+
     border-radius:23px;
-    background:linear-gradient(145deg,rgba(15,23,42,.95),rgba(30,18,55,.9));
-    box-shadow:0 14px 32px rgba(0,0,0,.34),0 0 18px rgba(34,211,238,.13);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,23,42,.95),
+            rgba(30,18,55,.9)
+        );
+
+    box-shadow:
+
+        0 14px 32px
+        rgba(0,0,0,.34),
+
+        0 0 18px
+        rgba(34,211,238,.13);
+
     transition:.3s ease;
 }
+
 .anime-card:hover{
-    transform:translateY(-9px);
-    border-color:var(--pink);
-    box-shadow:0 20px 40px rgba(0,0,0,.45),0 0 28px rgba(255,79,216,.28);
+
+    transform:
+        translateY(-9px);
+
+    border-color:
+        var(--pink);
+
+    box-shadow:
+
+        0 20px 40px
+        rgba(0,0,0,.45),
+
+        0 0 28px
+        rgba(255,79,216,.28);
 }
+
 .anime-image-wrap{
+
     position:relative;
+
     height:330px;
+
     overflow:hidden;
 }
+
 .anime-image{
+
     width:100%;
+
     height:100%;
+
     display:block;
+
     object-fit:cover;
+
     transition:.45s ease;
 }
-.anime-card:hover .anime-image{transform:scale(1.06)}
+
+.anime-card:hover
+.anime-image{
+
+    transform:
+        scale(1.06);
+}
+
 .image-shade{
+
     position:absolute;
+
     inset:0;
-    background:linear-gradient(to top,rgba(5,8,22,.88),transparent 48%);
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(5,8,22,.88),
+            transparent 48%
+        );
+
     pointer-events:none;
 }
+
 .status-chip{
+
     position:absolute;
+
     top:13px;
     left:13px;
-    padding:6px 10px;
+
+    padding:
+        6px 10px;
+
     border-radius:999px;
-    background:rgba(5,8,22,.76);
-    border:1px solid rgba(255,255,255,.25);
-    color:#fff;
+
+    background:
+        rgba(5,8,22,.76);
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    color:white;
+
     font-size:.66rem;
+
     font-weight:900;
+
     letter-spacing:.1em;
-    backdrop-filter:blur(8px);
+
+    backdrop-filter:
+        blur(8px);
 }
+
 .card-number{
+
     position:absolute;
+
     right:14px;
     bottom:10px;
-    color:rgba(255,255,255,.14);
+
+    color:
+        rgba(255,255,255,.14);
+
     font-size:4.5rem;
+
     font-weight:950;
+
     line-height:1;
 }
-.anime-info{padding:18px}
+
+.anime-info{
+    padding:18px;
+}
+
 .anime-name{
-    margin:0 0 10px;
-    color:#fff;
+
+    margin:
+        0 0
+        10px;
+
+    color:white;
+
     font-size:1.32rem;
+
     font-weight:950;
+
     letter-spacing:.04em;
 }
+
 .anime-meta{
+
     display:flex;
+
     flex-wrap:wrap;
+
     gap:7px;
+
     margin-bottom:13px;
 }
+
 .badge{
-    padding:5px 9px;
+
+    padding:
+        5px 9px;
+
     border-radius:999px;
-    background:rgba(34,211,238,.1);
-    border:1px solid rgba(34,211,238,.34);
+
+    background:
+        rgba(34,211,238,.1);
+
+    border:
+        1px solid
+        rgba(34,211,238,.34);
+
     color:#cffafe;
+
     font-size:.68rem;
+
     font-weight:900;
 }
+
 .badge.rating{
-    background:rgba(251,191,36,.1);
-    border-color:rgba(251,191,36,.35);
+
+    background:
+        rgba(251,191,36,.1);
+
+    border-color:
+        rgba(251,191,36,.35);
+
     color:#fde68a;
 }
+
 .character{
+
     color:#cbd5e1;
+
     font-size:.9rem;
 }
-.character strong{color:var(--pink)}
-.card-divider{
-    height:1px;
-    margin:16px 0 13px;
-    background:linear-gradient(90deg,rgba(94,234,212,.5),transparent);
+
+.character strong{
+    color:var(--pink);
 }
+
+.card-divider{
+
+    height:1px;
+
+    margin:
+        16px 0
+        13px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(94,234,212,.5),
+            transparent
+        );
+}
+
 .date-row{
+
     display:flex;
+
     justify-content:space-between;
+
     gap:10px;
+
     color:var(--muted);
+
     font-size:.7rem;
+
     font-weight:800;
 }
-.date-row strong{color:#e2e8f0}
 
-/* RATING */
+.date-row strong{
+    color:#e2e8f0;
+}
+
+
+/* =========================
+   RATING
+========================= */
+
 .rating-box{
     margin-top:16px;
 }
+
 .rating-head{
+
     display:flex;
+
     justify-content:space-between;
+
     color:#cbd5e1;
+
     font-size:.68rem;
+
     font-weight:900;
+
     letter-spacing:.08em;
 }
+
 .rating-track{
+
     height:7px;
+
     margin-top:7px;
+
     overflow:hidden;
+
     border-radius:999px;
-    background:rgba(148,163,184,.15);
-}
-.rating-fill{
-    height:100%;
-    border-radius:999px;
-    background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
-    box-shadow:0 0 12px rgba(34,211,238,.45);
+
+    background:
+        rgba(148,163,184,.15);
 }
 
-/* SOUNDS */
-.audio-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
+.rating-fill{
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--purple),
+            var(--pink)
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(34,211,238,.45);
 }
-.audio-player{
-    position:relative;
-    padding:19px;
-    border:1px solid rgba(94,234,212,.55);
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+
+    overflow-x:auto;
+
     border-radius:20px;
-    background:linear-gradient(145deg,rgba(12,18,35,.88),rgba(30,18,55,.78));
-    box-shadow:0 0 18px rgba(34,211,238,.11);
-    transition:.25s ease;
+
+    box-shadow:
+        0 0 25px
+        rgba(34,211,238,.16);
 }
-.audio-player:hover{
-    transform:translateY(-5px);
-    border-color:var(--pink);
-    box-shadow:0 0 24px rgba(255,79,216,.2);
+
+table{
+
+    width:100%;
+
+    min-width:760px;
+
+    border-collapse:collapse;
+
+    background:
+        rgba(10,15,30,.88);
+
+    border:
+        1px solid
+        rgba(94,234,212,.75);
 }
-.audio-label{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:10px;
+
+th,
+td{
+
+    padding:
+        15px 12px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        rgba(148,163,184,.22);
 }
-.audio-label span:first-child{
-    color:#ecfeff;
-    font-weight:950;
+
+th{
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--purple),
+            var(--cyan)
+        );
+
+    color:white;
+
+    font-size:.84rem;
+
     letter-spacing:.06em;
 }
+
+tbody tr:nth-child(even) td{
+    background:
+        rgba(34,211,238,.055);
+}
+
+tbody tr:nth-child(odd) td{
+    background:
+        rgba(15,23,42,.94);
+}
+
+tbody tr{
+    transition:.2s ease;
+}
+
+tbody tr:hover{
+
+    transform:
+        scale(1.008);
+
+    box-shadow:
+        inset 0 0 20px
+        rgba(34,211,238,.08);
+}
+
+
+/* ==================================================
+   CUSTOM ANIME AUDIO PLAYER
+================================================== */
+
+.audio-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
+}
+
+.audio-player{
+
+    position:relative;
+
+    padding:20px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(94,234,212,.55);
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12,18,35,.92),
+            rgba(30,18,55,.82)
+        );
+
+    box-shadow:
+
+        0 0 18px
+        rgba(34,211,238,.11),
+
+        inset 0 0 25px
+        rgba(139,92,246,.05);
+
+    transition:.3s ease;
+}
+
+.audio-player::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-80px;
+    left:-80px;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:
+        var(--cyan);
+
+    filter:blur(80px);
+
+    opacity:.08;
+
+    pointer-events:none;
+}
+
+.audio-player:hover{
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        var(--pink);
+
+    box-shadow:
+
+        0 0 25px
+        rgba(255,79,216,.25),
+
+        0 0 45px
+        rgba(139,92,246,.12);
+}
+
+
+/* AUDIO TITLE */
+
+.audio-label{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:12px;
+}
+
+.audio-label span:first-child{
+
+    color:#ecfeff;
+
+    font-weight:950;
+
+    letter-spacing:.08em;
+}
+
 .sound-number{
-    color:rgba(255,255,255,.18);
+
+    color:
+        rgba(255,255,255,.2);
+
     font-weight:950;
 }
-.audio-player audio{
-    display:block;
-    width:100%;
-    margin-top:8px;
-    border-radius:9px;
+
+
+/* =========================
+   VISUALIZER
+========================= */
+
+.audio-visualizer{
+
+    height:72px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:4px;
+
+    padding:5px;
+
+    margin-bottom:15px;
+
+    border-radius:12px;
+
+    background:
+        rgba(0,0,0,.15);
 }
+
+.audio-bar{
+
+    width:5px;
+
+    height:15px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--pink),
+            var(--purple),
+            var(--cyan)
+        );
+
+    box-shadow:
+
+        0 0 8px
+        rgba(34,211,238,.75),
+
+        0 0 14px
+        rgba(255,79,216,.35);
+
+    transform-origin:center;
+
+    transition:
+        height .12s ease,
+        opacity .2s ease;
+}
+
+
+/* ANIMATED BARS */
+
+.audio-player.playing
+.audio-bar{
+
+    animation:
+        audioPulse
+        .7s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+.audio-player.playing
+.audio-bar:nth-child(2n){
+
+    animation-delay:
+        .12s;
+}
+
+.audio-player.playing
+.audio-bar:nth-child(3n){
+
+    animation-delay:
+        .24s;
+}
+
+.audio-player.playing
+.audio-bar:nth-child(4n){
+
+    animation-delay:
+        .36s;
+}
+
+.audio-player.playing
+.audio-bar:nth-child(5n){
+
+    animation-delay:
+        .48s;
+}
+
+@keyframes audioPulse{
+
+    from{
+
+        transform:
+            scaleY(.35);
+
+        opacity:.6;
+    }
+
+    to{
+
+        transform:
+            scaleY(1.7);
+
+        opacity:1;
+    }
+}
+
+
+/* =========================
+   CUSTOM CONTROLS
+========================= */
+
+.custom-audio-controls{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+
+/* PLAY BUTTON */
+
+.audio-play{
+
+    flex-shrink:0;
+
+    width:43px;
+    height:43px;
+
+    border:
+        1px solid
+        rgba(94,234,212,.75);
+
+    border-radius:50%;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan),
+            var(--purple),
+            var(--pink)
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(34,211,238,.45);
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    transition:.2s ease;
+}
+
+.audio-play:hover{
+
+    transform:
+        scale(1.1);
+
+    box-shadow:
+
+        0 0 20px
+        rgba(255,79,216,.65);
+}
+
+.audio-play:active{
+    transform:scale(.94);
+}
+
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.audio-progress{
+
+    flex:1;
+
+    height:7px;
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--purple),
+            var(--pink)
+        );
+
+    cursor:pointer;
+
+    opacity:.75;
+}
+
+.audio-progress::-webkit-slider-thumb{
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    width:14px;
+    height:14px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:
+        white;
+
+    box-shadow:
+        0 0 10px
+        var(--cyan);
+
+    cursor:pointer;
+}
+
+.audio-progress::-moz-range-thumb{
+
+    width:14px;
+    height:14px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 10px
+        var(--cyan);
+
+    cursor:pointer;
+}
+
+
+/* TIME */
+
+.audio-time{
+
+    min-width:40px;
+
+    color:#94a3b8;
+
+    font-size:.65rem;
+
+    font-weight:800;
+
+    text-align:right;
+}
+
+
+/* HIDDEN REAL AUDIO */
+
+.real-audio{
+    display:none;
+}
+
+
+/* AUDIO NOTE */
+
 .audio-note{
-    margin:9px 0 0;
+
+    margin:
+        10px 0
+        0;
+
     color:var(--muted);
+
     font-size:.67rem;
+
     letter-spacing:.05em;
 }
 
-/* SCROLL REVEAL */
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
 .reveal{
+
     opacity:0;
-    transform:translateY(22px);
-    transition:opacity .65s ease,transform .65s ease;
+
+    transform:
+        translateY(22px);
+
+    transition:
+        opacity .65s ease,
+        transform .65s ease;
 }
+
 .reveal.visible{
+
     opacity:1;
+
     transform:none;
 }
 
-/* FOOTER */
+
+/* =========================
+   FOOTER
+========================= */
+
 footer{
-    margin:25px auto 45px;
+
+    margin:
+        25px auto
+        45px;
+
     padding-top:18px;
+
     text-align:center;
-    border-top:1px solid rgba(148,163,184,.16);
+
+    border-top:
+        1px solid
+        rgba(148,163,184,.16);
+
     color:#64748b;
+
     font-size:.72rem;
+
     letter-spacing:.09em;
 }
 
-/* RESPONSIVE */
+
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media(max-width:900px){
-    .stats{grid-template-columns:repeat(2,1fr)}
-    .anime-grid,.audio-grid{grid-template-columns:1fr}
-    .anime-image-wrap{height:390px}
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .anime-grid,
+    .audio-grid{
+        grid-template-columns:1fr;
+    }
+
+    .anime-image-wrap{
+        height:390px;
+    }
 }
+
 @media(max-width:600px){
-    .container{width:min(100% - 20px,1180px)}
-    .navbar{width:calc(100% - 20px)}
-    .hero{padding-top:20px}
-    .hero h1{font-size:2.8rem}
-    .subtitle{font-size:.8rem}
-    .stats{gap:9px}
-    .stat{padding:15px 8px}
-    .stat-number{font-size:1.5rem}
-    .section-heading{display:block}
-    .section-kicker{margin-top:5px}
-    .anime-image-wrap{height:330px}
+
+    .container{
+
+        width:
+            min(
+                100% - 20px,
+                1180px
+            );
+    }
+
+    .hero{
+        padding-top:20px;
+    }
+
+    .hero h1{
+        font-size:2.8rem;
+    }
+
+    .subtitle{
+        font-size:.8rem;
+    }
+
+    .stats{
+        gap:9px;
+    }
+
+    .stat{
+        padding:15px 8px;
+    }
+
+    .stat-number{
+        font-size:1.5rem;
+    }
+
+    .section-heading{
+        display:block;
+    }
+
+    .section-kicker{
+        margin-top:5px;
+    }
+
+    .anime-image-wrap{
+        height:330px;
+    }
+
+    .audio-player{
+        padding:16px;
+    }
+
+    .audio-visualizer{
+        height:65px;
+    }
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- ==================================================
+     POPUP
+================================================== -->
+
 <script>
-document.addEventListener("DOMContentLoaded", function(){
-    const overlay = document.createElement("div");
-    overlay.className = "custom-alert-overlay show";
-    overlay.innerHTML = `
-        <div class="custom-alert-box" role="alert" aria-live="assertive">
-            <div class="alert-badge">NOTICE</div>
-            <h3>Original Work</h3>
-            <p>ORIGINAL WORK OF MUHAMMAD AZAAN</p>
-            <button class="alert-close">UNDERSTOOD<br>DONT COPY!!</button>
-        </div>
-    `;
-    document.body.appendChild(overlay);
 
-    overlay.querySelector(".alert-close").addEventListener("click", function(){
-        overlay.classList.remove("show");
-        setTimeout(() => overlay.remove(), 250);
-    });
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-    const revealItems = document.querySelectorAll(".reveal");
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {threshold:.12});
+        const overlay =
+            document.createElement("div");
 
-    revealItems.forEach(item => observer.observe(item));
-
-
-});
-</script>
-
-
-
-<header class="hero container" id="home">
-    <h1>ANIMES WATCHED</h1>
-    <div class="hero-line"></div>
-</header>
-
-<main class="container">
-
-    <section class="section reveal" id="collection">
-        <div class="section-heading">
-            <h2 class="section-title">MY <span>ANIME COLLECTION</span></h2>
-            <div class="section-kicker">ANIME LOG / 2026</div>
-        </div>
-
-        <ul class="watched-list">
-            <li>ATTACK ON TITAN (REMAINING)</li>
-            <li>SOLO LEVELING</li>
-            <li>JUJUTSU KAISEN</li>
-        </ul>
-
-        <div class="anime-grid">
-
-            <article class="anime-card">
-                <div class="anime-image-wrap">
-                    <img class="anime-image" src="eren and founding Titan.jfif" alt="Attack on Titan">
-                    <div class="image-shade"></div>
-                    <div class="status-chip">PAUSED</div>
-                    <div class="card-number">01</div>
-                </div>
-                <div class="anime-info">
-                    <h3 class="anime-name">ATTACK ON TITAN</h3>
-                    <div class="anime-meta">
-                        <span class="badge">2 SEASONS</span>
-                        <span class="badge rating">8/10</span>
-                    </div>
-                    <div class="character">Favourite: <strong>EREN JAEGER</strong></div>
-                    <div class="card-divider"></div>
-                    <div class="date-row">
-                        <span>STARTED<br><strong>FEB 26, 2026</strong></span>
-                        <span>STATUS<br><strong>PAUSED</strong></span>
-                    </div>
-                    <div class="rating-box">
-                        <div class="rating-head"><span>RATING</span><span>8/10</span></div>
-                        <div class="rating-track"><div class="rating-fill" style="width:80%"></div></div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="anime-card">
-                <div class="anime-image-wrap">
-                    <img class="anime-image" src="2026-02-26 (18).png" alt="Solo Leveling">
-                    <div class="image-shade"></div>
-                    <div class="status-chip">FINISHED</div>
-                    <div class="card-number">02</div>
-                </div>
-                <div class="anime-info">
-                    <h3 class="anime-name">SOLO LEVELING</h3>
-                    <div class="anime-meta">
-                        <span class="badge">FINISHED</span>
-                        <span class="badge rating">11/10</span>
-                    </div>
-                    <div class="character">Favourite: <strong>SUNG JIN WOO</strong></div>
-                    <div class="card-divider"></div>
-                    <div class="date-row">
-                        <span>STARTED<br><strong>MAR 22, 2026</strong></span>
-                        <span>FINISHED<br><strong>APR 18, 2026</strong></span>
-                    </div>
-                    <div class="rating-box">
-                        <div class="rating-head"><span>RATING</span><span>11/10</span></div>
-                        <div class="rating-track"><div class="rating-fill" style="width:100%"></div></div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="anime-card">
-                <div class="anime-image-wrap">
-                    <img class="anime-image" src="2026-08-23 (5).png" alt="Jujutsu Kaisen">
-                    <div class="image-shade"></div>
-                    <div class="status-chip">FINISHED</div>
-                    <div class="card-number">03</div>
-                </div>
-                <div class="anime-info">
-                    <h3 class="anime-name">JUJUTSU KAISEN</h3>
-                    <div class="anime-meta">
-                        <span class="badge">FINISHED</span>
-                        <span class="badge rating">10/10</span>
-                    </div>
-                    <div class="character">Favourite: <strong>RYOMEN SUKUNA</strong></div>
-                    <div class="card-divider"></div>
-                    <div class="date-row">
-                        <span>STARTED<br><strong>JUL 3, 2026</strong></span>
-                        <span>FINISHED<br><strong>AUG 20, 2026</strong></span>
-                    </div>
-                    <div class="rating-box">
-                        <div class="rating-head"><span>RATING</span><span>10/10</span></div>
-                        <div class="rating-track"><div class="rating-fill" style="width:100%"></div></div>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-    </section>
-
-    <section class="section reveal" id="ratings">
-        <div class="section-heading">
-            <h2 class="section-title">ANIME <span>RECORD</span></h2>
-            <div class="section-kicker">YOUR ORIGINAL DATA</div>
-        </div>
-
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ANIME NAME</th>
-                        <th>STARTED</th>
-                        <th>FINISHED</th>
-                        <th>RATING</th>
-                        <th>FAVOURITE CHARACTER</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>ATTACK ON TITAN</td>
-                        <td>FEB, 26, 2026</td>
-                        <td>2 SEASONS (PAUSED)</td>
-                        <td>8/10</td>
-                        <td>EREN JAEGER</td>
-                    </tr>
-                    <tr>
-                        <td>SOLO LEVELING</td>
-                        <td>MAR, 22, 2026</td>
-                        <td>APR, 18, 2026</td>
-                        <td>11/10</td>
-                        <td>SUNG JIN WOO</td>
-                    </tr>
-                    <tr>
-                        <td>JUJUTSU KAISEN</td>
-                        <td>JUL, 3, 2026</td>
-                        <td>AUG, 20, 2026</td>
-                        <td>10/10</td>
-                        <td>RYOMEN SUKUNA</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <section class="section reveal" id="sounds">
-        <div class="section-heading">
-            <h2 class="section-title">ICONIC <span>ANIME SOUNDS</span></h2>
-            <div class="section-kicker">AUDIO ARCHIVE</div>
-        </div>
-
-        <div class="audio-grid">
-
-            <div class="audio-player">
-                <div class="audio-label">
-                    <span>EREN JAEGER</span>
-                    <span class="sound-number">01</span>
-                </div>
-                <audio controls preload="metadata" src="./tatakae-eren.mp3">
-                    Your browser does not support the audio element.
-                </audio>
-                <p class="audio-note">ATTACK ON TITAN</p>
-            </div>
-
-            <div class="audio-player">
-                <div class="audio-label">
-                    <span>SUNG JIN WOO</span>
-                    <span class="sound-number">02</span>
-                </div>
-                <audio controls preload="metadata" src="./jinwoo.mp3?v=3">
-                    Your browser does not support the audio element.
-                </audio>
-                <p class="audio-note">SOLO LEVELING</p>
-            </div>
-
-            <div class="audio-player">
-                <div class="audio-label">
-                    <span>RYOMEN SUKUNA</span>
-                    <span class="sound-number">03</span>
-                </div>
-                <audio controls preload="metadata" src="./sukuna.mp3?v=4">
-                    Your browser does not support the audio element.
-                </audio>
-                <p class="audio-note">JUJUTSU KAISEN</p>
-            </div>
-
-        </div>
-    </section>
-</main>
-</body>
-</html>
+        overlay.className =
+            "c
