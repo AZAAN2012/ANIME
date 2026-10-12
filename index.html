@@ -31,36 +31,36 @@
 
     <style>
         :root {
-            --bg1: #030a18;
-            --bg2: #08192f;
-            --bg3: #120d2a;
-            --panel: rgba(10, 15, 30, 0.82);
-            --line: #6ef2ff;
-            --line-2: #6cb8ff;
-            --text: #e2e8f0;
-            --heading: #f8fafc;
-            --pink: #ff57d8;
-            --purple: #7c6cff;
-            --cyan: #3fd7ff;
-            --green: #67f0a4;
-            --gold: #fbbf24;
-            --anime-red: #ff5f7a;
-            --anime-blue: #4ce1ff;
-            --anime-pink: #ff5ae0;
-            --anime-violet: #7b6fff;
-            --anime-gold: #ffd166;
-            --hero-glow: #4ce1ff;
-            --hero-glow-2: #7bbcff;
-            --list-glow: #7bcfff;
-            --list-alt: #8af3d8;
-            --table-glow: #5fe8ff;
-            --table-glow-2: #8fb8ff;
-            --card-glow: #5fe8ff;
-            --card-glow-2: #6aa8ff;
-            --audio-glow: #8ef0d1;
-            --audio-glow-2: #9ac7ff;
-            --popup-glow: #5ec8ff;
-            --popup-glow-2: #88a8ff;
+            --bg1: #07030f;
+            --bg2: #10051f;
+            --bg3: #21062b;
+            --panel: rgba(12, 5, 24, 0.88);
+            --line: #00f5ff;
+            --line-2: #a855f7;
+            --text: #f5eaff;
+            --heading: #ffffff;
+            --pink: #ff2bd6;
+            --purple: #a855f7;
+            --cyan: #00f5ff;
+            --green: #c7ff00;
+            --gold: #ffe600;
+            --anime-red: #ff3864;
+            --anime-blue: #00f5ff;
+            --anime-pink: #ff2bd6;
+            --anime-violet: #a855f7;
+            --anime-gold: #ffe600;
+            --hero-glow: #00f5ff;
+            --hero-glow-2: #ff2bd6;
+            --list-glow: #00f5ff;
+            --list-alt: #ff2bd6;
+            --table-glow: #00f5ff;
+            --table-glow-2: #ff2bd6;
+            --card-glow: #ff2bd6;
+            --card-glow-2: #00f5ff;
+            --audio-glow: #c7ff00;
+            --audio-glow-2: #ff2bd6;
+            --popup-glow: #00f5ff;
+            --popup-glow-2: #ff2bd6;
         }
 
         * {
@@ -78,10 +78,10 @@
             min-height: 100vh;
             padding: 35px 20px 60px;
             background:
-                radial-gradient(circle at 15% 15%, rgba(76,225,255,.24), transparent 22%),
-                radial-gradient(circle at 80% 18%, rgba(84,140,255,.22), transparent 25%),
-                radial-gradient(circle at 50% 90%, rgba(123,111,255,.24), transparent 35%),
-                linear-gradient(135deg, #030a18 0%, #091b2f 35%, #120d2a 100%);
+                radial-gradient(circle at 12% 12%, rgba(0,245,255,.20), transparent 24%),
+                radial-gradient(circle at 88% 18%, rgba(255,43,214,.22), transparent 27%),
+                radial-gradient(circle at 50% 92%, rgba(168,85,247,.24), transparent 36%),
+                linear-gradient(135deg, #07030f 0%, #10051f 42%, #21062b 100%);
             overflow-x: hidden;
         }
 
@@ -107,7 +107,7 @@
         }
 
         body::after {
-            background: #6aa8ff;
+            background: #ff2bd6;
             right: -100px;
             bottom: 10%;
             animation-delay: 2s;
@@ -229,7 +229,7 @@
         }
 
         th {
-            background: linear-gradient(135deg, #3a7cff, #5dc7ff, #75eaff);
+            background: linear-gradient(135deg, #a855f7, #ff2bd6, #00f5ff);
             color: white;
             font-size: .95rem;
             letter-spacing: .05em;
@@ -400,14 +400,14 @@
         }
 
         .audio-player {
-            --player-accent: #3fd7ff;
-            --player-accent-2: #8bb9ff;
+            --player-accent: #00f5ff;
+            --player-accent-2: #ff2bd6;
             position: relative;
             overflow: hidden;
             padding: 21px;
             border: 1px solid color-mix(in srgb, var(--player-accent) 65%, transparent);
             border-radius: 20px;
-            background: linear-gradient(145deg, rgba(8,25,47,.97), rgba(18,13,42,.97));
+            background: linear-gradient(145deg, rgba(12,5,24,.98), rgba(33,6,43,.98));
             box-shadow: 0 0 18px color-mix(in srgb, var(--player-accent) 15%, transparent),
                         0 0 28px rgba(106,168,255,.10),
                         inset 0 0 20px rgba(76,225,255,.035);
@@ -415,24 +415,13 @@
         }
 
         .audio-player:nth-child(2) {
-            --player-accent: #8b7bff;
-            --player-accent-2: #3fd7ff;
+            --player-accent: #a855f7;
+            --player-accent-2: #00f5ff;
         }
 
         .audio-player:nth-child(3) {
-            --player-accent: #ff57d8;
-            --player-accent-2: #8b7bff;
-        }
-
-        .audio-player::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 12%;
-            width: 76%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--player-accent), var(--player-accent-2), transparent);
-            box-shadow: 0 0 13px var(--player-accent);
+            --player-accent: #ff2bd6;
+            --player-accent-2: #ffe600;
         }
 
         .audio-player:hover {
@@ -739,6 +728,41 @@
                 font-size: .85rem;
             }
         }
+
+        /* CYBERPUNK ELECTRIC THEME */
+        body {
+            background-image:
+                linear-gradient(rgba(0,245,255,.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,43,214,.045) 1px, transparent 1px),
+                radial-gradient(circle at 12% 12%, rgba(0,245,255,.20), transparent 24%),
+                radial-gradient(circle at 88% 18%, rgba(255,43,214,.22), transparent 27%),
+                radial-gradient(circle at 50% 92%, rgba(168,85,247,.24), transparent 36%),
+                linear-gradient(135deg, #07030f 0%, #10051f 42%, #21062b 100%);
+            background-size: 34px 34px, 34px 34px, auto, auto, auto, auto;
+            background-attachment: fixed;
+        }
+        .hero-badge, .watched-list, .table-wrap, .anime-card, .audio-player {
+            backdrop-filter: blur(10px);
+        }
+        .watched-list {
+            border-color: rgba(255,43,214,.75);
+            box-shadow: 0 0 20px rgba(255,43,214,.18), 0 0 30px rgba(0,245,255,.12), inset 0 0 25px rgba(168,85,247,.08);
+        }
+        .anime-card {
+            border-color: rgba(255,43,214,.62);
+            background: linear-gradient(145deg, rgba(12,5,24,.97), rgba(33,6,43,.95));
+            box-shadow: 0 12px 30px rgba(0,0,0,.42), 0 0 18px rgba(255,43,214,.15), 0 0 26px rgba(0,245,255,.10);
+        }
+        .anime-card:hover {
+            border-color: #00f5ff;
+            box-shadow: 0 18px 35px rgba(0,0,0,.48), 0 0 25px rgba(0,245,255,.30), 0 0 45px rgba(255,43,214,.20);
+        }
+        .section-title { color: #00f5ff; text-shadow: 0 0 15px rgba(0,245,255,.8), 0 0 22px rgba(255,43,214,.4); }
+        .section-title span { color: #ff2bd6; text-shadow: 0 0 15px rgba(255,43,214,.8), 0 0 22px rgba(168,85,247,.4); }
+        .audio-player { border-radius: 8px 20px 8px 20px; }
+        .play-button { border-radius: 8px 16px 8px 16px; }
+        th { background: linear-gradient(115deg, #7e22ce, #ff2bd6, #00f5ff); }
+
     </style>
 </head>
 
