@@ -1,1019 +1,1491 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANIMES WATCHED</title>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const overlay = document.createElement("div");
-            overlay.className = "custom-alert-overlay show";
-            overlay.innerHTML = `
-                <div class="custom-alert-box" role="alert" aria-live="assertive">
-                    <div class="alert-badge">NOTICE</div>
-                    <h3>Original Work</h3>
-                    <p>ORIGINAL WORK OF MUHAMMAD AZAAN</p>
-                    <button class="alert-close">UNDERSTOOD <br> DONT COPY</button>
-                </div>
-            `;
-            document.body.appendChild(overlay);
-
-            const closeButton = overlay.querySelector(".alert-close");
-            closeButton.addEventListener("click", function () {
-                overlay.classList.remove("show");
-                setTimeout(function () {
-                    overlay.remove();
-                }, 250);
-            });
-        });
-    </script>
-
-    <style>
-        :root {
-            --bg1: #07030f;
-            --bg2: #10051f;
-            --bg3: #21062b;
-            --panel: rgba(12, 5, 24, 0.88);
-            --line: #00f5ff;
-            --line-2: #a855f7;
-            --text: #f5eaff;
-            --heading: #ffffff;
-            --pink: #ff2bd6;
-            --purple: #a855f7;
-            --cyan: #00f5ff;
-            --green: #c7ff00;
-            --gold: #ffe600;
-            --anime-red: #ff3864;
-            --anime-blue: #00f5ff;
-            --anime-pink: #ff2bd6;
-            --anime-violet: #a855f7;
-            --anime-gold: #ffe600;
-            --hero-glow: #00f5ff;
-            --hero-glow-2: #ff2bd6;
-            --list-glow: #00f5ff;
-            --list-alt: #ff2bd6;
-            --table-glow: #00f5ff;
-            --table-glow-2: #ff2bd6;
-            --card-glow: #ff2bd6;
-            --card-glow-2: #00f5ff;
-            --audio-glow: #c7ff00;
-            --audio-glow-2: #ff2bd6;
-            --popup-glow: #00f5ff;
-            --popup-glow-2: #ff2bd6;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            color: var(--text);
-            min-height: 100vh;
-            padding: 35px 20px 60px;
-            background:
-                radial-gradient(circle at 12% 12%, rgba(0,245,255,.20), transparent 24%),
-                radial-gradient(circle at 88% 18%, rgba(255,43,214,.22), transparent 27%),
-                radial-gradient(circle at 50% 92%, rgba(168,85,247,.24), transparent 36%),
-                linear-gradient(135deg, #07030f 0%, #10051f 42%, #21062b 100%);
-            overflow-x: hidden;
-        }
-
-        body::before,
-        body::after {
-            content: "";
-            position: fixed;
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: .18;
-            pointer-events: none;
-            z-index: -1;
-            animation: floatGlow 7s ease-in-out infinite alternate;
-        }
-
-        body::before {
-            background: var(--anime-blue);
-            top: 10%;
-            left: -100px;
-            box-shadow: 0 0 90px rgba(76,225,255,.75);
-        }
-
-        body::after {
-            background: #ff2bd6;
-            right: -100px;
-            bottom: 10%;
-            animation-delay: 2s;
-            box-shadow: 0 0 90px rgba(106,168,255,.7);
-        }
-
-        @keyframes floatGlow {
-            from { transform: translateY(0) scale(1); }
-            to { transform: translateY(50px) scale(1.15); }
-        }
-
-        /* TOP TITLE */
-        .hero {
-            max-width: 1150px;
-            margin: 0 auto 30px;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 7px 15px;
-            border: 1px solid rgba(76,225,255,.95);
-            border-radius: 999px;
-            color: var(--hero-glow);
-            background: rgba(76,225,255,.08);
-            font-size: .75rem;
-            font-weight: 800;
-            letter-spacing: .16em;
-            margin-bottom: 12px;
-            box-shadow: 0 0 18px rgba(76,225,255,.45), 0 0 28px rgba(106,168,255,.22);
-        }
-
-        h1 {
-            margin: 0;
-            font-size: clamp(2.5rem, 7vw, 5.5rem);
-            line-height: 1;
-            font-weight: 900;
-            letter-spacing: .05em;
-            background: linear-gradient(90deg, var(--anime-blue), #eafcff, #8bb9ff, #68d8ff, var(--anime-blue));
-            background-size: 300% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: titleShine 6s linear infinite;
-            text-shadow: 0 0 35px rgba(76,225,255,.25), 0 0 45px rgba(107,160,255,.18);
-        }
-
-        @keyframes titleShine {
-            to { background-position: 300% center; }
-        }
-
-        .hero::after {
-            content: "";
-            display: block;
-            width: min(420px, 70%);
-            height: 2px;
-            margin: 22px auto 0;
-            background: linear-gradient(90deg, transparent, var(--anime-blue), #8bb9ff, var(--anime-blue), transparent);
-            box-shadow: 0 0 14px rgba(76,225,255,.9), 0 0 18px rgba(107,160,255,.7);
-            animation: linePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes linePulse {
-            0%, 100% { opacity: .55; transform: scaleX(.8); }
-            50% { opacity: 1; transform: scaleX(1); }
-        }
-
-        .subtitle {
-            margin: 15px auto 0;
-            max-width: 700px;
-            font-size: 1rem;
-            color: #cbd5e1;
-            letter-spacing: .08em;
-        }
-
-        /* INTRO LIST */
-        .watched-list {
-            max-width: 700px;
-            margin: 0 auto 35px;
-            padding: 20px 25px 20px 45px;
-            background: rgba(12,18,35,.72);
-            border: 1px solid rgba(92,220,255,.9);
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(92,220,255,.2), 0 0 30px rgba(107,160,255,.15), inset 0 0 25px rgba(92,220,255,.08);
-        }
-
-        .watched-list li {
-            margin: 9px 0;
-            font-weight: 700;
-            color: #f8fafc;
-        }
-
-        .watched-list li::marker {
-            color: var(--anime-blue);
-        }
-
-        /* TABLE */
-        .table-wrap {
-            max-width: 1150px;
-            margin: 0 auto 40px;
-            overflow-x: auto;
-            border-radius: 20px;
-            box-shadow: 0 0 25px rgba(76,225,255,.22), 0 0 35px rgba(107,160,255,.18);
-        }
-
-        table {
-            width: 100%;
-            min-width: 760px;
-            border-collapse: collapse;
-            background: rgba(10,15,30,.88);
-            border: 1px solid rgba(122,247,255,.9);
-            overflow: hidden;
-        }
-
-        th, td {
-            border: 1px solid rgba(148,163,184,.25);
-            padding: 15px 12px;
-            text-align: center;
-        }
-
-        th {
-            background: linear-gradient(135deg, #a855f7, #ff2bd6, #00f5ff);
-            color: white;
-            font-size: .95rem;
-            letter-spacing: .05em;
-            text-shadow: 0 0 10px rgba(255,255,255,.35);
-        }
-
-        tr:nth-child(even) td {
-            background: rgba(34,211,238,.07);
-        }
-
-        tr:nth-child(odd) td {
-            background: rgba(15,23,42,.94);
-        }
-
-        tr {
-            transition: transform .2s ease, background .2s ease;
-        }
-
-        tbody tr:hover {
-            transform: scale(1.008);
-            box-shadow: inset 0 0 20px rgba(34,211,238,.08);
-        }
-
-        /* SECTION TITLE */
-        .section-title {
-            text-align: center;
-            margin: 35px 0 20px;
-            color: #9ef8ff;
-            font-size: 1.8rem;
-            text-shadow: 0 0 15px rgba(158,248,255,.9), 0 0 22px rgba(92,220,255,.45);
-        }
-
-        .section-title span {
-            color: #7ab7ff;
-            text-shadow: 0 0 15px rgba(122,183,255,.8), 0 0 22px rgba(92,220,255,.35);
-        }
-
-        /* ANIME CARDS */
-        .anime-grid {
-            max-width: 1150px;
-            margin: 0 auto 45px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-        }
-
-        .anime-card {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(92,220,255,.8);
-            border-radius: 22px;
-            background: linear-gradient(145deg, rgba(12,18,32,.96), rgba(16,22,42,.94));
-            box-shadow: 0 12px 30px rgba(0,0,0,.35), 0 0 18px rgba(92,220,255,.2), 0 0 26px rgba(107,160,255,.14);
-            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-        }
-
-        .anime-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                120deg,
-                transparent 20%,
-                rgba(255,255,255,.08) 45%,
-                transparent 70%
-            );
-            transform: translateX(-120%);
-            transition: transform .7s ease;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .anime-card:hover::before {
-            transform: translateX(120%);
-        }
-
-        .anime-card:hover {
-            transform: translateY(-9px) scale(1.015);
-            border-color: var(--anime-blue);
-            box-shadow: 0 18px 35px rgba(0,0,0,.45),
-                        0 0 25px rgba(92,220,255,.46),
-                        0 0 45px rgba(107,160,255,.24);
-        }
-
-        .anime-image {
-            width: 100%;
-            height: 330px;
-            object-fit: cover;
-            display: block;
-            border: 0;
-            border-radius: 0;
-            margin: 0;
-            box-shadow: none;
-            transition: transform .45s ease;
-        }
-
-        .anime-card:hover .anime-image {
-            transform: scale(1.045);
-        }
-
-        .anime-info {
-            padding: 18px;
-            position: relative;
-            z-index: 3;
-        }
-
-        .anime-info::before {
-            content: "";
-            display: block;
-            width: 45px;
-            height: 3px;
-            margin-bottom: 13px;
-            border-radius: 10px;
-            background: linear-gradient(90deg, var(--anime-blue), #6ba7ff);
-            box-shadow: 0 0 10px rgba(92,220,255,.8), 0 0 12px rgba(107,160,255,.6);
-        }
-
-        .anime-name {
-            margin: 0 0 9px;
-            color: white;
-            font-size: 1.3rem;
-            font-weight: 900;
-            letter-spacing: .04em;
-        }
-
-        .anime-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-bottom: 13px;
-        }
-
-        .badge {
-            padding: 5px 9px;
-            border-radius: 999px;
-            font-size: .72rem;
-            font-weight: 800;
-            letter-spacing: .04em;
-            background: rgba(92,220,255,.12);
-            border: 1px solid rgba(92,220,255,.4);
-            color: #cffafe;
-            box-shadow: 0 0 12px rgba(92,220,255,.15);
-        }
-
-        .badge.rating {
-            background: rgba(107,160,255,.12);
-            border-color: rgba(107,160,255,.45);
-            color: #dfeaff;
-            box-shadow: 0 0 12px rgba(107,160,255,.12);
-        }
-
-        .character {
-            color: #cbd5e1;
-            font-size: .92rem;
-        }
-
-        .character strong {
-            color: var(--pink);
-        }
-
-        /* CUSTOM NEON AUDIO PLAYERS */
-        .audio-grid {
-            max-width: 1150px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 22px;
-        }
-
-        .audio-player {
-            --player-accent: #00f5ff;
-            --player-accent-2: #ff2bd6;
-            position: relative;
-            overflow: hidden;
-            padding: 21px;
-            border: 1px solid color-mix(in srgb, var(--player-accent) 65%, transparent);
-            border-radius: 20px;
-            background: linear-gradient(145deg, rgba(12,5,24,.98), rgba(33,6,43,.98));
-            box-shadow: 0 0 18px color-mix(in srgb, var(--player-accent) 15%, transparent),
-                        0 0 28px rgba(106,168,255,.10),
-                        inset 0 0 20px rgba(76,225,255,.035);
-            transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
-        }
-
-        .audio-player:nth-child(2) {
-            --player-accent: #a855f7;
-            --player-accent-2: #00f5ff;
-        }
-
-        .audio-player:nth-child(3) {
-            --player-accent: #ff2bd6;
-            --player-accent-2: #ffe600;
-        }
-
-        .audio-player:hover {
-            transform: translateY(-5px);
-            border-color: var(--player-accent);
-            box-shadow: 0 0 23px color-mix(in srgb, var(--player-accent) 30%, transparent),
-                        0 0 36px rgba(106,168,255,.16);
-        }
-
-        .audio-heading {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 17px;
-        }
-
-        .audio-player label {
-            display: block;
-            color: #eafcff;
-            font-weight: 900;
-            font-size: .96rem;
-            letter-spacing: .11em;
-            text-shadow: 0 0 10px color-mix(in srgb, var(--player-accent) 65%, transparent);
-        }
-
-        .audio-tag {
-            color: var(--player-accent);
-            font-size: .65rem;
-            font-weight: 900;
-            letter-spacing: .13em;
-            border: 1px solid color-mix(in srgb, var(--player-accent) 50%, transparent);
-            border-radius: 999px;
-            padding: 5px 8px;
-            background: color-mix(in srgb, var(--player-accent) 8%, transparent);
-            white-space: nowrap;
-        }
-
-        .equalizer {
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            margin: 0 0 16px;
-            padding: 5px 12px;
-            border-radius: 10px;
-            background: rgba(2,8,23,.55);
-            border: 1px solid rgba(148,163,184,.12);
-        }
-
-        .equalizer span {
-            display: block;
-            width: 4px;
-            height: 8px;
-            border-radius: 5px;
-            background: linear-gradient(to top, var(--player-accent), var(--player-accent-2));
-            opacity: .75;
-        }
-
-        .audio-player.is-playing .equalizer span {
-            animation: equalize .65s ease-in-out infinite alternate;
-            box-shadow: 0 0 8px color-mix(in srgb, var(--player-accent) 65%, transparent);
-        }
-
-        .audio-player.is-playing .equalizer span:nth-child(3n) { animation-delay: -.4s; }
-        .audio-player.is-playing .equalizer span:nth-child(3n + 1) { animation-delay: -.2s; }
-        .audio-player.is-playing .equalizer span:nth-child(4n) { animation-duration: .85s; }
-
-        @keyframes equalize {
-            from { height: 5px; opacity: .55; }
-            to { height: 25px; opacity: 1; }
-        }
-
-        .custom-controls {
-            display: grid;
-            grid-template-columns: 43px minmax(0, 1fr);
-            gap: 12px;
-            align-items: center;
-        }
-
-        .play-button {
-            width: 43px;
-            height: 43px;
-            display: grid;
-            place-items: center;
-            border: 1px solid color-mix(in srgb, var(--player-accent) 70%, transparent);
-            border-radius: 50%;
-            color: #03101f;
-            background: linear-gradient(135deg, var(--player-accent), var(--player-accent-2));
-            box-shadow: 0 0 15px color-mix(in srgb, var(--player-accent) 35%, transparent);
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 900;
-            transition: transform .2s ease, box-shadow .2s ease;
-        }
-
-        .play-button:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 22px color-mix(in srgb, var(--player-accent) 55%, transparent);
-        }
-
-        .play-button:focus-visible,
-        .seek-bar:focus-visible,
-        .volume-bar:focus-visible {
-            outline: 2px solid #fff;
-            outline-offset: 3px;
-        }
-
-        .track-area { min-width: 0; }
-
-        .seek-bar {
-            width: 100%;
-            height: 6px;
-            display: block;
-            margin: 0 0 9px;
-            border-radius: 999px;
-            appearance: none;
-            -webkit-appearance: none;
-            cursor: pointer;
-            background: linear-gradient(to right, var(--player-accent) 0%, rgba(148,163,184,.25) 0%);
-        }
-
-        .seek-bar::-webkit-slider-thumb {
-            appearance: none;
-            -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #f8fafc;
-            border: 2px solid var(--player-accent);
-            box-shadow: 0 0 9px var(--player-accent);
-        }
-
-        .seek-bar::-moz-range-thumb {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: #f8fafc;
-            border: 2px solid var(--player-accent);
-            box-shadow: 0 0 9px var(--player-accent);
-        }
-
-        .time-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 8px;
-            color: #a9bed5;
-            font-size: .72rem;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .volume-row {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            margin-top: 17px;
-            color: #9eb7d0;
-            font-size: .72rem;
-            letter-spacing: .06em;
-        }
-
-        .volume-bar {
-            flex: 1;
-            min-width: 0;
-            height: 4px;
-            accent-color: var(--player-accent);
-            cursor: pointer;
-        }
-
-        .audio-status {
-            min-height: 15px;
-            margin-top: 11px;
-            color: #829bb7;
-            font-size: .7rem;
-            letter-spacing: .04em;
-        }
-
-        .audio-player audio { display: none; }
-
-        /* FOOTER */
-        footer {
-            max-width: 1150px;
-            margin: 50px auto 0;
-            padding-top: 20px;
-            text-align: center;
-            color: #94a3b8;
-            border-top: 1px solid rgba(148,163,184,.18);
-            font-size: .85rem;
-            letter-spacing: .06em;
-        }
-
-        /* POPUP */
-        .custom-alert-overlay {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(2,6,23,.76);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity .25s ease, visibility .25s ease;
-        }
-
-        .custom-alert-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .custom-alert-box {
-            width: min(420px, 88vw);
-            background: linear-gradient(135deg, rgba(12,18,32,.97), rgba(25,44,78,.95));
-            border: 1px solid rgba(92,220,255,.9);
-            border-radius: 22px;
-            box-shadow: 0 0 22px rgba(92,220,255,.72), 0 0 38px rgba(107,160,255,.52);
-            padding: 26px 24px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            animation: alertFloat .35s ease-out;
-        }
-
-        .alert-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #52d6ff, #6aa8ff, #9ae5ff);
-            color: white;
-            font-size: .72rem;
-            font-weight: 700;
-            letter-spacing: .12em;
-            margin-bottom: 10px;
-            box-shadow: 0 0 12px rgba(82,214,255,.65), 0 0 18px rgba(106,168,255,.4);
-        }
-
-        .custom-alert-box h3 {
-            margin: 0 0 10px;
-            color: white;
-            font-size: 1.8rem;
-            text-shadow: 0 0 12px rgba(34,211,238,.7);
-        }
-
-        .custom-alert-box p {
-            margin: 0 0 22px;
-            font-size: 1.05rem;
-            color: #fdf2f8;
-            letter-spacing: .05em;
-        }
-
-        .alert-close {
-            border: none;
-            border-radius: 12px;
-            padding: 12px 26px;
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: .08em;
-            color: white;
-            cursor: pointer;
-            background: linear-gradient(135deg, #5ee4ff, #7f8eff, #8abaff);
-            box-shadow: 0 0 16px rgba(92,220,255,.55), 0 0 20px rgba(107,160,255,.45);
-            transition: transform .2s ease, box-shadow .2s ease;
-        }
-
-        .alert-close:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 0 25px rgba(34,211,238,.7);
-        }
-
-        @keyframes alertFloat {
-            from { opacity: 0; transform: translateY(18px) scale(.96); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* PHONE */
-        @media (max-width: 850px) {
-            .anime-grid,
-            .audio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .anime-image {
-                height: 390px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 25px 12px 45px;
-            }
-
-            .anime-image {
-                height: 330px;
-            }
-
-            h1 {
-                font-size: 2.7rem;
-            }
-
-            .subtitle {
-                font-size: .85rem;
-            }
-        }
-
-        /* CYBERPUNK ELECTRIC THEME */
-        body {
-            background-image:
-                linear-gradient(rgba(0,245,255,.045) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,43,214,.045) 1px, transparent 1px),
-                radial-gradient(circle at 12% 12%, rgba(0,245,255,.20), transparent 24%),
-                radial-gradient(circle at 88% 18%, rgba(255,43,214,.22), transparent 27%),
-                radial-gradient(circle at 50% 92%, rgba(168,85,247,.24), transparent 36%),
-                linear-gradient(135deg, #07030f 0%, #10051f 42%, #21062b 100%);
-            background-size: 34px 34px, 34px 34px, auto, auto, auto, auto;
-            background-attachment: fixed;
-        }
-        .hero-badge, .watched-list, .table-wrap, .anime-card, .audio-player {
-            backdrop-filter: blur(10px);
-        }
-        .watched-list {
-            border-color: rgba(255,43,214,.75);
-            box-shadow: 0 0 20px rgba(255,43,214,.18), 0 0 30px rgba(0,245,255,.12), inset 0 0 25px rgba(168,85,247,.08);
-        }
-        .anime-card {
-            border-color: rgba(255,43,214,.62);
-            background: linear-gradient(145deg, rgba(12,5,24,.97), rgba(33,6,43,.95));
-            box-shadow: 0 12px 30px rgba(0,0,0,.42), 0 0 18px rgba(255,43,214,.15), 0 0 26px rgba(0,245,255,.10);
-        }
-        .anime-card:hover {
-            border-color: #00f5ff;
-            box-shadow: 0 18px 35px rgba(0,0,0,.48), 0 0 25px rgba(0,245,255,.30), 0 0 45px rgba(255,43,214,.20);
-        }
-        .section-title { color: #00f5ff; text-shadow: 0 0 15px rgba(0,245,255,.8), 0 0 22px rgba(255,43,214,.4); }
-        .section-title span { color: #ff2bd6; text-shadow: 0 0 15px rgba(255,43,214,.8), 0 0 22px rgba(168,85,247,.4); }
-        .audio-player { border-radius: 8px 20px 8px 20px; }
-        .play-button { border-radius: 8px 16px 8px 16px; }
-        th { background: linear-gradient(115deg, #7e22ce, #ff2bd6, #00f5ff); }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ANIMES WATCHED | Cyberpunk Electric</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #030611;
+    --panel: rgba(10, 19, 39, 0.82);
+    --panel-light: rgba(17, 30, 57, 0.8);
+    --cyan: #00f5ff;
+    --blue: #388bff;
+    --purple: #a855f7;
+    --pink: #ff35c6;
+    --green: #55ffb1;
+    --text: #f1f7ff;
+    --muted: #93a7c7;
+    --border: rgba(0, 245, 255, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    color: var(--text);
+    background:
+        radial-gradient(ellipse at 10% 5%, rgba(0, 245, 255, .10), transparent 35%),
+        radial-gradient(ellipse at 90% 25%, rgba(168, 85, 247, .13), transparent 35%),
+        radial-gradient(ellipse at 50% 90%, rgba(255, 53, 198, .07), transparent 35%),
+        var(--bg);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(0,245,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,255,.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: .10;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0,0,0,.25) 4px
+    );
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    width: min(1180px, 92%);
+    margin: auto;
+}
+
+/* ORIGINAL WORK POPUP */
+
+.custom-alert-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 3, 12, .92);
+    backdrop-filter: blur(14px);
+    transition: opacity .4s ease, visibility .4s ease;
+}
+
+.custom-alert-overlay.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.custom-alert-box {
+    width: min(420px, 100%);
+    padding: 36px 28px;
+    text-align: center;
+    background: linear-gradient(145deg, #101d38, #080d1d);
+    border: 1px solid var(--cyan);
+    clip-path: polygon(
+        0 18px, 18px 0, calc(100% - 18px) 0,
+        100% 18px, 100% calc(100% - 18px),
+        calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px)
+    );
+    box-shadow: 0 0 35px rgba(0,245,255,.18);
+    animation: popupIn .45s ease;
+}
+
+@keyframes popupIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.popup-tag {
+    color: var(--pink);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .7rem;
+    letter-spacing: 4px;
+    margin-bottom: 17px;
+}
+
+.custom-alert-box h2 {
+    color: var(--cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    margin-bottom: 13px;
+    text-shadow: 0 0 15px rgba(0,245,255,.4);
+}
+
+.custom-alert-box p {
+    color: var(--muted);
+    letter-spacing: 2px;
+    font-size: 1rem;
+    margin-bottom: 26px;
+}
+
+.popup-button {
+    width: 100%;
+    padding: 13px;
+    color: #001018;
+    border: none;
+    background: var(--cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    letter-spacing: 2px;
+    transition: .25s;
+}
+
+.popup-button:hover {
+    background: white;
+    box-shadow: 0 0 25px var(--cyan);
+    transform: translateY(-2px);
+}
+
+.popup-button small {
+    display: block;
+    margin-top: 5px;
+    color: #7b164f;
+    font-size: .67rem;
+    letter-spacing: 3px;
+}
+
+/* HERO */
+
+.hero {
+    position: relative;
+    padding: 85px 0 50px;
+    text-align: center;
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 1px;
+    top: 125px;
+    background: linear-gradient(90deg, transparent, var(--cyan));
+}
+
+.hero::before {
+    left: max(3%, calc((100% - 1050px) / 2));
+}
+
+.hero::after {
+    right: max(3%, calc((100% - 1050px) / 2));
+    transform: rotate(180deg);
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 16px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    background: rgba(0,245,255,.045);
+    color: var(--cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .66rem;
+    letter-spacing: 2px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--green);
+    animation: blink 1.7s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: .35;
+    }
+}
+
+.hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.3rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -2px;
+    color: #fff;
+    text-shadow:
+        0 0 8px rgba(0,245,255,.6),
+        0 0 35px rgba(0,245,255,.2);
+    animation: titleGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 0 0 8px rgba(0,245,255,.45), 0 0 25px rgba(0,245,255,.12);
+    }
+    to {
+        text-shadow: 0 0 13px rgba(0,245,255,.7), 0 0 42px rgba(168,85,247,.35);
+    }
+}
+
+.hero h1 span {
+    color: var(--cyan);
+}
+
+.hero-subtitle {
+    max-width: 620px;
+    margin: 20px auto 0;
+    color: var(--muted);
+    font-size: 1.2rem;
+    letter-spacing: .6px;
+    line-height: 1.6;
+}
+
+.hero-line {
+    width: 90px;
+    height: 3px;
+    margin: 30px auto 0;
+    background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+    box-shadow: 0 0 15px rgba(0,245,255,.35);
+}
+
+/* SECTION HEADINGS */
+
+.section {
+    margin-bottom: 65px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 25px;
+    padding-bottom: 17px;
+    border-bottom: 1px solid rgba(0,245,255,.15);
+}
+
+.section-heading h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.15rem, 3vw, 1.65rem);
+    letter-spacing: 1px;
+}
+
+.section-heading h2 span {
+    color: var(--cyan);
+}
+
+.section-code {
+    color: var(--muted);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .65rem;
+    letter-spacing: 2px;
+}
+
+/* WATCHED LIST */
+
+.watched-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.watched-item {
+    position: relative;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    background: var(--panel);
+    border: 1px solid rgba(255,255,255,.09);
+    transition: .25s ease;
+    overflow: hidden;
+}
+
+.watched-item:hover {
+    border-color: var(--cyan);
+    transform: translateY(-4px);
+    background: var(--panel-light);
+}
+
+.watched-index {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--cyan);
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.watched-name {
+    font-weight: 700;
+    font-size: 1.02rem;
+    letter-spacing: .6px;
+}
+
+.watched-status {
+    display: inline-block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: .78rem;
+    letter-spacing: 1px;
+}
+
+/* ANIME CARDS */
+
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.anime-card {
+    --accent: var(--cyan);
+    position: relative;
+    background: var(--panel);
+    border: 1px solid rgba(255,255,255,.10);
+    overflow: hidden;
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.anime-card:hover {
+    transform: translateY(-7px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 35px rgba(0,0,0,.25);
+}
+
+.anime-card.eren {
+    --accent: var(--cyan);
+}
+
+.anime-card.jinwoo {
+    --accent: var(--purple);
+}
+
+.anime-card.sukuna {
+    --accent: var(--pink);
+}
+
+.card-topline {
+    height: 3px;
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--accent);
+}
+
+.anime-image-wrap {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    background: #080d1c;
+}
+
+.anime-image-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 35% 0 0;
+    background: linear-gradient(transparent, rgba(3,6,17,.96));
+    pointer-events: none;
+}
+
+.anime-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    transition: transform .6s ease;
+}
+
+.anime-card:hover .anime-image {
+    transform: scale(1.055);
+}
+
+.card-number {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    padding: 7px 10px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    background: rgba(3,6,17,.82);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .65rem;
+    letter-spacing: 1px;
+}
+
+.card-rating {
+    position: absolute;
+    right: 14px;
+    bottom: 15px;
+    z-index: 2;
+    color: var(--accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    text-shadow: 0 0 15px var(--accent);
+}
+
+.anime-info {
+    padding: 23px 21px 24px;
+}
+
+.anime-kicker {
+    color: var(--accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .62rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.anime-info h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.anime-details {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 19px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: .95rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,.055);
+}
+
+.detail-label {
+    color: var(--muted);
+    flex-shrink: 0;
+}
+
+.detail-value {
+    text-align: right;
+    font-weight: 700;
+}
+
+.detail-value.accent {
+    color: var(--accent);
+}
+
+.character-label {
+    color: var(--muted);
+    font-size: .75rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+}
+
+.character-name {
+    color: var(--accent);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+/* AUDIO PLAYERS */
+
+.audio-section {
+    margin-bottom: 70px;
+}
+
+.audio-intro {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-top: -12px;
+    margin-bottom: 25px;
+}
+
+.audio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.audio-card {
+    --audio-accent: var(--cyan);
+    position: relative;
+    padding: 22px;
+    background: var(--panel);
+    border: 1px solid rgba(255,255,255,.10);
+    overflow: hidden;
+    transition: border-color .25s, transform .25s;
+}
+
+.audio-card.eren-audio {
+    --audio-accent: var(--cyan);
+}
+
+.audio-card.jinwoo-audio {
+    --audio-accent: var(--purple);
+}
+
+.audio-card.sukuna-audio {
+    --audio-accent: var(--pink);
+}
+
+.audio-card:hover,
+.audio-card.is-playing {
+    border-color: var(--audio-accent);
+    transform: translateY(-3px);
+}
+
+.audio-card.is-playing {
+    box-shadow: 0 0 24px rgba(0,245,255,.08);
+}
+
+.audio-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 20px;
+}
+
+.audio-icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: var(--audio-accent);
+    background: rgba(0,0,0,.2);
+    border: 1px solid var(--audio-accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .8rem;
+    font-weight: 800;
+}
+
+.audio-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
+.audio-subtitle {
+    color: var(--muted);
+    font-size: .88rem;
+    margin-top: 4px;
+}
+
+.audio-visualizer {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin: 0 0 20px;
+    padding: 8px 12px;
+    background: rgba(0,0,0,.17);
+}
+
+.audio-visualizer span {
+    width: 4px;
+    height: 5px;
+    border-radius: 2px;
+    background: var(--audio-accent);
+    opacity: .65;
+}
+
+.audio-card.is-playing .audio-visualizer span {
+    animation: equalize .65s ease-in-out infinite alternate;
+    opacity: 1;
+    box-shadow: 0 0 7px var(--audio-accent);
+}
+
+.audio-visualizer span:nth-child(3n) {
+    animation-delay: -.25s;
+}
+
+.audio-visualizer span:nth-child(4n) {
+    animation-delay: -.45s;
+}
+
+.audio-visualizer span:nth-child(5n) {
+    animation-delay: -.15s;
+}
+
+.audio-visualizer span:nth-child(2n) {
+    animation-delay: -.35s;
+}
+
+@keyframes equalize {
+    from {
+        height: 5px;
+    }
+    to {
+        height: 24px;
+    }
+}
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.play-button {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border: 1px solid var(--audio-accent);
+    color: var(--audio-accent);
+    background: transparent;
+    font-size: 1.1rem;
+    transition: .2s;
+}
+
+.play-button:hover {
+    color: #030611;
+    background: var(--audio-accent);
+}
+
+.audio-timeline {
+    flex: 1;
+    min-width: 0;
+}
+
+.seek-bar {
+    width: 100%;
+    height: 5px;
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,.14);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.seek-bar::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--audio-accent);
+}
+
+.seek-bar::-moz-range-thumb {
+    width: 11px;
+    height: 11px;
+    border: none;
+    border-radius: 50%;
+    background: var(--audio-accent);
+}
+
+.time-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: .78rem;
+    margin-top: 8px;
+}
+
+.audio-volume {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 17px;
+}
+
+.volume-label {
+    color: var(--muted);
+    font-size: .78rem;
+}
+
+.volume-bar {
+    width: 100%;
+    height: 4px;
+    flex: 1;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,.14);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.volume-bar::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--audio-accent);
+}
+
+.volume-bar::-moz-range-thumb {
+    width: 9px;
+    height: 9px;
+    border: none;
+    border-radius: 50%;
+    background: var(--audio-accent);
+}
+
+.audio-status {
+    min-height: 18px;
+    margin-top: 13px;
+    color: var(--muted);
+    font-size: .8rem;
+    letter-spacing: .3px;
+}
+
+.audio-status.error {
+    color: #ff729b;
+}
+
+/* FOOTER */
+
+.footer {
+    padding: 28px 0 35px;
+    border-top: 1px solid rgba(0,245,255,.13);
+    text-align: center;
+}
+
+.footer-title {
+    color: var(--cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .78rem;
+    letter-spacing: 3px;
+}
+
+.footer p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+.footer-line {
+    width: 45px;
+    height: 2px;
+    background: var(--purple);
+    margin: 15px auto 0;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+    .anime-grid,
+    .audio-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .anime-card:last-child,
+    .audio-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .watched-list {
+        grid-template-columns: 1fr;
+    }
+
+    .hero::before,
+    .hero::after {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 65px 0 38px;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.05rem;
+    }
+
+    .section {
+        margin-bottom: 48px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+    }
+
+    .section-code {
+        font-size: .55rem;
+        text-align: right;
+    }
+
+    .anime-grid,
+    .audio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .anime-card:last-child,
+    .audio-card:last-child {
+        grid-column: auto;
+    }
+
+    .anime-image-wrap {
+        height: 300px;
+    }
+
+    .audio-card {
+        padding: 19px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <header class="hero">
-        <div class="hero-badge">MY ANIME ARCHIVE • 2026</div>
-        <h1>ANIMES WATCHED</h1>
-        <div class="subtitle">A personal collection of anime, favourite characters, ratings & iconic sounds </div>
-    </header>
-    <ul class="watched-list">
-        <li>ATTACK ON TITAN (REMAINING)</li>
-        <li>SOLO LEVELING</li>
-        <li>JUJUTSU KAISEN</li>
-    </ul>
+<!-- ORIGINAL WORK POPUP -->
 
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>ANIME NAME</th>
-                    <th>STARTED</th>
-                    <th>FINISHED</th>
-                    <th>RATING</th>
-                    <th>FAVOURITE CHARACTER</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>ATTACK ON TITAN</td>
-                    <td>FEB, 26, 2026</td>
-                    <td>2 SEASONS (PAUSED)</td>
-                    <td>8/10 </td>
-                    <td>EREN JAEGER</td>
-                </tr>
-                <tr>
-                    <td>SOLO LEVELING</td>
-                    <td>MAR, 22, 2026</td>
-                    <td>APR, 18, 2026</td>
-                    <td>11/10 </td>
-                    <td>SUNG JIN WOO</td>
-                </tr>
-                <tr>
-                    <td>JUJUTSU KAISEN</td>
-                    <td>JUL, 3, 2026</td>
-                    <td>AUG, 20, 2026</td>
-                    <td>10/10 </td>
-                    <td>RYOMEN SUKUNA</td>
-                </tr>
-            </tbody>
-        </table>
+<div class="custom-alert-overlay" id="noticePopup">
+    <div class="custom-alert-box">
+        <div class="popup-tag">SYSTEM NOTICE</div>
+
+        <h2>Original Work</h2>
+
+        <p>ORIGINAL WORK OF MUHAMMAD AZAAN</p>
+
+        <button class="popup-button" id="understoodButton">
+            UNDERSTOOD
+            <small>DONT COPY!!</small>
+        </button>
     </div>
+</div>
 
-    <h2 class="section-title"> MY <span>ANIME COLLECTION</span></h2>
+<!-- HERO -->
 
-    <div class="anime-grid">
+<header class="hero">
+    <div class="container">
 
-        <article class="anime-card">
-            <img class="anime-image" src="eren and founding Titan.jfif" alt="Attack on Titan">
-            <div class="anime-info">
-                <h3 class="anime-name">ATTACK ON TITAN</h3>
-                <div class="anime-meta">
-                    <span class="badge"> PAUSED</span>
-                    <span class="badge rating"> 8/10</span>
-                </div>
-                <div class="character">Favourite: <strong>EREN JAEGER</strong></div>
-            </div>
-        </article>
-
-        <article class="anime-card">
-            <img class="anime-image" src="2026-02-26 (18).png" alt="Solo Leveling">
-            <div class="anime-info">
-                <h3 class="anime-name">SOLO LEVELING</h3>
-                <div class="anime-meta">
-                    <span class="badge"> FINISHED</span>
-                    <span class="badge rating"> 11/10</span>
-                </div>
-                <div class="character">Favourite: <strong>SUNG JIN WOO</strong></div>
-            </div>
-        </article>
-
-        <article class="anime-card">
-            <img class="anime-image" src="2026-08-23 (5).png" alt="Jujutsu Kaisen">
-            <div class="anime-info">
-                <h3 class="anime-name">JUJUTSU KAISEN</h3>
-                <div class="anime-meta">
-                    <span class="badge"> FINISHED</span>
-                    <span class="badge rating"> 10/10</span>
-                </div>
-                <div class="character">Favourite: <strong>RYOMEN SUKUNA</strong></div>
-            </div>
-        </article>
-
-    </div>
-    <h2 class="section-title">ICONIC <span>CHARACTER SOUNDS</span></h2>
-
-    <div class="audio-grid">
-        <div class="audio-player" data-audio-player>
-            <div class="audio-heading">
-                <label>EREN JAEGER</label>
-                <span class="audio-tag">ATTACK MODE</span>
-            </div>
-            <div class="equalizer" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <audio preload="metadata" src="tatakae-eren.mp3" aria-label="Eren Jaeger audio"></audio>
-            <div class="custom-controls">
-                <button class="play-button" type="button" aria-label="Play Eren Jaeger sound" title="Play">▶</button>
-                <div class="track-area">
-                    <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Eren audio progress">
-                    <div class="time-row"><span class="current-time">0:00</span><span class="duration">0:00</span></div>
-                </div>
-            </div>
-            <div class="volume-row"><span>VOL</span><input class="volume-bar" type="range" min="0" max="1" value="0.8" step="0.01" aria-label="Eren audio volume"><span>NEON</span></div>
-            <div class="audio-status" role="status">READY TO PLAY</div>
+        <div class="eyebrow">
+            <span class="status-dot"></span>
+            MY ANIME COLLECTION • 2026
         </div>
 
-        <div class="audio-player" data-audio-player>
-            <div class="audio-heading">
-                <label>SUNG JIN WOO</label>
-                <span class="audio-tag">SHADOW MONARCH</span>
-            </div>
-            <div class="equalizer" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <audio preload="metadata" src="./jinwoo.mp3?v=2" aria-label="Sung Jin Woo audio"></audio>
-            <div class="custom-controls">
-                <button class="play-button" type="button" aria-label="Play Sung Jin Woo sound" title="Play">▶</button>
-                <div class="track-area">
-                    <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Sung Jin Woo audio progress">
-                    <div class="time-row"><span class="current-time">0:00</span><span class="duration">0:00</span></div>
-                </div>
-            </div>
-            <div class="volume-row"><span>VOL</span><input class="volume-bar" type="range" min="0" max="1" value="0.8" step="0.01" aria-label="Sung Jin Woo audio volume"><span>NEON</span></div>
-            <div class="audio-status" role="status">READY TO PLAY</div>
-        </div>
+        <h1>ANIMES <span>WATCHED</span></h1>
 
-        <div class="audio-player" data-audio-player>
-            <div class="audio-heading">
-                <label>RYOMEN SUKUNA</label>
-                <span class="audio-tag">KING OF CURSES</span>
-            </div>
-            <div class="equalizer" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <audio preload="metadata" src="./sukuna.mp3" aria-label="Ryomen Sukuna audio"></audio>
-            <div class="custom-controls">
-                <button class="play-button" type="button" aria-label="Play Sukuna sound" title="Play">▶</button>
-                <div class="track-area">
-                    <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Sukuna audio progress">
-                    <div class="time-row"><span class="current-time">0:00</span><span class="duration">0:00</span></div>
-                </div>
-            </div>
-            <div class="volume-row"><span>VOL</span><input class="volume-bar" type="range" min="0" max="1" value="0.8" step="0.01" aria-label="Sukuna audio volume"><span>NEON</span></div>
-            <div class="audio-status" role="status">READY TO PLAY</div>
-        </div>
+        <p class="hero-subtitle">
+            A personal collection of anime, favourite characters,
+            ratings & iconic sounds.
+        </p>
+
+        <div class="hero-line"></div>
+
     </div>
+</header>
 
-    <script>
-        // Custom themed audio controls. Audio files stay in the same folder as this HTML file.
-        document.querySelectorAll('[data-audio-player]').forEach((player) => {
-            const audio = player.querySelector('audio');
-            const playButton = player.querySelector('.play-button');
-            const seekBar = player.querySelector('.seek-bar');
-            const volumeBar = player.querySelector('.volume-bar');
-            const currentTime = player.querySelector('.current-time');
-            const duration = player.querySelector('.duration');
-            const status = player.querySelector('.audio-status');
+<main class="container">
 
-            const formatTime = (seconds) => {
-                if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
-                const mins = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
-                return `${mins}:${secs}`;
-            };
+    <!-- WATCHED LIST -->
 
-            const updateSeekStyle = () => {
-                const progress = Number(seekBar.value);
-                const accent = getComputedStyle(player).getPropertyValue('--player-accent').trim() || '#3fd7ff';
-                seekBar.style.background = `linear-gradient(to right, ${accent} ${progress}%, rgba(148,163,184,.25) ${progress}%)`;
-            };
+    <section class="section">
 
-            audio.volume = Number(volumeBar.value);
-            updateSeekStyle();
+        <div class="section-heading">
+            <h2>WATCHED <span>LIST</span></h2>
+            <span class="section-code">MY COLLECTION</span>
+        </div>
 
-            playButton.addEventListener('click', async () => {
-                if (audio.paused) {
-                    // Pause the other tracks so only one character sound plays at a time.
-                    document.querySelectorAll('[data-audio-player] audio').forEach((otherAudio) => {
-                        if (otherAudio !== audio) otherAudio.pause();
-                    });
-                    try {
-                        await audio.play();
-                    } catch (error) {
-                        status.textContent = 'AUDIO COULD NOT LOAD — CHECK FILE NAME/PATH';
-                    }
-                } else {
-                    audio.pause();
-                }
-            });
+        <div class="watched-list">
 
-            audio.addEventListener('play', () => {
-                playButton.textContent = 'Ⅱ';
-                playButton.setAttribute('aria-label', 'Pause audio');
-                playButton.title = 'Pause';
-                player.classList.add('is-playing');
-                status.textContent = 'NOW PLAYING';
-            });
+            <div class="watched-item">
+                <span class="watched-index">01</span>
+                <div>
+                    <div class="watched-name">ATTACK ON TITAN</div>
+                    <span class="watched-status">REMAINING</span>
+                </div>
+            </div>
 
-            audio.addEventListener('pause', () => {
-                playButton.textContent = '▶';
-                playButton.setAttribute('aria-label', 'Play audio');
-                playButton.title = 'Play';
-                player.classList.remove('is-playing');
-                if (audio.ended) status.textContent = 'PLAYBACK COMPLETE';
-                else if (audio.currentTime > 0) status.textContent = 'PAUSED';
-            });
+            <div class="watched-item">
+                <span class="watched-index">02</span>
+                <div>
+                    <div class="watched-name">SOLO LEVELING</div>
+                    <span class="watched-status">COMPLETED</span>
+                </div>
+            </div>
 
-            audio.addEventListener('loadedmetadata', () => {
-                duration.textContent = formatTime(audio.duration);
-                status.textContent = 'READY TO PLAY';
-            });
+            <div class="watched-item">
+                <span class="watched-index">03</span>
+                <div>
+                    <div class="watched-name">JUJUTSU KAISEN</div>
+                    <span class="watched-status">COMPLETED</span>
+                </div>
+            </div>
 
-            audio.addEventListener('timeupdate', () => {
-                currentTime.textContent = formatTime(audio.currentTime);
-                duration.textContent = formatTime(audio.duration);
-                if (Number.isFinite(audio.duration) && audio.duration > 0) {
-                    seekBar.value = (audio.currentTime / audio.duration) * 100;
-                    updateSeekStyle();
-                }
-            });
+        </div>
+    </section>
 
-            seekBar.addEventListener('input', () => {
-                updateSeekStyle();
-                if (Number.isFinite(audio.duration) && audio.duration > 0) {
-                    audio.currentTime = (Number(seekBar.value) / 100) * audio.duration;
-                }
-            });
+    <!-- ANIME DATABASE -->
 
-            volumeBar.addEventListener('input', () => {
-                audio.volume = Number(volumeBar.value);
-                audio.muted = audio.volume === 0;
-            });
+    <section class="section">
 
-            audio.addEventListener('ended', () => {
-                seekBar.value = 0;
-                updateSeekStyle();
-                currentTime.textContent = '0:00';
-                status.textContent = 'PLAYBACK COMPLETE';
-            });
+        <div class="section-heading">
+            <h2>ANIME <span>DATABASE</span></h2>
+            <span class="section-code">3 ENTRIES FOUND</span>
+        </div>
 
-            audio.addEventListener('error', () => {
-                status.textContent = 'FILE NOT FOUND — CHECK THE MP3 NAME';
-            });
-        });
-    </script>
+        <div class="anime-grid">
 
+            <!-- ATTACK ON TITAN -->
+
+            <article class="anime-card eren">
+
+                <div class="card-topline"></div>
+
+                <div class="anime-image-wrap">
+
+                    <img
+                        class="anime-image"
+                        src="./eren%20and%20founding%20Titan.jfif"
+                        alt="Eren Yeager and the Founding Titan"
+                        loading="lazy"
+                    >
+
+                    <span class="card-number">ENTRY_01</span>
+                    <span class="card-rating">8/10</span>
+
+                </div>
+
+                <div class="anime-info">
+
+                    <div class="anime-kicker">ATTACK ON TITAN</div>
+
+                    <h3>Attack on Titan</h3>
+
+                    <div class="anime-details">
+
+                        <div class="detail-row">
+                            <span class="detail-label">Started</span>
+                            <span class="detail-value">FEB 26, 2026</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Progress</span>
+                            <span class="detail-value accent">2 SEASONS (PAUSED)</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value accent">8/10</span>
+                        </div>
+
+                    </div>
+
+                    <div class="character-label">FAVOURITE CHARACTER</div>
+                    <div class="character-name">EREN JAEGER</div>
+
+                </div>
+            </article>
+
+            <!-- SOLO LEVELING -->
+
+            <article class="anime-card jinwoo">
+
+                <div class="card-topline"></div>
+
+                <div class="anime-image-wrap">
+
+                    <img
+                        class="anime-image"
+                        src="./2026-02-26%20(18).png"
+                        alt="Sung Jin Woo from Solo Leveling"
+                        loading="lazy"
+                    >
+
+                    <span class="card-number">ENTRY_02</span>
+                    <span class="card-rating">11/10</span>
+
+                </div>
+
+                <div class="anime-info">
+
+                    <div class="anime-kicker">SOLO LEVELING</div>
+
+                    <h3>Solo Leveling</h3>
+
+                    <div class="anime-details">
+
+                        <div class="detail-row">
+                            <span class="detail-label">Started</span>
+                            <span class="detail-value">MAR 22, 2026</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Finished</span>
+                            <span class="detail-value">APR 18, 2026</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value accent">11/10</span>
+                        </div>
+
+                    </div>
+
+                    <div class="character-label">FAVOURITE CHARACTER</div>
+                    <div class="character-name">SUNG JIN WOO</div>
+
+                </div>
+            </article>
+
+            <!-- JUJUTSU KAISEN -->
+
+            <article class="anime-card sukuna">
+
+                <div class="card-topline"></div>
+
+                <div class="anime-image-wrap">
+
+                    <img
+                        class="anime-image"
+                        src="./2026-08-23%20(5).png"
+                        alt="Ryomen Sukuna from Jujutsu Kaisen"
+                        loading="lazy"
+                    >
+
+                    <span class="card-number">ENTRY_03</span>
+                    <span class="card-rating">10/10</span>
+
+                </div>
+
+                <div class="anime-info">
+
+                    <div class="anime-kicker">JUJUTSU KAISEN</div>
+
+                    <h3>Jujutsu Kaisen</h3>
+
+                    <div class="anime-details">
+
+                        <div class="detail-row">
+                            <span class="detail-label">Started</span>
+                            <span class="detail-value">JUL 3, 2026</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Finished</span>
+                            <span class="detail-value">AUG 20, 2026</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value accent">10/10</span>
+                        </div>
+
+                    </div>
+
+                    <div class="character-label">FAVOURITE CHARACTER</div>
+                    <div class="character-name">RYOMEN SUKUNA</div>
+
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ICONIC SOUNDS -->
+
+    <section class="audio-section">
+
+        <div class="section-heading">
+            <h2>ICONIC <span>SOUNDS</span></h2>
+            <span class="section-code">AUDIO SYSTEM ONLINE</span>
+        </div>
+
+        <p class="audio-intro">
+            Select a track to play its iconic audio.
+        </p>
+
+        <div class="audio-grid">
+
+            <!-- EREN AUDIO -->
+
+            <article class="audio-card eren-audio" data-audio-card>
+
+                <div class="audio-header">
+                    <div class="audio-icon">01</div>
+
+                    <div>
+                        <div class="audio-title">ATTACK TITAN</div>
+                        <div class="audio-subtitle">Eren Yeager • Attack on Titan</div>
+                    </div>
+                </div>
+
+                <div class="audio-visualizer" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+
+                <audio preload="metadata" src="./tatakae-eren.mp3"></audio>
+
+                <div class="audio-controls">
+
+                    <button class="play-button" type="button" aria-label="Play Eren audio">▶</button>
+
+                    <div class="audio-timeline">
+                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Eren audio">
+
+                        <div class="time-row">
+                            <span class="current-time">0:00</span>
+                            <span class="duration">0:00</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="audio-volume">
+                    <span class="volume-label">VOL</span>
+                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Eren audio volume">
+                </div>
+
+                <p class="audio-status" aria-live="polite">READY TO PLAY</p>
+
+            </article>
+
+            <!-- SUNG JIN WOO AUDIO -->
+
+            <article class="audio-card jinwoo-audio" data-audio-card>
+
+                <div class="audio-header">
+                    <div class="audio-icon">02</div>
+
+                    <div>
+                        <div class="audio-title">SHADOW MONARCH</div>
+                        <div class="audio-subtitle">Sung Jin Woo • Solo Leveling</div>
+                    </div>
+                </div>
+
+                <div class="audio-visualizer" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+
+                <audio preload="metadata" src="./jinwoo.mp3?v=2"></audio>
+
+                <div class="audio-controls">
+
+                    <button class="play-button" type="button" aria-label="Play Sung Jin Woo audio">▶</button>
+
+                    <div class="audio-timeline">
+                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Sung Jin Woo audio">
+
+                        <div class="time-row">
+                            <span class="current-time">0:00</span>
+                            <span class="duration">0:00</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="audio-volume">
+                    <span class="volume-label">VOL</span>
+                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Sung Jin Woo audio volume">
+                </div>
+
+                <p class="audio-status" aria-live="polite">READY TO PLAY</p>
+
+            </article>
+
+            <!-- SUKUNA AUDIO -->
+
+            <article class="audio-card sukuna-audio" data-audio-card>
+
+                <div class="audio-header">
+                    <div class="audio-icon">03</div>
+
+                    <div>
+                        <div class="audio-title">KING OF CURSES</div>
+                        <div class="audio-subtitle">Ryomen Sukuna • Jujutsu Kaisen</div>
+                    </div>
+                </div>
+
+                <div class="audio-visualizer" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+
+                <audio preload="metadata" src="./sukuna.mp3"></audio>
+
+                <div class="audio-controls">
+
+                    <button class="play-button" type="button" aria-label="Play Sukuna audio">▶</button>
+
+                    <div class="audio-timeline">
+                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Sukuna audio">
+
+                        <div class="time-row">
+                            <span class="current-time">0:00</span>
+                            <span class="duration">0:00</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="audio-volume">
+                    <span class="volume-label">VOL</span>
+                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Sukuna audio volume">
+                </div>
+
+                <p class="audio-status" aria-live="polite">READY TO PLAY</p>
+
+            </article>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+    <div class="container">
+
+        <div class="footer-title">ANIME COLLECTION // 2026</div>
+
+        <p>Personal collection • Built with passion for anime</p>
+
+        <div class="footer-line"></div>
+
+    </div>
+</footer>
+
+<script>
+/* POPUP */
+
+const popup = document.getElementById("noticePopup");
+const understoodButton = document.getElementById("understoodButton");
+
+understoodButton.addEventListener("click", () => {
+    popup.classList.add("hide");
+
+    try {
+        sessionStorage.setItem("animeNoticeSeen", "true");
+    } catch (error) {
+        // Popup still closes if browser storage is unavailable.
+    }
+});
+
+try {
+    if (sessionStorage.getItem("animeNoticeSeen") === "true") {
+        popup.classList.add("hide");
+    }
+} catch (error) {
+    // Keep the popup functional without session storage.
+}
+
+/* AUDIO PLAYERS */
+
+const audioCards = [...document.querySelectorAll("[data-audio-card]")];
+
+function formatTime(seconds) {
+    if (!Number.isFinite(seconds) || seconds < 0) {
+        return "0:00";
+    }
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+}
+
+function setStatus(card, message, isError = false) {
+    const status = card.querySelector(".audio-status");
+
+    status.textContent = message;
+    status.classList.toggle("error", isError);
+}
+
+function updatePlayButton(card) {
+    const audio = card.querySelector("audio");
+    const button = card.querySelector(".play-button");
+    const playing = !audio.paused && !audio.ended;
+
+    button.textContent = playing ? "Ⅱ" : "▶";
+    button.setAttribute(
+        "aria-label",
+        playing ? "Pause audio" : "Play audio"
+    );
+
+    card.classList.toggle("is-playing", playing);
+}
+
+function updateTimeline(card) {
+    const audio = card.querySelector("audio");
+    const seek = card.querySelector(".seek-bar");
+    const current = card.querySelector(".current-time");
+    const duration = card.querySelector(".duration");
+
+    current.textContent = formatTime(audio.currentTime);
+
+    if (Number.isFinite(audio.duration) && audio.duration > 0) {
+        seek.value = (audio.currentTime / audio.duration) * 100;
+        duration.textContent = formatTime(audio.duration);
+    } else {
+        seek.value = 0;
+        duration.textContent = "0:00";
+    }
+}
+
+function stopOtherTracks(currentAudio) {
+    audioCards.forEach(card => {
+        const audio = card.querySelector("audio");
+
+        if (audio !== currentAudio) {
+            audio.pause();
+            updatePlayButton(card);
+        }
+    });
+}
+
+audioCards.forEach(card => {
+    const audio = card.querySelector("audio");
+    const playButton = card.querySelector(".play-button");
+    const seek = card.querySelector(".seek-bar");
+    const volume = card.querySelector(".volume-bar");
+
+    audio.volume = Number(volume.value);
+
+    playButton.addEventListener("click", async () => {
+        if (!audio.paused) {
+            audio.pause();
+            updatePlayButton(card);
+            setStatus(card, "PAUSED");
+            return;
+        }
+
+        stopOtherTracks(audio);
+
+        try {
+            await audio.play();
+
+            updatePlayButton(card);
+            setStatus(card, "NOW PLAYING");
+        } catch (error) {
+            updatePlayButton(card);
+
+            setStatus(
+                card,
+                "COULD NOT PLAY — CHECK THE AUDIO FILE",
+                true
+            );
+        }
+    });
+
+    audio.addEventListener("loadedmetadata", () => {
+        updateTimeline(card);
+        setStatus(card, "READY TO PLAY");
+    });
+
+    audio.addEventListener("timeupdate", () => {
+        updateTimeline(card);
+    });
+
+    audio.addEventListener("play", () => {
+        updatePlayButton(card);
+        setStatus(card, "NOW PLAYING");
+    });
+
+    audio.addEventListener("pause", () => {
+        updatePlayButton(card);
+    });
+
+    audio.addEventListener("ended", () => {
+        updatePlayButton(card);
+        updateTimeline(card);
+        setStatus(card, "PLAYBACK COMPLETE");
+    });
+
+    audio.addEventListener("error", () => {
+        updatePlayButton(card);
+
+        setStatus(
+            card,
+            "AUDIO FILE NOT FOUND — CHECK FILENAME",
+            true
+        );
+    });
+
+    seek.addEventListener("input", () => {
+        if (Number.isFinite(audio.duration) && audio.duration > 0) {
+            audio.currentTime = (Number(seek.value) / 100) * audio.duration;
+            updateTimeline(card);
+        }
+    });
+
+    volume.addEventListener("input", () => {
+        audio.volume = Number(volume.value);
+    });
+
+    updatePlayButton(card);
+    updateTimeline(card);
+});
+
+/* CLOSE POPUP WITH ESCAPE */
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        popup.classList.add("hide");
+    }
+});
+</script>
 
 </body>
 </html>
