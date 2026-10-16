@@ -407,9 +407,82 @@ button {
 
 .anime-image-wrap {
     position: relative;
+    isolation: isolate;
     height: 280px;
     overflow: hidden;
     background: #080d1c;
+    border: 2px solid rgba(0,245,255,.18);
+}
+
+/* A moving cyan-purple-pink light revolves around each anime picture on hover. */
+.anime-image-wrap::before {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    inset: -50%;
+    pointer-events: none;
+    opacity: 0;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg 285deg,
+        var(--accent) 315deg,
+        #ffffff 330deg,
+        var(--accent) 345deg,
+        transparent 360deg
+    );
+    transition: opacity .25s ease;
+}
+.anime-card:hover .anime-image-wrap::before {
+    opacity: 1;
+    animation: revolvingEdgeLight 2s linear infinite;
+}
+.anime-image-wrap::after {
+    z-index: 1;
+}
+.anime-image {
+    position: relative;
+    z-index: 0;
+}
+@keyframes revolvingEdgeLight {
+    to { transform: rotate(360deg); }
+}
+
+/* Inner cover keeps the moving gradient visible only as a thin edge. */
+.anime-image-wrap .anime-image {
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    background: #080d1c;
+    background-clip: content-box;
+}
+
+/* BACKGROUND IMAGE SLOT: set the file path in --site-background below. */
+:root {
+    --site-background: url('./gojo-background.png');
+}
+body {
+    background-image:
+        linear-gradient(rgba(3, 10, 24, .62), rgba(3, 10, 24, .72)),
+        var(--site-background),
+        radial-gradient(ellipse at 10% 5%, rgba(0, 245, 255, .10), transparent 35%),
+        radial-gradient(ellipse at 90% 25%, rgba(168, 85, 247, .13), transparent 35%),
+        radial-gradient(ellipse at 50% 90%, rgba(255, 53, 198, .07), transparent 35%),
+        linear-gradient(var(--bg), var(--bg));
+    background-size: cover, cover, auto, auto, auto, auto;
+    background-position: center, center, center, center, center, center;
+    background-attachment: fixed, fixed, scroll, scroll, scroll, scroll;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+}
+body::before {
+    /* Keep the cyber grid above the optional background image. */
+    z-index: 0;
+}
+body::after {
+    z-index: 10;
+}
+.container, .footer, .hero {
+    position: relative;
+    z-index: 1;
 }
 
 .anime-image-wrap::after {
@@ -878,117 +951,6 @@ button {
         transition-duration: .01ms !important;
     }
 }
-
-
-/* VERSION 4: CINEMATIC MOTION UPGRADE */
-.hero .eyebrow,
-.hero h1,
-.hero-subtitle,
-.hero-line {
-    animation: heroEntrance .85s cubic-bezier(.2,.75,.25,1) both, titleGlow 4s ease-in-out infinite alternate;
-}
-.hero .eyebrow { animation-delay: .05s, 0s; }
-.hero h1 { animation-delay: .16s, 0s; }
-.hero-subtitle { animation: heroEntrance .85s .28s cubic-bezier(.2,.75,.25,1) both; }
-.hero-line { animation: lineEntrance .9s .4s ease both; }
-
-@keyframes heroEntrance {
-    from { opacity: 0; transform: translateY(22px); filter: blur(5px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-@keyframes lineEntrance {
-    from { opacity: 0; transform: scaleX(.15); }
-    to { opacity: 1; transform: scaleX(1); }
-}
-
-.watched-item,
-.anime-card,
-.audio-card {
-    will-change: transform;
-}
-.watched-item {
-    animation: cardArrive .65s both;
-}
-.watched-item:nth-child(2) { animation-delay: .1s; }
-.watched-item:nth-child(3) { animation-delay: .2s; }
-
-.anime-card,
-.audio-card {
-    transform-style: preserve-3d;
-}
-.anime-card:hover {
-    box-shadow: 0 14px 38px color-mix(in srgb, var(--accent) 18%, transparent),
-                0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent);
-}
-.anime-card:hover .card-topline {
-    animation: accentPulse 1.2s ease-in-out infinite alternate;
-}
-.audio-card:hover,
-.audio-card.is-playing {
-    box-shadow: 0 8px 28px color-mix(in srgb, var(--audio-accent) 13%, transparent);
-}
-.play-button:active,
-.popup-button:active {
-    transform: scale(.96);
-}
-.play-button:focus-visible,
-.popup-button:focus-visible,
-input:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 4px;
-}
-@keyframes accentPulse {
-    from { filter: brightness(1); }
-    to { filter: brightness(1.8); }
-}
-@keyframes cardArrive {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Reveal content gently as it enters the viewport */
-.js-reveal .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1);
-}
-.js-reveal .reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Ambient particle canvas sits behind the content and never blocks clicks */
-#electricParticles {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    opacity: .72;
-}
-.hero, main, .footer {
-    position: relative;
-    z-index: 1;
-}
-.custom-alert-overlay {
-    z-index: 1000;
-}
-@media (max-width: 600px) {
-    #electricParticles { opacity: .4; }
-}
-@media (prefers-reduced-motion: reduce) {
-    .hero .eyebrow, .hero h1, .hero-subtitle, .hero-line,
-    .watched-item, .anime-card, .audio-card {
-        animation: none !important;
-    }
-    .js-reveal .reveal-on-scroll {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-}
-
 </style>
 </head>
 
@@ -1595,96 +1557,6 @@ document.addEventListener("keydown", event => {
         popup.classList.add("hide");
     }
 });
-
-
-/* VERSION 4: SCROLL REVEAL + AMBIENT ELECTRIC PARTICLES */
-document.documentElement.classList.add("js-reveal");
-
-const revealTargets = document.querySelectorAll(
-    ".section-heading, .watched-item, .anime-card, .audio-card, .audio-intro, .footer-title, .footer p"
-);
-revealTargets.forEach((element, index) => {
-    element.classList.add("reveal-on-scroll");
-    element.style.transitionDelay = `${(index % 3) * 70}ms`;
-});
-
-if ("IntersectionObserver" in window) {
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
-
-    revealTargets.forEach(element => revealObserver.observe(element));
-} else {
-    revealTargets.forEach(element => element.classList.add("is-visible"));
-}
-
-/* Lightweight canvas particles; automatically respects reduced-motion settings. */
-(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) return;
-
-    const canvas = document.createElement("canvas");
-    canvas.id = "electricParticles";
-    canvas.setAttribute("aria-hidden", "true");
-    document.body.prepend(canvas);
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) {
-        canvas.remove();
-        return;
-    }
-
-    let width = 0, height = 0, particles = [];
-    const particleCount = () => Math.min(55, Math.max(22, Math.floor(window.innerWidth / 25)));
-
-    function resizeCanvas() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        particles = Array.from({ length: particleCount() }, () => ({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            radius: Math.random() * 1.6 + .4,
-            speedX: (Math.random() - .5) * .28,
-            speedY: (Math.random() - .5) * .28,
-            alpha: Math.random() * .45 + .15
-        }));
-    }
-
-    function animateParticles() {
-        ctx.clearRect(0, 0, width, height);
-        for (const particle of particles) {
-            particle.x += particle.speedX;
-            particle.y += particle.speedY;
-            if (particle.x < 0) particle.x = width;
-            if (particle.x > width) particle.x = 0;
-            if (particle.y < 0) particle.y = height;
-            if (particle.y > height) particle.y = 0;
-
-            ctx.beginPath();
-            ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0, 245, 255, ${particle.alpha})`;
-            ctx.shadowBlur = 9;
-            ctx.shadowColor = "rgba(0, 245, 255, .55)";
-            ctx.fill();
-        }
-        ctx.shadowBlur = 0;
-        requestAnimationFrame(animateParticles);
-    }
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas, { passive: true });
-    animateParticles();
-})();
-
 </script>
 
 </body>
