@@ -383,6 +383,37 @@ button {
     transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
 
+@property --edge-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.anime-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    padding: 2px;
+    pointer-events: none;
+    opacity: .7;
+    background: conic-gradient(
+        from var(--edge-angle),
+        transparent 0deg 285deg,
+        var(--accent) 315deg,
+        transparent 345deg 360deg
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: edgeOrbit 3.2s linear infinite;
+}
+
+@keyframes edgeOrbit {
+    to { --edge-angle: 360deg; }
+}
+
 .anime-card:hover {
     transform: translateY(-7px);
     border-color: var(--accent);
@@ -1095,7 +1126,7 @@ input:focus-visible {
 
                     <img
                         class="anime-image"
-                        src="eren Yeager founding titan.jfif"
+                        src="eren and founding Titan.jfif"
                         alt="Eren Yeager and the Founding Titan"
                         loading="lazy"
                     >
