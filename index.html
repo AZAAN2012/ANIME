@@ -106,8 +106,14 @@ button {
 }
 
 @keyframes popupIn {
-  from { opacity: 0; transform: translateY(20px) scale(.94); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .popup-tag {
@@ -336,9 +342,19 @@ button {
   transition: transform .35s,border-color .35s,box-shadow .35s;
 }
 
-.anime-card.eren { --accent: var(--cyan); }
-.anime-card.jinwoo { --accent: var(--purple); }
-.anime-card.sukuna { --accent: var(--pink); }
+.anime-card.eren {
+  --accent: var(--cyan);
+}
+
+.anime-card.jinwoo {
+  --accent: var(--purple);
+}
+
+.anime-card.sukuna {
+  --accent: var(--pink);
+}
+
+/* ROTATING NEON BORDER */
 
 .anime-card::before {
   content: "";
@@ -362,7 +378,9 @@ button {
 }
 
 @keyframes rotateGlow {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .anime-card::after {
@@ -408,6 +426,7 @@ button {
   position: absolute;
   inset: 35% 0 0;
   background: linear-gradient(transparent,rgba(3,6,17,.97));
+  pointer-events: none;
 }
 
 .anime-image {
@@ -423,7 +442,8 @@ button {
   filter: saturate(1.2) brightness(1.08);
 }
 
-.card-number,.card-rating {
+.card-number,
+.card-rating {
   position: absolute;
   top: 14px;
   z-index: 2;
@@ -447,6 +467,8 @@ button {
   border: 1px solid rgba(255,255,255,.2);
 }
 
+/* COMPACT CARDS: NO DESCRIPTIONS */
+
 .card-body {
   padding: 22px;
 }
@@ -469,13 +491,7 @@ button {
 
 .card-character {
   color: var(--muted);
-  margin-bottom: 17px;
-}
-
-.card-description {
-  color: #b7c7e1;
-  font-size: .98rem;
-  line-height: 1.7;
+  margin-bottom: 5px;
 }
 
 .card-footer {
@@ -518,11 +534,20 @@ button {
   transition: transform .3s,box-shadow .3s,border-color .3s;
 }
 
-.eren-audio { --audio-accent: var(--cyan); }
-.jinwoo-audio { --audio-accent: var(--purple); }
-.sukuna-audio { --audio-accent: var(--pink); }
+.eren-audio {
+  --audio-accent: var(--cyan);
+}
 
-.audio-card:hover,.audio-card.is-playing {
+.jinwoo-audio {
+  --audio-accent: var(--purple);
+}
+
+.sukuna-audio {
+  --audio-accent: var(--pink);
+}
+
+.audio-card:hover,
+.audio-card.is-playing {
   transform: translateY(-5px);
   border-color: var(--audio-accent);
   box-shadow: 0 0 12px var(--audio-accent),
@@ -587,14 +612,31 @@ button {
   animation: soundBars .65s ease-in-out infinite alternate;
 }
 
-.audio-visualizer span:nth-child(4n+1) { animation-delay: -.1s; }
-.audio-visualizer span:nth-child(4n+2) { animation-delay: -.4s; }
-.audio-visualizer span:nth-child(4n+3) { animation-delay: -.25s; }
-.audio-visualizer span:nth-child(5n) { animation-delay: -.55s; }
+.audio-visualizer span:nth-child(4n+1) {
+  animation-delay: -.1s;
+}
+
+.audio-visualizer span:nth-child(4n+2) {
+  animation-delay: -.4s;
+}
+
+.audio-visualizer span:nth-child(4n+3) {
+  animation-delay: -.25s;
+}
+
+.audio-visualizer span:nth-child(5n) {
+  animation-delay: -.55s;
+}
 
 @keyframes soundBars {
-  from { height: 12%; opacity: .5; }
-  to { height: 95%; opacity: 1; }
+  from {
+    height: 12%;
+    opacity: .5;
+  }
+  to {
+    height: 95%;
+    opacity: 1;
+  }
 }
 
 .audio-controls {
@@ -627,7 +669,8 @@ button {
   flex: 1;
 }
 
-.seek-bar,.volume-bar {
+.seek-bar,
+.volume-bar {
   width: 100%;
   accent-color: var(--audio-accent);
   cursor: pointer;
@@ -710,19 +753,27 @@ button {
 /* RESPONSIVE */
 
 @media(max-width:900px) {
-  .watched-list,.anime-grid,.audio-grid {
+  .watched-list,
+  .anime-grid,
+  .audio-grid {
     grid-template-columns: repeat(2,minmax(0,1fr));
   }
 }
 
 @media(max-width:620px) {
-  .hero { padding: 65px 0 42px; }
+  .hero {
+    padding: 65px 0 42px;
+  }
 
-  .watched-list,.anime-grid,.audio-grid {
+  .watched-list,
+  .anime-grid,
+  .audio-grid {
     grid-template-columns: 1fr;
   }
 
-  .section { margin-bottom: 48px; }
+  .section {
+    margin-bottom: 48px;
+  }
 
   .section-heading {
     align-items: flex-start;
@@ -730,12 +781,19 @@ button {
     gap: 8px;
   }
 
-  .anime-image-wrap { height: 300px; }
-  .audio-card { padding: 20px; }
+  .anime-image-wrap {
+    height: 300px;
+  }
+
+  .audio-card {
+    padding: 20px;
+  }
 }
 
 @media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
@@ -748,12 +806,17 @@ button {
 <body>
 
 <!-- ORIGINAL WORK POPUP -->
-<div class="custom-alert-overlay" id="originalPopup"
-     role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+<div class="custom-alert-overlay"
+     id="originalPopup"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="popupTitle">
+
   <div class="custom-alert-box">
     <div class="popup-tag">NOTICE // ORIGINAL CONTENT</div>
     <h2 id="popupTitle">Original Work</h2>
     <p>ORIGINAL WORK OF MUHAMMAD AZAAN</p>
+
     <button class="popup-button" id="closePopup" type="button">
       UNDERSTOOD
       <small>DONT COPY!!</small>
@@ -764,6 +827,7 @@ button {
 <!-- HERO -->
 <header class="hero">
   <div class="container">
+
     <div class="eyebrow">
       <span class="status-dot"></span>
       ANIME LOG / 2026
@@ -790,6 +854,7 @@ button {
     </div>
 
     <div class="watched-list">
+
       <div class="watched-item">
         <div class="watched-index">01</div>
         <div>
@@ -813,6 +878,7 @@ button {
           <div class="watched-status">FINISHED // COMPLETE</div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -830,11 +896,12 @@ button {
         <div class="card-topline"></div>
 
         <div class="anime-image-wrap">
-          <img class="anime-image"
-               src="eren and founding Titan.jfif"
-               alt="Eren Yeager and the Founding Titan"
-               loading="lazy"
-               onerror="this.style.display='none'">
+          <img
+            class="anime-image"
+            src="eren and founding Titan.jfif"
+            alt="Eren Yeager and the Founding Titan"
+            loading="lazy"
+            onerror="this.style.display='none'">
 
           <div class="card-number">FILE_001</div>
           <div class="card-rating">8/10</div>
@@ -844,6 +911,7 @@ button {
           <div class="card-category">DARK FANTASY / ACTION</div>
           <h3>ATTACK ON TITAN</h3>
           <div class="card-character">FAVOURITE: EREN JAEGER</div>
+
           <div class="card-footer">
             <span>STATUS</span>
             <strong>PAUSED</strong>
@@ -861,11 +929,12 @@ button {
         <div class="card-topline"></div>
 
         <div class="anime-image-wrap">
-          <img class="anime-image"
-               src="2026-02-26 (18).png"
-               alt="Sung Jin-Woo from Solo Leveling"
-               loading="lazy"
-               onerror="this.style.display='none'">
+          <img
+            class="anime-image"
+            src="2026-02-26 (18).png"
+            alt="Sung Jin-Woo from Solo Leveling"
+            loading="lazy"
+            onerror="this.style.display='none'">
 
           <div class="card-number">FILE_002</div>
           <div class="card-rating">11/10</div>
@@ -875,6 +944,7 @@ button {
           <div class="card-category">FANTASY / LEVEL-UP ACTION</div>
           <h3>SOLO LEVELING</h3>
           <div class="card-character">FAVOURITE: SUNG JIN-WOO</div>
+
           <div class="card-footer">
             <span>STATUS</span>
             <strong>FINISHED</strong>
@@ -897,11 +967,12 @@ button {
         <div class="card-topline"></div>
 
         <div class="anime-image-wrap">
-          <img class="anime-image"
-               src="2026-08-23 (5).png"
-               alt="Ryomen Sukuna from Jujutsu Kaisen"
-               loading="lazy"
-               onerror="this.style.display='none'">
+          <img
+            class="anime-image"
+            src="2026-08-23 (5).png"
+            alt="Ryomen Sukuna from Jujutsu Kaisen"
+            loading="lazy"
+            onerror="this.style.display='none'">
 
           <div class="card-number">FILE_003</div>
           <div class="card-rating">10/10</div>
@@ -911,10 +982,12 @@ button {
           <div class="card-category">SUPERNATURAL / ACTION</div>
           <h3>JUJUTSU KAISEN</h3>
           <div class="card-character">FAVOURITE: RYOMEN SUKUNA</div>
+
           <div class="card-footer">
             <span>STATUS</span>
             <strong>FINISHED</strong>
           </div>
+
           <div class="card-footer">
             <span>STARTED</span>
             <strong>JUL 3, 2026</strong>
@@ -949,6 +1022,7 @@ button {
 
         <div class="audio-controls">
           <button class="play-button" type="button" aria-label="Play audio">▶</button>
+
           <div class="audio-timeline">
             <input class="seek-bar" type="range" min="0" max="100" value="0" aria-label="Seek audio">
             <div class="time-row">
@@ -981,6 +1055,7 @@ button {
 
         <div class="audio-controls">
           <button class="play-button" type="button" aria-label="Play audio">▶</button>
+
           <div class="audio-timeline">
             <input class="seek-bar" type="range" min="0" max="100" value="0" aria-label="Seek audio">
             <div class="time-row">
@@ -1013,6 +1088,7 @@ button {
 
         <div class="audio-controls">
           <button class="play-button" type="button" aria-label="Play audio">▶</button>
+
           <div class="audio-timeline">
             <input class="seek-bar" type="range" min="0" max="100" value="0" aria-label="Seek audio">
             <div class="time-row">
@@ -1035,6 +1111,7 @@ button {
 
 </main>
 
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="footer-title">ANIMES WATCHED // AZAAN'S ARCHIVE</div>
@@ -1052,7 +1129,7 @@ button {
     popup.classList.add('hide');
   });
 
-  // Generate the neon sound bars.
+  // Create the animated audio visualizer bars.
   document.querySelectorAll('.audio-visualizer').forEach((visualizer, index) => {
     for (let i = 0; i < 30; i++) {
       const bar = document.createElement('span');
@@ -1109,10 +1186,10 @@ button {
       playButton.setAttribute('aria-label', 'Pause audio');
       setStatus(card, 'PLAYING // AUDIO ACTIVE');
 
-      // Keep only one track playing at a time.
       audioCards.forEach(otherCard => {
-        if (otherCard === card) return;
-        otherCard.querySelector('[data-audio]').pause();
+        if (otherCard !== card) {
+          otherCard.querySelector('[data-audio]').pause();
+        }
       });
     });
 
