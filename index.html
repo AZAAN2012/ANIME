@@ -1000,28 +1000,10 @@ input:focus-visible {
 
 <div class="custom-alert-overlay" id="noticePopup">
     <div class="custom-alert-box">
-        <div class="popup-tag">GOJO AUDIO SYSTEM</div>
-
-        <h2>DOMAIN <span style="color:var(--pink)">ACTIVATED</span></h2>
-
-        <p>GOJO SATORU • YOWAI MO</p>
-
-        <div class="audio-visualizer" aria-hidden="true" style="margin-bottom:22px;">
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-        </div>
-
-        <audio id="gojoIntroAudio" src="./gojo_satoru_s_yowai_mo.mp3" preload="auto" autoplay></audio>
-
-        <p id="introAudioStatus" style="font-size:.78rem; margin-bottom:18px;">
-            INITIALIZING AUDIO...
-        </p>
+        <audio id="gojoIntroAudio" src="./muryo-kusho-made-with-Voicemod.mp3" preload="auto" autoplay></audio>
 
         <button class="popup-button" id="understoodButton">
-            ENTER WEBSITE
-            <small>ACTIVATE GOJO AUDIO</small>
+            ENTER THE DOMAIN
         </button>
     </div>
 </div>
@@ -1433,21 +1415,17 @@ input:focus-visible {
 </footer>
 
 <script>
-/* OPENING GOJO AUDIO POPUP */
+/* OPENING AUDIO POPUP */
 
 const popup = document.getElementById("noticePopup");
 const understoodButton = document.getElementById("understoodButton");
 const gojoIntroAudio = document.getElementById("gojoIntroAudio");
-const introAudioStatus = document.getElementById("introAudioStatus");
 
-/* Try to start audio as soon as the website opens.
-   Some browsers block sound until the visitor clicks the button. */
+/* Try to autoplay when the website opens.
+   Browsers may require the visitor to click the button first. */
 gojoIntroAudio.volume = 0.8;
-
-gojoIntroAudio.play().then(() => {
-    introAudioStatus.textContent = "AUDIO ONLINE • PLAYING";
-}).catch(() => {
-    introAudioStatus.textContent = "AUDIO READY • CLICK ENTER TO ACTIVATE";
+gojoIntroAudio.play().catch(() => {
+    /* The Enter the Domain button is the fallback if autoplay is blocked. */
 });
 
 understoodButton.addEventListener("click", async () => {
@@ -1455,9 +1433,8 @@ understoodButton.addEventListener("click", async () => {
         if (gojoIntroAudio.paused) {
             await gojoIntroAudio.play();
         }
-        introAudioStatus.textContent = "AUDIO ONLINE • PLAYING";
     } catch (error) {
-        introAudioStatus.textContent = "AUDIO BLOCKED • CHECK THE MP3 FILE";
+        /* The browser may still block audio until another interaction. */
     }
 
     popup.classList.add("hide");
