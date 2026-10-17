@@ -996,19 +996,32 @@ input:focus-visible {
 
 <body>
 
-<!-- ORIGINAL WORK POPUP -->
+<!-- OPENING AUDIO POPUP (same cyberpunk theme) -->
 
 <div class="custom-alert-overlay" id="noticePopup">
     <div class="custom-alert-box">
-        <div class="popup-tag">SYSTEM NOTICE</div>
+        <div class="popup-tag">GOJO AUDIO SYSTEM</div>
 
-        <h2>Original Work</h2>
+        <h2>DOMAIN <span style="color:var(--pink)">ACTIVATED</span></h2>
 
-        <p>ORIGINAL WORK OF MUHAMMAD AZAAN</p>
+        <p>GOJO SATORU • YOWAI MO</p>
+
+        <div class="audio-visualizer" aria-hidden="true" style="margin-bottom:22px;">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <audio id="gojoIntroAudio" src="./gojo_satoru_s_yowai_mo.mp3" preload="auto" autoplay></audio>
+
+        <p id="introAudioStatus" style="font-size:.78rem; margin-bottom:18px;">
+            INITIALIZING AUDIO...
+        </p>
 
         <button class="popup-button" id="understoodButton">
-            UNDERSTOOD
-            <small>DONT COPY!!</small>
+            ENTER WEBSITE
+            <small>ACTIVATE GOJO AUDIO</small>
         </button>
     </div>
 </div>
@@ -1420,28 +1433,37 @@ input:focus-visible {
 </footer>
 
 <script>
-/* POPUP */
+/* OPENING GOJO AUDIO POPUP */
 
 const popup = document.getElementById("noticePopup");
 const understoodButton = document.getElementById("understoodButton");
+const gojoIntroAudio = document.getElementById("gojoIntroAudio");
+const introAudioStatus = document.getElementById("introAudioStatus");
 
-understoodButton.addEventListener("click", () => {
-    popup.classList.add("hide");
+/* Try to start audio as soon as the website opens.
+   Some browsers block sound until the visitor clicks the button. */
+gojoIntroAudio.volume = 0.8;
 
-    try {
-        sessionStorage.setItem("animeNoticeSeen", "true");
-    } catch (error) {
-        // Popup still closes if browser storage is unavailable.
-    }
+gojoIntroAudio.play().then(() => {
+    introAudioStatus.textContent = "AUDIO ONLINE • PLAYING";
+}).catch(() => {
+    introAudioStatus.textContent = "AUDIO READY • CLICK ENTER TO ACTIVATE";
 });
 
-try {
-    if (sessionStorage.getItem("animeNoticeSeen") === "true") {
-        popup.classList.add("hide");
+understoodButton.addEventListener("click", async () => {
+    try {
+        if (gojoIntroAudio.paused) {
+            await gojoIntroAudio.play();
+        }
+        introAudioStatus.textContent = "AUDIO ONLINE • PLAYING";
+    } catch (error) {
+        introAudioStatus.textContent = "AUDIO BLOCKED • CHECK THE MP3 FILE";
     }
-} catch (error) {
-    // Keep the popup functional without session storage.
-}
+
+    popup.classList.add("hide");
+});
+
+/* The opening popup appears on every fresh website load. */
 
 /* AUDIO PLAYERS */
 
@@ -1691,3 +1713,4 @@ if ("IntersectionObserver" in window) {
 
 </body>
 </html>
+can iadd a pop up at the openong of website feuturing some audio
