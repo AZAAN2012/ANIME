@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -525,55 +526,6 @@ button {
 
 
 
-/* LATEST SUKUNA YOUTUBE CLIP — separate from the MP3 audio players */
-const animeVideoPopup = document.getElementById("animeVideoPopup");
-const animeVideoFrame = document.getElementById("animeVideoFrame");
-const animeVideoTitle = document.getElementById("animeVideoTitle");
-const closeAnimeVideo = document.getElementById("closeAnimeVideo");
-const videoCards = document.querySelectorAll(".anime-card[data-video-id]");
-
-function openAnimeVideo(card) {
-    const videoId = card.dataset.videoId;
-    if (!videoId) return;
-    animeVideoTitle.textContent = card.dataset.videoTitle || "Anime Clip";
-    animeVideoPopup.style.setProperty("--video-accent", card.dataset.videoAccent || "#00f5ff");
-    animeVideoFrame.replaceChildren();
-    const iframe = document.createElement("iframe");
-    iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(videoId) + "?autoplay=1&rel=0";
-    iframe.title = (card.dataset.videoTitle || "Anime") + " YouTube video";
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-    iframe.referrerPolicy = "strict-origin-when-cross-origin";
-    iframe.allowFullscreen = true;
-    animeVideoFrame.appendChild(iframe);
-    animeVideoPopup.classList.add("is-open");
-    animeVideoPopup.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-    closeAnimeVideo.focus();
-}
-
-function closeAnimeVideoPopup() {
-    animeVideoPopup.classList.remove("is-open");
-    animeVideoPopup.setAttribute("aria-hidden", "true");
-    animeVideoFrame.replaceChildren();
-    document.body.style.overflow = "";
-}
-
-videoCards.forEach(card => {
-    card.addEventListener("click", () => openAnimeVideo(card));
-    card.addEventListener("keydown", event => {
-        if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            openAnimeVideo(card);
-        }
-    });
-});
-closeAnimeVideo.addEventListener("click", closeAnimeVideoPopup);
-animeVideoPopup.addEventListener("click", event => {
-    if (event.target === animeVideoPopup) closeAnimeVideoPopup();
-});
-document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && animeVideoPopup.classList.contains("is-open")) closeAnimeVideoPopup();
-});
 
 /* AUDIO PLAYERS */
 
@@ -1523,6 +1475,59 @@ input:focus-visible {
 </footer>
 
 <script>
+
+/* LATEST SUKUNA YOUTUBE CLIP — separate from the MP3 audio players */
+const animeVideoPopup = document.getElementById("animeVideoPopup");
+const animeVideoFrame = document.getElementById("animeVideoFrame");
+const animeVideoTitle = document.getElementById("animeVideoTitle");
+const closeAnimeVideo = document.getElementById("closeAnimeVideo");
+const videoCards = document.querySelectorAll(".anime-card[data-video-id]");
+
+function openAnimeVideo(card) {
+    const videoId = card.dataset.videoId;
+    if (!videoId) return;
+    animeVideoTitle.textContent = card.dataset.videoTitle || "Anime Clip";
+    animeVideoPopup.style.setProperty("--video-accent", card.dataset.videoAccent || "#00f5ff");
+    animeVideoFrame.replaceChildren();
+    const iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(videoId) + "?autoplay=1&rel=0";
+    iframe.title = (card.dataset.videoTitle || "Anime") + " YouTube video";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.allowFullscreen = true;
+    animeVideoFrame.appendChild(iframe);
+    animeVideoPopup.classList.add("is-open");
+    animeVideoPopup.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    closeAnimeVideo.focus();
+}
+
+function closeAnimeVideoPopup() {
+    animeVideoPopup.classList.remove("is-open");
+    animeVideoPopup.setAttribute("aria-hidden", "true");
+    animeVideoFrame.replaceChildren();
+    document.body.style.overflow = "";
+}
+
+videoCards.forEach(card => {
+    card.addEventListener("click", () => openAnimeVideo(card));
+    card.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openAnimeVideo(card);
+        }
+    });
+});
+closeAnimeVideo.addEventListener("click", closeAnimeVideoPopup);
+animeVideoPopup.addEventListener("click", event => {
+    if (event.target === animeVideoPopup) closeAnimeVideoPopup();
+});
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && animeVideoPopup.classList.contains("is-open")) closeAnimeVideoPopup();
+});
+
+
+
 /* GOJO INTRO AUDIO POPUP */
 
 const popup = document.getElementById("noticePopup");
@@ -1795,3 +1800,4 @@ if ("IntersectionObserver" in window) {
 
 </body>
 </html>
+```
