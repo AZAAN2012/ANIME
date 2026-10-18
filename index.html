@@ -449,571 +449,101 @@ button {
     letter-spacing: 1px;
 }
 
-@keyframes lineEntrance {
-    from { opacity: 0; transform: scaleX(.1); }
-    to { opacity: 1; transform: scaleX(1); }
-}
-
-.anime-card,
-.audio-card,
-.watched-item {
-    transform-style: preserve-3d;
-}
-
-.anime-card::before,
-.audio-card::before {
-    content: "";
+.card-rating {
     position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0;
-    background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,.08) 45%, transparent 70%);
-    transform: translateX(-120%);
-    transition: opacity .3s;
-}
-
-.anime-card:hover::before,
-.audio-card:hover::before {
-    opacity: 1;
-    animation: cardShine .9s ease;
-}
-
-@keyframes cardShine {
-    to { transform: translateX(120%); }
-}
-
-.anime-card:hover {
-    box-shadow: 0 0 0 1px var(--accent), 0 0 22px color-mix(in srgb, var(--accent) 25%, transparent), 0 18px 40px rgba(0,0,0,.32);
-}
-
-.audio-card:hover,
-.audio-card.is-playing {
-    box-shadow: 0 0 22px color-mix(in srgb, var(--audio-accent) 18%, transparent);
-}
-
-.reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity .65s ease, transform .65s cubic-bezier(.2,.75,.25,1);
-}
-
-.reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-html.js-reveal .hero .eyebrow,
-html.js-reveal .hero h1,
-html.js-reveal .hero-subtitle,
-html.js-reveal .hero-line {
-    will-change: transform, opacity;
-}
-
-#electricParticles {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-}
-
-/* YOUTUBE NEON VIDEO POPUP */
-
-.anime-card[data-video-id] {
-    cursor: pointer;
-}
-
-.anime-card[data-video-id]:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
-}
-
-.anime-video-popup {
-    --video-accent: var(--cyan);
-    position: fixed;
-    inset: 0;
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(0, 2, 12, .92);
-    backdrop-filter: blur(15px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity .3s ease, visibility .3s ease;
-}
-
-.anime-video-popup.is-open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-}
-
-.anime-video-box {
-    width: min(900px, 100%);
-    position: relative;
-    padding: 18px;
-    border: 1px solid var(--video-accent);
-    background: linear-gradient(145deg, rgba(12,22,44,.98), rgba(3,6,17,.98));
-    box-shadow: 0 0 18px color-mix(in srgb, var(--video-accent) 35%, transparent),
-                0 0 65px color-mix(in srgb, var(--video-accent) 16%, transparent);
-    clip-path: polygon(0 18px, 18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px));
-    transform: translateY(15px) scale(.98);
-    transition: transform .3s ease;
-}
-
-.anime-video-popup.is-open .anime-video-box {
-    transform: translateY(0) scale(1);
-}
-
-.anime-video-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 14px;
-}
-
-.anime-video-heading h2 {
-    color: var(--video-accent);
+    right: 14px;
+    bottom: 15px;
+    z-index: 2;
+    color: var(--accent);
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(.9rem, 3vw, 1.25rem);
-    letter-spacing: 1px;
-    text-shadow: 0 0 14px color-mix(in srgb, var(--video-accent) 40%, transparent);
+    font-size: 1rem;
+    font-weight: 800;
+    text-shadow: 0 0 15px var(--accent);
 }
 
-.close-anime-video {
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
-    color: var(--video-accent);
-    background: rgba(0,0,0,.35);
-    border: 1px solid var(--video-accent);
-    font-size: 1.5rem;
-    line-height: 1;
-    transition: .2s;
+.anime-info {
+    padding: 23px 21px 24px;
 }
 
-.close-anime-video:hover {
-    color: #030611;
-    background: var(--video-accent);
-    box-shadow: 0 0 18px var(--video-accent);
+.anime-kicker {
+    color: var(--accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .62rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
 }
 
-.anime-video-frame {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: #000;
-    border: 1px solid color-mix(in srgb, var(--video-accent) 45%, transparent);
+.anime-info h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
 }
 
-.anime-video-frame iframe {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border: 0;
+.anime-details {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 19px;
 }
 
-.anime-video-caption {
-    margin-top: 12px;
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: .95rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,.055);
+}
+
+.detail-label {
     color: var(--muted);
-    font-size: .9rem;
-    letter-spacing: 1px;
+    flex-shrink: 0;
 }
 
-@media (max-width: 600px) {
-    .anime-video-popup { padding: 10px; }
-    .anime-video-box { padding: 12px; }
-    .anime-video-heading { margin-bottom: 10px; }
+.detail-value {
+    text-align: right;
+    font-weight: 700;
 }
 
-/* VERSION 5: EXTRA NEON GLOW */
-.anime-card,
-.audio-card,
-.watched-item {
-    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease, background .3s ease;
+.detail-value.accent {
+    color: var(--accent);
 }
 
-.anime-card:hover {
-    transform: translateY(-8px) scale(1.01);
+.character-label {
+    color: var(--muted);
+    font-size: .75rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
 }
 
-.anime-card.eren:hover {
-    box-shadow: 0 0 12px rgba(0,245,255,.35), 0 0 32px rgba(0,245,255,.14);
+.character-name {
+    color: var(--accent);
+    font-size: 1.15rem;
+    font-weight: 700;
 }
 
-.anime-card.jinwoo:hover {
-    box-shadow: 0 0 12px rgba(168,85,247,.35), 0 0 32px rgba(168,85,247,.14);
-}
 
-.anime-card.sukuna:hover {
-    box-shadow: 0 0 12px rgba(255,53,198,.35), 0 0 32px rgba(255,53,198,.14);
-}
-</style>
-</head>
 
-<body>
-
-<!-- ORIGINAL WORK POPUP -->
-<div class="custom-alert-overlay" id="customAlert">
-    <div class="custom-alert-box">
-        <div class="popup-tag">NOTICE</div>
-        <h2>Original Work</h2>
-        <p>ORIGINAL WORK OF MUHAMMAD AZAAN</p>
-        <button class="popup-button" id="understoodButton">
-            ENTER THE DOMAIN
-            <small>DONT COPY!!</small>
-        </button>
-    </div>
-</div>
-
-<!-- YOUTUBE NEON VIDEO POPUP -->
-<div class="anime-video-popup" id="animeVideoPopup" aria-hidden="true">
-    <div class="anime-video-box" role="dialog" aria-modal="true" aria-labelledby="animeVideoTitle">
-        <div class="anime-video-heading">
-            <h2 id="animeVideoTitle">ANIME CLIP</h2>
-            <button class="close-anime-video" id="closeAnimeVideo" type="button" aria-label="Close video">×</button>
-        </div>
-        <div class="anime-video-frame" id="animeVideoFrame"></div>
-        <div class="anime-video-caption">VIDEO TRANSMISSION // NEON DOMAIN</div>
-    </div>
-</div>
-
-<!-- HERO -->
-<header class="hero">
-    <div class="container">
-        <div class="eyebrow"><span class="status-dot"></span> ANIME LOG / 2026</div>
-        <h1>ANIMES <span>WATCHED</span></h1>
-        <p class="hero-subtitle">A personal anime archive. Every story leaves a mark.</p>
-        <div class="hero-line"></div>
-    </div>
-</header>
-
-<main class="container">
-
-    <!-- WATCHED LIST -->
-    <section class="section">
-        <div class="section-heading">
-            <h2>MY <span>ANIME COLLECTION</span></h2>
-            <div class="section-code">DATABASE // 001</div>
-        </div>
-
-        <div class="watched-list">
-            <div class="watched-item">
-                <div class="watched-index">01</div>
-                <div>
-                    <div class="watched-name">ATTACK ON TITAN</div>
-                    <div class="watched-status">REMAINING</div>
-                </div>
-            </div>
-
-            <div class="watched-item">
-                <div class="watched-index">02</div>
-                <div>
-                    <div class="watched-name">SOLO LEVELING</div>
-                    <div class="watched-status">FINISHED</div>
-                </div>
-            </div>
-
-            <div class="watched-item">
-                <div class="watched-index">03</div>
-                <div>
-                    <div class="watched-name">JUJUTSU KAISEN</div>
-                    <div class="watched-status">FINISHED</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ANIME CARDS -->
-    <section class="section">
-        <div class="section-heading">
-            <h2>MY <span>ANIME DETAILS</span></h2>
-            <div class="section-code">CLICK A CARD TO PLAY</div>
-        </div>
-
-        <div class="anime-grid">
-
-            <!-- ATTACK ON TITAN -->
-            <article class="anime-card eren" data-video-id="3orkdcYMw_k" data-video-title="Attack on Titan" data-video-accent="#00f5ff" role="button" tabindex="0" aria-label="Play Attack on Titan video">
-                <div class="card-topline"></div>
-                <div class="anime-image-wrap">
-                    <img class="anime-image" src="./eren and founding Titan.jfif" alt="Eren Yeager and the Founding Titan">
-                    <div class="card-number">ANIME 01</div>
-                    <div class="card-rating">8/10</div>
-                </div>
-                <div class="anime-info">
-                    <div class="anime-kicker">STATUS // PAUSED</div>
-                    <h3>ATTACK ON TITAN</h3>
-                    <div class="anime-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Progress</span>
-                            <span class="detail-value">2 SEASONS</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Started</span>
-                            <span class="detail-value">FEB 26, 2026</span>
-                        </div>
-                    </div>
-                    <div class="character-label">FAVOURITE CHARACTER</div>
-                    <div class="character-name">EREN JAEGER</div>
-                </div>
-            </article>
-
-            <!-- SOLO LEVELING -->
-            <article class="anime-card jinwoo" data-video-id="IrHTT2IEKpE" data-video-title="Solo Leveling" data-video-accent="#a855f7" role="button" tabindex="0" aria-label="Play Solo Leveling video">
-                <div class="card-topline"></div>
-                <div class="anime-image-wrap">
-                    <img class="anime-image" src="./2026-02-26%20(18).png" alt="Sung Jin-Woo from Solo Leveling">
-                    <div class="card-number">ANIME 02</div>
-                    <div class="card-rating">11/10</div>
-                </div>
-                <div class="anime-info">
-                    <div class="anime-kicker">STATUS // FINISHED</div>
-                    <h3>SOLO LEVELING</h3>
-                    <div class="anime-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Started</span>
-                            <span class="detail-value">MAR 22, 2026</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Finished</span>
-                            <span class="detail-value">APR 18, 2026</span>
-                        </div>
-                    </div>
-                    <div class="character-label">FAVOURITE CHARACTER</div>
-                    <div class="character-name">SUNG JIN WOO</div>
-                </div>
-            </article>
-
-            <!-- JUJUTSU KAISEN -->
-            <article class="anime-card sukuna" data-video-id="vyYYTCxDXaA" data-video-title="Sukuna" data-video-accent="#ff35c6" role="button" tabindex="0" aria-label="Play Sukuna video">
-                <div class="card-topline"></div>
-                <div class="anime-image-wrap">
-                    <img class="anime-image" src="./2026-08-23%20(5).png" alt="Ryomen Sukuna from Jujutsu Kaisen">
-                    <div class="card-number">ANIME 03</div>
-                    <div class="card-rating">10/10</div>
-                </div>
-                <div class="anime-info">
-                    <div class="anime-kicker">STATUS // FINISHED</div>
-                    <h3>JUJUTSU KAISEN</h3>
-                    <div class="anime-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Started</span>
-                            <span class="detail-value">JUL 3, 2026</span>
-                        </div>
-                    </div>
-                    <div class="character-label">FAVOURITE CHARACTER</div>
-                    <div class="character-name">RYOMEN SUKUNA</div>
-                </div>
-            </article>
-
-        </div>
-    </section>
-
-    <!-- AUDIO COLLECTION -->
-    <section class="audio-section">
-        <div class="section-heading">
-            <h2>ICONIC <span>CHARACTER SOUNDS</span></h2>
-            <div class="section-code">AUDIO // 003</div>
-        </div>
-
-        <p class="audio-intro">Press play to listen to your favourite anime sounds.</p>
-
-        <div class="audio-grid">
-
-            <!-- EREN AUDIO -->
-            <article class="audio-card eren-audio" data-audio-card>
-                <div class="audio-header">
-                    <div class="audio-icon">01</div>
-                    <div>
-                        <div class="audio-title">ATTACK ON TITAN</div>
-                        <div class="audio-subtitle">Eren Yeager • Attack on Titan</div>
-                    </div>
-                </div>
-
-                <div class="audio-visualizer" aria-hidden="true">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-
-                <audio preload="metadata" src="./eren.mp3"></audio>
-
-                <div class="audio-controls">
-                    <button class="play-button" type="button" aria-label="Play Eren audio">▶</button>
-                    <div class="audio-timeline">
-                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Eren audio">
-                        <div class="time-row">
-                            <span class="current-time">0:00</span>
-                            <span class="duration">0:00</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="audio-volume">
-                    <span class="volume-label">VOLUME</span>
-                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Eren audio volume">
-                </div>
-
-                <div class="audio-status">READY TO PLAY</div>
-            </article>
-
-            <!-- JINWOO AUDIO -->
-            <article class="audio-card jinwoo-audio" data-audio-card>
-                <div class="audio-header">
-                    <div class="audio-icon">02</div>
-                    <div>
-                        <div class="audio-title">SOLO LEVELING</div>
-                        <div class="audio-subtitle">Sung Jin-Woo • Solo Leveling</div>
-                    </div>
-                </div>
-
-                <div class="audio-visualizer" aria-hidden="true">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-
-                <audio preload="metadata" src="./jinwoo.mp3"></audio>
-
-                <div class="audio-controls">
-                    <button class="play-button" type="button" aria-label="Play Jin-Woo audio">▶</button>
-                    <div class="audio-timeline">
-                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Jin-Woo audio">
-                        <div class="time-row">
-                            <span class="current-time">0:00</span>
-                            <span class="duration">0:00</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="audio-volume">
-                    <span class="volume-label">VOLUME</span>
-                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Jin-Woo audio volume">
-                </div>
-
-                <div class="audio-status">READY TO PLAY</div>
-            </article>
-
-            <!-- SUKUNA AUDIO -->
-            <article class="audio-card sukuna-audio" data-audio-card>
-                <div class="audio-header">
-                    <div class="audio-icon">03</div>
-                    <div>
-                        <div class="audio-title">JUJUTSU KAISEN</div>
-                        <div class="audio-subtitle">Ryomen Sukuna • Jujutsu Kaisen</div>
-                    </div>
-                </div>
-
-                <div class="audio-visualizer" aria-hidden="true">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-
-                <audio preload="metadata" src="./sukuna.mp3"></audio>
-
-                <div class="audio-controls">
-                    <button class="play-button" type="button" aria-label="Play Sukuna audio">▶</button>
-                    <div class="audio-timeline">
-                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Sukuna audio">
-                        <div class="time-row">
-                            <span class="current-time">0:00</span>
-                            <span class="duration">0:00</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="audio-volume">
-                    <span class="volume-label">VOLUME</span>
-                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Sukuna audio volume">
-                </div>
-
-                <div class="audio-status">READY TO PLAY</div>
-            </article>
-
-        </div>
-    </section>
-
-</main>
-
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-title">ANIMES WATCHED // PERSONAL ARCHIVE</div>
-        <p>Built with passion for anime.</p>
-        <div class="footer-line"></div>
-    </div>
-</footer>
-
-<script>
-/* ORIGINAL POPUP + BACKGROUND AUDIO */
-const popup = document.getElementById("customAlert");
-const understoodButton = document.getElementById("understoodButton");
-
-/* Optional background intro audio.
-   Keep a file named gojo-intro.mp3 in the same folder if you want it. */
-const gojoIntroAudio = new Audio("./gojo-intro.mp3");
-gojoIntroAudio.loop = true;
-gojoIntroAudio.volume = 0.8;
-
-gojoIntroAudio.play().catch(() => {
-    /* The Enter the Domain button is the fallback if autoplay is blocked. */
-});
-
-understoodButton.addEventListener("click", async () => {
-    try {
-        if (gojoIntroAudio.paused) {
-            await gojoIntroAudio.play();
-        }
-    } catch (error) {
-        /* The browser may still block audio until another interaction. */
-    }
-
-    popup.classList.add("hide");
-});
-
-/* The opening popup appears on every fresh website load. */
-
-/* USER'S YOUTUBE VIDEOS IN THE NEON POPUP */
+/* LATEST SUKUNA YOUTUBE CLIP — separate from the MP3 audio players */
 const animeVideoPopup = document.getElementById("animeVideoPopup");
 const animeVideoFrame = document.getElementById("animeVideoFrame");
 const animeVideoTitle = document.getElementById("animeVideoTitle");
 const closeAnimeVideo = document.getElementById("closeAnimeVideo");
-const animeCardsWithVideos = document.querySelectorAll(".anime-card[data-video-id]");
+const videoCards = document.querySelectorAll(".anime-card[data-video-id]");
 
 function openAnimeVideo(card) {
     const videoId = card.dataset.videoId;
-    const title = card.dataset.videoTitle || "Anime Clip";
-    const accent = card.dataset.videoAccent || "#00f5ff";
-
     if (!videoId) return;
-
-    animeVideoTitle.textContent = title;
-    animeVideoPopup.style.setProperty("--video-accent", accent);
+    animeVideoTitle.textContent = card.dataset.videoTitle || "Anime Clip";
+    animeVideoPopup.style.setProperty("--video-accent", card.dataset.videoAccent || "#00f5ff");
     animeVideoFrame.replaceChildren();
-
     const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
-    iframe.title = `${title} YouTube video`;
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(videoId) + "?autoplay=1&rel=0";
+    iframe.title = (card.dataset.videoTitle || "Anime") + " YouTube video";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
     iframe.allowFullscreen = true;
-
     animeVideoFrame.appendChild(iframe);
     animeVideoPopup.classList.add("is-open");
     animeVideoPopup.setAttribute("aria-hidden", "false");
@@ -1028,9 +558,8 @@ function closeAnimeVideoPopup() {
     document.body.style.overflow = "";
 }
 
-animeCardsWithVideos.forEach(card => {
+videoCards.forEach(card => {
     card.addEventListener("click", () => openAnimeVideo(card));
-
     card.addEventListener("keydown", event => {
         if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
@@ -1038,11 +567,984 @@ animeCardsWithVideos.forEach(card => {
         }
     });
 });
-
 closeAnimeVideo.addEventListener("click", closeAnimeVideoPopup);
-
 animeVideoPopup.addEventListener("click", event => {
     if (event.target === animeVideoPopup) closeAnimeVideoPopup();
+});
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && animeVideoPopup.classList.contains("is-open")) closeAnimeVideoPopup();
+});
+
+/* AUDIO PLAYERS */
+
+.audio-section {
+    margin-bottom: 70px;
+}
+
+.audio-intro {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-top: -12px;
+    margin-bottom: 25px;
+}
+
+.audio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.audio-card {
+    --audio-accent: var(--cyan);
+    position: relative;
+    padding: 22px;
+    background: var(--panel);
+    border: 1px solid rgba(255,255,255,.10);
+    overflow: hidden;
+    transition: border-color .25s, transform .25s;
+}
+
+.audio-card.eren-audio {
+    --audio-accent: var(--cyan);
+}
+
+.audio-card.jinwoo-audio {
+    --audio-accent: var(--purple);
+}
+
+.audio-card.sukuna-audio {
+    --audio-accent: var(--pink);
+}
+
+.audio-card:hover,
+.audio-card.is-playing {
+    border-color: var(--audio-accent);
+    transform: translateY(-3px);
+}
+
+.audio-card.is-playing {
+    box-shadow: 0 0 24px rgba(0,245,255,.08);
+}
+
+.audio-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 20px;
+}
+
+.audio-icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: var(--audio-accent);
+    background: rgba(0,0,0,.2);
+    border: 1px solid var(--audio-accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .8rem;
+    font-weight: 800;
+}
+
+.audio-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
+.audio-subtitle {
+    color: var(--muted);
+    font-size: .88rem;
+    margin-top: 4px;
+}
+
+.audio-visualizer {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin: 0 0 20px;
+    padding: 8px 12px;
+    background: rgba(0,0,0,.17);
+}
+
+.audio-visualizer span {
+    width: 4px;
+    height: 5px;
+    border-radius: 2px;
+    background: var(--audio-accent);
+    opacity: .65;
+}
+
+.audio-card.is-playing .audio-visualizer span {
+    animation: equalize .65s ease-in-out infinite alternate;
+    opacity: 1;
+    box-shadow: 0 0 7px var(--audio-accent);
+}
+
+.audio-visualizer span:nth-child(3n) {
+    animation-delay: -.25s;
+}
+
+.audio-visualizer span:nth-child(4n) {
+    animation-delay: -.45s;
+}
+
+.audio-visualizer span:nth-child(5n) {
+    animation-delay: -.15s;
+}
+
+.audio-visualizer span:nth-child(2n) {
+    animation-delay: -.35s;
+}
+
+@keyframes equalize {
+    from {
+        height: 5px;
+    }
+    to {
+        height: 24px;
+    }
+}
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.play-button {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border: 1px solid var(--audio-accent);
+    color: var(--audio-accent);
+    background: transparent;
+    font-size: 1.1rem;
+    transition: .2s;
+}
+
+.play-button:hover {
+    color: #030611;
+    background: var(--audio-accent);
+}
+
+.audio-timeline {
+    flex: 1;
+    min-width: 0;
+}
+
+.seek-bar {
+    width: 100%;
+    height: 5px;
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,.14);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.seek-bar::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--audio-accent);
+}
+
+.seek-bar::-moz-range-thumb {
+    width: 11px;
+    height: 11px;
+    border: none;
+    border-radius: 50%;
+    background: var(--audio-accent);
+}
+
+.time-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: .78rem;
+    margin-top: 8px;
+}
+
+.audio-volume {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 17px;
+}
+
+.volume-label {
+    color: var(--muted);
+    font-size: .78rem;
+}
+
+.volume-bar {
+    width: 100%;
+    height: 4px;
+    flex: 1;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,.14);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.volume-bar::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--audio-accent);
+}
+
+.volume-bar::-moz-range-thumb {
+    width: 9px;
+    height: 9px;
+    border: none;
+    border-radius: 50%;
+    background: var(--audio-accent);
+}
+
+.audio-status {
+    min-height: 18px;
+    margin-top: 13px;
+    color: var(--muted);
+    font-size: .8rem;
+    letter-spacing: .3px;
+}
+
+.audio-status.error {
+    color: #ff729b;
+}
+
+/* FOOTER */
+
+.footer {
+    padding: 28px 0 35px;
+    border-top: 1px solid rgba(0,245,255,.13);
+    text-align: center;
+}
+
+.footer-title {
+    color: var(--cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .78rem;
+    letter-spacing: 3px;
+}
+
+.footer p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+.footer-line {
+    width: 45px;
+    height: 2px;
+    background: var(--purple);
+    margin: 15px auto 0;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+    .anime-grid,
+    .audio-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .anime-card:last-child,
+    .audio-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .watched-list {
+        grid-template-columns: 1fr;
+    }
+
+    .hero::before,
+    .hero::after {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 65px 0 38px;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.05rem;
+    }
+
+    .section {
+        margin-bottom: 48px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+    }
+
+    .section-code {
+        font-size: .55rem;
+        text-align: right;
+    }
+
+    .anime-grid,
+    .audio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .anime-card:last-child,
+    .audio-card:last-child {
+        grid-column: auto;
+    }
+
+    .anime-image-wrap {
+        height: 300px;
+    }
+
+    .audio-card {
+        padding: 19px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+
+/* VERSION 4: CINEMATIC MOTION UPGRADE */
+.hero .eyebrow,
+.hero h1,
+.hero-subtitle,
+.hero-line {
+    animation: heroEntrance .85s cubic-bezier(.2,.75,.25,1) both, titleGlow 4s ease-in-out infinite alternate;
+}
+.hero .eyebrow { animation-delay: .05s, 0s; }
+.hero h1 { animation-delay: .16s, 0s; }
+.hero-subtitle { animation: heroEntrance .85s .28s cubic-bezier(.2,.75,.25,1) both; }
+.hero-line { animation: lineEntrance .9s .4s ease both; }
+
+@keyframes heroEntrance {
+    from { opacity: 0; transform: translateY(22px); filter: blur(5px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes lineEntrance {
+    from { opacity: 0; transform: scaleX(.15); }
+    to { opacity: 1; transform: scaleX(1); }
+}
+
+.watched-item,
+.anime-card,
+.audio-card {
+    will-change: transform;
+}
+.watched-item {
+    animation: cardArrive .65s both;
+}
+.watched-item:nth-child(2) { animation-delay: .1s; }
+.watched-item:nth-child(3) { animation-delay: .2s; }
+
+.anime-card,
+.audio-card {
+    transform-style: preserve-3d;
+}
+.anime-card:hover {
+    box-shadow: 0 14px 38px color-mix(in srgb, var(--accent) 18%, transparent),
+                0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.anime-card:hover .card-topline {
+    animation: accentPulse 1.2s ease-in-out infinite alternate;
+}
+.audio-card:hover,
+.audio-card.is-playing {
+    box-shadow: 0 8px 28px color-mix(in srgb, var(--audio-accent) 13%, transparent);
+}
+.play-button:active,
+.popup-button:active {
+    transform: scale(.96);
+}
+.play-button:focus-visible,
+.popup-button:focus-visible,
+input:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+}
+@keyframes accentPulse {
+    from { filter: brightness(1); }
+    to { filter: brightness(1.8); }
+}
+@keyframes cardArrive {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reveal content gently as it enters the viewport */
+.js-reveal .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1);
+}
+.js-reveal .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ambient particle canvas sits behind the content and never blocks clicks */
+#electricParticles {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .72;
+}
+.hero, main, .footer {
+    position: relative;
+    z-index: 1;
+}
+.custom-alert-overlay {
+    z-index: 1000;
+}
+@media (max-width: 600px) {
+    #electricParticles { opacity: .4; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero .eyebrow, .hero h1, .hero-subtitle, .hero-line,
+    .watched-item, .anime-card, .audio-card {
+        animation: none !important;
+    }
+    .js-reveal .reveal-on-scroll {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+
+
+/* NEON YOUTUBE VIDEO POPUP — added without changing the original audio styling */
+.anime-card[data-video-id] { cursor: pointer; }
+.anime-card[data-video-id]:focus-visible { outline: 2px solid var(--accent, var(--cyan)); outline-offset: 4px; }
+.anime-video-popup {
+    --video-accent: var(--cyan);
+    position: fixed; inset: 0; z-index: 2000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 18px; background: rgba(0, 2, 12, .92);
+    backdrop-filter: blur(14px); opacity: 0; visibility: hidden;
+    pointer-events: none; transition: opacity .25s ease, visibility .25s ease;
+}
+.anime-video-popup.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+.anime-video-box {
+    width: min(900px, 100%); padding: 16px; position: relative;
+    background: linear-gradient(145deg, rgba(12,22,44,.98), rgba(3,6,17,.98));
+    border: 1px solid var(--video-accent);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--video-accent) 35%, transparent), 0 0 60px rgba(0,0,0,.45);
+}
+.anime-video-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:13px; }
+.anime-video-heading h2 { color:var(--video-accent); font-family:'Orbitron',sans-serif; font-size:clamp(.9rem,3vw,1.25rem); letter-spacing:1px; }
+.close-anime-video { width:38px; height:38px; flex-shrink:0; color:var(--video-accent); background:transparent; border:1px solid var(--video-accent); font-size:1.5rem; line-height:1; }
+.close-anime-video:hover { color:#030611; background:var(--video-accent); }
+.anime-video-frame { width:100%; aspect-ratio:16/9; background:#000; border:1px solid color-mix(in srgb, var(--video-accent) 40%, transparent); }
+.anime-video-frame iframe { width:100%; height:100%; display:block; border:0; }
+.anime-video-caption { margin-top:10px; color:var(--muted); font-size:.8rem; letter-spacing:1.5px; }
+@media(max-width:600px) { .anime-video-popup { padding:10px; } .anime-video-box { padding:11px; } }
+
+</style>
+</head>
+
+<body>
+
+<!-- ORIGINAL WORK POPUP -->
+
+<div class="custom-alert-overlay" id="noticePopup">
+    <div class="custom-alert-box">
+        <div class="popup-tag">SYSTEM NOTICE</div>
+
+        <h2>Original Work</h2>
+
+        <p>GOJO SATORU • MURYO KUSHO</p>
+
+        <div class="audio-visualizer" aria-hidden="true" style="margin-bottom:18px;">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <audio id="gojoIntroAudio" src="./muryo-kusho-made-with-Voicemod.mp3" preload="auto"></audio>
+        <p id="introAudioStatus" style="font-size:.78rem; margin-bottom:18px;">MURYO KUSHO AUDIO READY • CLICK ENTER TO ACTIVATE</p>
+
+        <button class="popup-button" id="understoodButton">
+            ENTER THE DOMAIN
+            <small>ACTIVATE GOJO AUDIO</small>
+        </button>
+    </div>
+</div>
+
+<!-- NEON YOUTUBE VIDEO POPUP -->
+<div class="anime-video-popup" id="animeVideoPopup" aria-hidden="true">
+    <div class="anime-video-box" role="dialog" aria-modal="true" aria-labelledby="animeVideoTitle">
+        <div class="anime-video-heading">
+            <h2 id="animeVideoTitle">ANIME CLIP</h2>
+            <button class="close-anime-video" id="closeAnimeVideo" type="button" aria-label="Close video">×</button>
+        </div>
+        <div class="anime-video-frame" id="animeVideoFrame"></div>
+        <div class="anime-video-caption">VIDEO TRANSMISSION // NEON DOMAIN</div>
+    </div>
+</div>
+
+<!-- HERO -->
+
+<header class="hero">
+    <div class="container">
+
+        <div class="eyebrow">
+            <span class="status-dot"></span>
+            MY ANIME COLLECTION • 2026
+        </div>
+
+        <h1>ANIMES <span>WATCHED</span></h1>
+
+        <p class="hero-subtitle">
+            A personal collection of anime, favourite characters,
+            ratings & iconic sounds.
+        </p>
+
+        <div class="hero-line"></div>
+
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- WATCHED LIST -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <h2>WATCHED <span>LIST</span></h2>
+            <span class="section-code">MY COLLECTION</span>
+        </div>
+
+        <div class="watched-list">
+
+            <div class="watched-item">
+                <span class="watched-index">01</span>
+                <div>
+                    <div class="watched-name">ATTACK ON TITAN</div>
+                    <span class="watched-status">REMAINING</span>
+                </div>
+            </div>
+
+            <div class="watched-item">
+                <span class="watched-index">02</span>
+                <div>
+                    <div class="watched-name">SOLO LEVELING</div>
+                    <span class="watched-status">COMPLETED</span>
+                </div>
+            </div>
+
+            <div class="watched-item">
+                <span class="watched-index">03</span>
+                <div>
+                    <div class="watched-name">JUJUTSU KAISEN</div>
+                    <span class="watched-status">COMPLETED</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ANIME DATABASE -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <h2>ANIME <span>DATABASE</span></h2>
+        </div>
+
+        <div class="anime-grid">
+
+            <!-- ATTACK ON TITAN -->
+
+            <article class="anime-card eren">
+
+                <div class="card-topline"></div>
+
+                <div class="anime-image-wrap">
+
+                    <img
+                        class="anime-image"
+                        src="eren Yeager founding titan.jfif"
+                        alt="Eren Yeager and the Founding Titan"
+                        loading="lazy"
+                    >
+
+                    <span class="card-number">ENTRY_01</span>
+                    <span class="card-rating">8/10</span>
+
+                </div>
+
+                <div class="anime-info">
+
+                    <div class="anime-kicker">ATTACK ON TITAN</div>
+
+                    <h3>Attack on Titan</h3>
+
+                    <div class="anime-details">
+
+                        <div class="detail-row">
+                            <span class="detail-label">Started</span>
+                            <span class="detail-value">FEB 26, 2026</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Progress</span>
+                            <span class="detail-value accent">2 SEASONS (PAUSED)</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value accent">8/10</span>
+                        </div>
+
+                    </div>
+
+                    <div class="character-label">FAVOURITE CHARACTER</div>
+                    <div class="character-name">EREN JAEGER</div>
+
+                </div>
+            </article>
+
+            <!-- SOLO LEVELING -->
+
+            <article class="anime-card jinwoo">
+
+                <div class="card-topline"></div>
+
+                <div class="anime-image-wrap">
+
+                    <img
+                        class="anime-image"
+                        src="./2026-02-26%20(18).png"
+                        alt="Sung Jin Woo from Solo Leveling"
+                        loading="lazy"
+                    >
+
+                    <span class="card-number">ENTRY_02</span>
+                    <span class="card-rating">11/10</span>
+
+                </div>
+
+                <div class="anime-info">
+
+                    <div class="anime-kicker">SOLO LEVELING</div>
+
+                    <h3>Solo Leveling</h3>
+
+                    <div class="anime-details">
+
+                        <div class="detail-row">
+                            <span class="detail-label">Started</span>
+                            <span class="detail-value">MAR 22, 2026</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Finished</span>
+                            <span class="detail-value">APR 18, 2026</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value accent">11/10</span>
+                        </div>
+
+                    </div>
+
+                    <div class="character-label">FAVOURITE CHARACTER</div>
+                    <div class="character-name">SUNG JIN WOO</div>
+
+                </div>
+            </article>
+
+            <!-- JUJUTSU KAISEN -->
+
+            <article class="anime-card sukuna" data-video-id="vyYYTCxDXaA" data-video-title="Sukuna" data-video-accent="#ff35c6" role="button" tabindex="0" aria-label="Play latest Sukuna video">
+
+                <div class="card-topline"></div>
+
+                <div class="anime-image-wrap">
+
+                    <img
+                        class="anime-image"
+                        src="./2026-08-23%20(5).png"
+                        alt="Ryomen Sukuna from Jujutsu Kaisen"
+                        loading="lazy"
+                    >
+
+                    <span class="card-number">ENTRY_03</span>
+                    <span class="card-rating">10/10</span>
+
+                </div>
+
+                <div class="anime-info">
+
+                    <div class="anime-kicker">JUJUTSU KAISEN</div>
+
+                    <h3>Jujutsu Kaisen</h3>
+
+                    <div class="anime-details">
+
+                        <div class="detail-row">
+                            <span class="detail-label">Started</span>
+                            <span class="detail-value">JUL 3, 2026</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Finished</span>
+                            <span class="detail-value">AUG 20, 2026</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value accent">10/10</span>
+                        </div>
+
+                    </div>
+
+                    <div class="character-label">FAVOURITE CHARACTER</div>
+                    <div class="character-name">RYOMEN SUKUNA</div>
+
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ICONIC SOUNDS -->
+
+    <section class="audio-section">
+
+        <div class="section-heading">
+            <h2>ICONIC <span>SOUNDS</span></h2>
+            <span class="section-code">AUDIO SYSTEM ONLINE</span>
+        </div>
+
+        <p class="audio-intro">
+            Select a track to play its iconic audio.
+        </p>
+
+        <div class="audio-grid">
+
+            <!-- EREN AUDIO -->
+
+            <article class="audio-card eren-audio" data-audio-card>
+
+                <div class="audio-header">
+                    <div class="audio-icon">01</div>
+
+                    <div>
+                        <div class="audio-title">ATTACK TITAN</div>
+                        <div class="audio-subtitle">Eren Yeager • Attack on Titan</div>
+                    </div>
+                </div>
+
+                <div class="audio-visualizer" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+
+                <audio preload="metadata" src="./tatakae-eren.mp3"></audio>
+
+                <div class="audio-controls">
+
+                    <button class="play-button" type="button" aria-label="Play Eren audio">▶</button>
+
+                    <div class="audio-timeline">
+                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Eren audio">
+
+                        <div class="time-row">
+                            <span class="current-time">0:00</span>
+                            <span class="duration">0:00</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="audio-volume">
+                    <span class="volume-label">VOL</span>
+                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Eren audio volume">
+                </div>
+
+                <p class="audio-status" aria-live="polite">READY TO PLAY</p>
+
+            </article>
+
+            <!-- SUNG JIN WOO AUDIO -->
+
+            <article class="audio-card jinwoo-audio" data-audio-card>
+
+                <div class="audio-header">
+                    <div class="audio-icon">02</div>
+
+                    <div>
+                        <div class="audio-title">SHADOW MONARCH</div>
+                        <div class="audio-subtitle">Sung Jin Woo • Solo Leveling</div>
+                    </div>
+                </div>
+
+                <div class="audio-visualizer" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+
+                <audio preload="metadata" src="./jinwoo.mp3?v=2"></audio>
+
+                <div class="audio-controls">
+
+                    <button class="play-button" type="button" aria-label="Play Sung Jin Woo audio">▶</button>
+
+                    <div class="audio-timeline">
+                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Sung Jin Woo audio">
+
+                        <div class="time-row">
+                            <span class="current-time">0:00</span>
+                            <span class="duration">0:00</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="audio-volume">
+                    <span class="volume-label">VOL</span>
+                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Sung Jin Woo audio volume">
+                </div>
+
+                <p class="audio-status" aria-live="polite">READY TO PLAY</p>
+
+            </article>
+
+            <!-- SUKUNA AUDIO -->
+
+            <article class="audio-card sukuna-audio" data-audio-card>
+
+                <div class="audio-header">
+                    <div class="audio-icon">03</div>
+
+                    <div>
+                        <div class="audio-title">KING OF CURSES</div>
+                        <div class="audio-subtitle">Ryomen Sukuna • Jujutsu Kaisen</div>
+                    </div>
+                </div>
+
+                <div class="audio-visualizer" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+
+                <audio preload="metadata" src="./sukuna.mp3"></audio>
+
+                <div class="audio-controls">
+
+                    <button class="play-button" type="button" aria-label="Play Sukuna audio">▶</button>
+
+                    <div class="audio-timeline">
+                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Sukuna audio">
+
+                        <div class="time-row">
+                            <span class="current-time">0:00</span>
+                            <span class="duration">0:00</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="audio-volume">
+                    <span class="volume-label">VOL</span>
+                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Sukuna audio volume">
+                </div>
+
+                <p class="audio-status" aria-live="polite">READY TO PLAY</p>
+
+            </article>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+    <div class="container">
+
+        <div class="footer-title">ANIME COLLECTION // 2026</div>
+
+        <p>Personal collection • Built with passion for anime</p>
+
+        <div class="footer-line"></div>
+
+    </div>
+</footer>
+
+<script>
+/* GOJO INTRO AUDIO POPUP */
+
+const popup = document.getElementById("noticePopup");
+const understoodButton = document.getElementById("understoodButton");
+const gojoIntroAudio = document.getElementById("gojoIntroAudio");
+const introAudioStatus = document.getElementById("introAudioStatus");
+
+gojoIntroAudio.volume = 0.8;
+gojoIntroAudio.play().then(() => {
+    introAudioStatus.textContent = "AUDIO ONLINE • PLAYING";
+}).catch(() => {
+    introAudioStatus.textContent = "MURYO KUSHO AUDIO READY • CLICK ENTER TO ACTIVATE";
+});
+
+understoodButton.addEventListener("click", async () => {
+    try {
+        if (gojoIntroAudio.paused) await gojoIntroAudio.play();
+        introAudioStatus.textContent = "AUDIO ONLINE • PLAYING";
+    } catch (error) {
+        introAudioStatus.textContent = "AUDIO BLOCKED • CHECK MP3 FILE";
+    }
+    popup.classList.add("hide");
 });
 
 /* AUDIO PLAYERS */
@@ -1062,6 +1564,7 @@ function formatTime(seconds) {
 
 function setStatus(card, message, isError = false) {
     const status = card.querySelector(".audio-status");
+
     status.textContent = message;
     status.classList.toggle("error", isError);
 }
@@ -1196,12 +1699,9 @@ audioCards.forEach(card => {
 document.addEventListener("keydown", event => {
     if (event.key === "Escape") {
         popup.classList.add("hide");
-
-        if (animeVideoPopup.classList.contains("is-open")) {
-            closeAnimeVideoPopup();
-        }
     }
 });
+
 
 /* VERSION 4: SCROLL REVEAL + AMBIENT ELECTRIC PARTICLES */
 document.documentElement.classList.add("js-reveal");
@@ -1209,7 +1709,6 @@ document.documentElement.classList.add("js-reveal");
 const revealTargets = document.querySelectorAll(
     ".section-heading, .watched-item, .anime-card, .audio-card, .audio-intro, .footer-title, .footer p"
 );
-
 revealTargets.forEach((element, index) => {
     element.classList.add("reveal-on-scroll");
     element.style.transitionDelay = `${(index % 3) * 70}ms`;
@@ -1223,22 +1722,16 @@ if ("IntersectionObserver" in window) {
                 observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.12,
-        rootMargin: "0px 0px -35px 0px"
-    });
+    }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
 
     revealTargets.forEach(element => revealObserver.observe(element));
 } else {
     revealTargets.forEach(element => element.classList.add("is-visible"));
 }
 
-/* Lightweight canvas particles; respects reduced-motion settings. */
+/* Lightweight canvas particles; automatically respects reduced-motion settings. */
 (() => {
-    const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
-
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) return;
 
     const canvas = document.createElement("canvas");
@@ -1247,80 +1740,54 @@ if ("IntersectionObserver" in window) {
     document.body.prepend(canvas);
 
     const ctx = canvas.getContext("2d");
-
     if (!ctx) {
         canvas.remove();
         return;
     }
 
-    let width = 0;
-    let height = 0;
-    let particles = [];
-
-    const particleCount = () =>
-        Math.min(55, Math.max(22, Math.floor(window.innerWidth / 25)));
+    let width = 0, height = 0, particles = [];
+    const particleCount = () => Math.min(55, Math.max(22, Math.floor(window.innerWidth / 25)));
 
     function resizeCanvas() {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
         width = window.innerWidth;
         height = window.innerHeight;
-
         canvas.width = Math.floor(width * dpr);
         canvas.height = Math.floor(height * dpr);
-
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        particles = Array.from(
-            { length: particleCount() },
-            () => ({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                radius: Math.random() * 1.6 + 0.4,
-                speedX: (Math.random() - 0.5) * 0.28,
-                speedY: (Math.random() - 0.5) * 0.28,
-                alpha: Math.random() * 0.45 + 0.15
-            })
-        );
+        particles = Array.from({ length: particleCount() }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 1.6 + .4,
+            speedX: (Math.random() - .5) * .28,
+            speedY: (Math.random() - .5) * .28,
+            alpha: Math.random() * .45 + .15
+        }));
     }
 
     function animateParticles() {
         ctx.clearRect(0, 0, width, height);
-
         for (const particle of particles) {
             particle.x += particle.speedX;
             particle.y += particle.speedY;
-
             if (particle.x < 0) particle.x = width;
             if (particle.x > width) particle.x = 0;
             if (particle.y < 0) particle.y = height;
             if (particle.y > height) particle.y = 0;
 
             ctx.beginPath();
-            ctx.arc(
-                particle.x,
-                particle.y,
-                particle.radius,
-                0,
-                Math.PI * 2
-            );
-
+            ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(0, 245, 255, ${particle.alpha})`;
             ctx.shadowBlur = 9;
             ctx.shadowColor = "rgba(0, 245, 255, .55)";
             ctx.fill();
         }
-
         ctx.shadowBlur = 0;
         requestAnimationFrame(animateParticles);
     }
 
     resizeCanvas();
-
-    window.addEventListener("resize", resizeCanvas, {
-        passive: true
-    });
-
+    window.addEventListener("resize", resizeCanvas, { passive: true });
     animateParticles();
 })();
 
