@@ -90,6 +90,17 @@ button {
     margin: auto;
 }
 
+/* Minimal intro popup: keep only the Enter the Domain button visible */
+.custom-alert-box.enter-domain-only {
+    width: min(420px, 92vw);
+    text-align: center;
+    padding: 30px;
+}
+.custom-alert-box.enter-domain-only .popup-button {
+    width: 100%;
+    margin: 0;
+}
+
 /* ORIGINAL WORK POPUP */
 
 .custom-alert-overlay {
@@ -1029,29 +1040,12 @@ input:focus-visible {
 
 <body>
 
-<!-- ORIGINAL WORK POPUP -->
-
+<!-- MINIMAL GOJO INTRO POPUP: only the ENTER THE DOMAIN button -->
 <div class="custom-alert-overlay" id="noticePopup">
-    <div class="custom-alert-box">
-        <div class="popup-tag">SYSTEM NOTICE</div>
-
-        <h2>Original Work</h2>
-
-        <p>GOJO SATORU • MURYO KUSHO</p>
-
-        <div class="audio-visualizer" aria-hidden="true" style="margin-bottom:18px;">
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-        </div>
-
+    <div class="custom-alert-box enter-domain-only">
         <audio id="gojoIntroAudio" src="./muryo-kusho-made-with-Voicemod.mp3" preload="auto"></audio>
-        <p id="introAudioStatus" style="font-size:.78rem; margin-bottom:18px;">MURYO KUSHO AUDIO READY • CLICK ENTER TO ACTIVATE</p>
-
-        <button class="popup-button" id="understoodButton">
+        <button class="popup-button" id="understoodButton" aria-label="Enter the domain and play Gojo voice">
             ENTER THE DOMAIN
-            <small>ACTIVATE GOJO AUDIO</small>
         </button>
     </div>
 </div>
@@ -1142,7 +1136,7 @@ input:focus-visible {
 
             <!-- ATTACK ON TITAN -->
 
-            <article class="anime-card eren">
+            <article class="anime-card eren" data-video-id="3orkdcYMw_k" data-video-title="Attack on Titan" data-video-accent="#00f5ff" role="button" tabindex="0" aria-label="Play Attack on Titan video">
 
                 <div class="card-topline"></div>
 
@@ -1193,7 +1187,7 @@ input:focus-visible {
 
             <!-- SOLO LEVELING -->
 
-            <article class="anime-card jinwoo">
+            <article class="anime-card jinwoo" data-video-id="IrHTT2IEKpE" data-video-title="Solo Leveling" data-video-accent="#a855f7" role="button" tabindex="0" aria-label="Play Solo Leveling video">
 
                 <div class="card-topline"></div>
 
@@ -1533,21 +1527,16 @@ document.addEventListener("keydown", event => {
 const popup = document.getElementById("noticePopup");
 const understoodButton = document.getElementById("understoodButton");
 const gojoIntroAudio = document.getElementById("gojoIntroAudio");
-const introAudioStatus = document.getElementById("introAudioStatus");
-
 gojoIntroAudio.volume = 0.8;
-gojoIntroAudio.play().then(() => {
-    introAudioStatus.textContent = "AUDIO ONLINE • PLAYING";
-}).catch(() => {
-    introAudioStatus.textContent = "MURYO KUSHO AUDIO READY • CLICK ENTER TO ACTIVATE";
-});
 
 understoodButton.addEventListener("click", async () => {
+    // User click permits browser audio playback; use the exact Gojo intro MP3 in the repo.
     try {
-        if (gojoIntroAudio.paused) await gojoIntroAudio.play();
-        introAudioStatus.textContent = "AUDIO ONLINE • PLAYING";
+        gojoIntroAudio.currentTime = 0;
+        await gojoIntroAudio.play();
     } catch (error) {
-        introAudioStatus.textContent = "AUDIO BLOCKED • CHECK MP3 FILE";
+        // If the MP3 path is unavailable, the popup still closes; check the file name/path in GitHub.
+        console.error("Gojo intro audio could not play:", error);
     }
     popup.classList.add("hide");
 });
