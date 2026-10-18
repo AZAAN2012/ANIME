@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="theme-color" content="#030611">
 <title>ANIMES WATCHED | Cyberpunk Electric</title>
 
 <style>
@@ -11,16 +11,13 @@
 
 :root {
     --bg: #030611;
-    --panel: rgba(10, 19, 39, 0.82);
-    --panel-light: rgba(17, 30, 57, 0.8);
+    --panel: rgba(10, 19, 39, .88);
     --cyan: #00f5ff;
-    --blue: #388bff;
     --purple: #a855f7;
     --pink: #ff35c6;
     --green: #55ffb1;
     --text: #f1f7ff;
     --muted: #93a7c7;
-    --border: rgba(0, 245, 255, 0.2);
 }
 
 * {
@@ -35,44 +32,15 @@ html {
 
 body {
     min-height: 100vh;
+    overflow-x: hidden;
     color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
     background:
-        radial-gradient(ellipse at 10% 5%, rgba(0, 245, 255, .10), transparent 35%),
-        radial-gradient(ellipse at 90% 25%, rgba(168, 85, 247, .13), transparent 35%),
-        radial-gradient(ellipse at 50% 90%, rgba(255, 53, 198, .07), transparent 35%),
-        linear-gradient(rgba(4, 8, 20, .38), rgba(4, 8, 20, .62)),
+        radial-gradient(ellipse at 10% 5%, rgba(0,245,255,.12), transparent 35%),
+        radial-gradient(ellipse at 90% 25%, rgba(168,85,247,.14), transparent 35%),
+        linear-gradient(rgba(3,6,17,.72), rgba(3,6,17,.91)),
         url("./2026-07-28%20(8).png") center / cover fixed no-repeat;
     background-color: var(--bg);
-    font-family: 'Rajdhani', sans-serif;
-    overflow-x: hidden;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image:
-        linear-gradient(rgba(0,245,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,245,255,.035) 1px, transparent 1px);
-    background-size: 42px 42px;
-    mask-image: linear-gradient(to bottom, black, transparent 90%);
-}
-
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 10;
-    opacity: .10;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(0,0,0,.25) 4px
-    );
 }
 
 button,
@@ -89,19 +57,19 @@ button {
     margin: auto;
 }
 
-/* ORIGINAL WORK POPUP */
+/* OPENING AUDIO POPUP */
 
 .custom-alert-overlay {
     position: fixed;
     inset: 0;
-    z-index: 1000;
+    z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: rgba(0, 3, 12, .92);
-    backdrop-filter: blur(14px);
-    transition: opacity .4s ease, visibility .4s ease;
+    background: rgba(0,3,12,.94);
+    backdrop-filter: blur(15px);
+    transition: opacity .4s, visibility .4s;
 }
 
 .custom-alert-overlay.hide {
@@ -112,61 +80,33 @@ button {
 
 .custom-alert-box {
     width: min(420px, 100%);
-    padding: 36px 28px;
+    padding: 35px 28px;
     text-align: center;
     background: linear-gradient(145deg, #101d38, #080d1d);
     border: 1px solid var(--cyan);
+    box-shadow: 0 0 35px rgba(0,245,255,.22);
     clip-path: polygon(
         0 18px, 18px 0, calc(100% - 18px) 0,
         100% 18px, 100% calc(100% - 18px),
         calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px)
     );
-    box-shadow: 0 0 35px rgba(0,245,255,.18);
-    animation: popupIn .45s ease;
+    animation: popupIn .5s ease;
 }
 
 @keyframes popupIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(.97);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.popup-tag {
-    color: var(--pink);
-    font-family: 'Orbitron', sans-serif;
-    font-size: .7rem;
-    letter-spacing: 4px;
-    margin-bottom: 17px;
-}
-
-.custom-alert-box h2 {
-    color: var(--cyan);
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.4rem, 5vw, 2rem);
-    margin-bottom: 13px;
-    text-shadow: 0 0 15px rgba(0,245,255,.4);
-}
-
-.custom-alert-box p {
-    color: var(--muted);
-    letter-spacing: 2px;
-    font-size: 1rem;
-    margin-bottom: 26px;
+    from { opacity: 0; transform: translateY(20px) scale(.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .popup-button {
     width: 100%;
-    padding: 13px;
+    padding: 15px;
     color: #001018;
-    border: none;
     background: var(--cyan);
+    border: none;
     font-family: 'Orbitron', sans-serif;
-    font-weight: 800;
+    font-size: .85rem;
+    font-weight: 900;
     letter-spacing: 2px;
     transition: .25s;
 }
@@ -177,39 +117,11 @@ button {
     transform: translateY(-2px);
 }
 
-.popup-button small {
-    display: block;
-    margin-top: 5px;
-    color: #7b164f;
-    font-size: .67rem;
-    letter-spacing: 3px;
-}
-
 /* HERO */
 
 .hero {
-    position: relative;
-    padding: 85px 0 50px;
+    padding: 90px 0 55px;
     text-align: center;
-}
-
-.hero::before,
-.hero::after {
-    content: "";
-    position: absolute;
-    width: 120px;
-    height: 1px;
-    top: 125px;
-    background: linear-gradient(90deg, transparent, var(--cyan));
-}
-
-.hero::before {
-    left: max(3%, calc((100% - 1050px) / 2));
-}
-
-.hero::after {
-    right: max(3%, calc((100% - 1050px) / 2));
-    transform: rotate(180deg);
 }
 
 .eyebrow {
@@ -217,50 +129,43 @@ button {
     align-items: center;
     gap: 10px;
     padding: 9px 16px;
-    margin-bottom: 24px;
-    border: 1px solid var(--border);
-    background: rgba(0,245,255,.045);
+    margin-bottom: 25px;
     color: var(--cyan);
+    border: 1px solid rgba(0,245,255,.25);
+    background: rgba(0,245,255,.05);
     font-family: 'Orbitron', sans-serif;
-    font-size: .66rem;
+    font-size: .68rem;
     letter-spacing: 2px;
 }
 
 .status-dot {
-    width: 7px;
-    height: 7px;
-    display: inline-block;
+    width: 8px;
+    height: 8px;
     background: var(--green);
     border-radius: 50%;
     box-shadow: 0 0 12px var(--green);
-    animation: blink 1.7s infinite;
+    animation: blink 1.5s infinite;
 }
 
 @keyframes blink {
-    50% {
-        opacity: .35;
-    }
+    50% { opacity: .3; }
 }
 
 .hero h1 {
+    color: white;
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(2.3rem, 7vw, 5.5rem);
+    font-size: clamp(2.2rem, 7vw, 5.4rem);
     font-weight: 900;
-    line-height: 1.15;
-    letter-spacing: -2px;
-    color: #fff;
-    text-shadow:
-        0 0 8px rgba(0,245,255,.6),
-        0 0 35px rgba(0,245,255,.2);
-    animation: titleGlow 4s ease-in-out infinite alternate;
+    line-height: 1.2;
+    text-shadow: 0 0 12px rgba(0,245,255,.6),
+                 0 0 40px rgba(168,85,247,.3);
+    animation: titleGlow 3s infinite alternate;
 }
 
 @keyframes titleGlow {
-    from {
-        text-shadow: 0 0 8px rgba(0,245,255,.45), 0 0 25px rgba(0,245,255,.12);
-    }
     to {
-        text-shadow: 0 0 13px rgba(0,245,255,.7), 0 0 42px rgba(168,85,247,.35);
+        text-shadow: 0 0 20px rgba(0,245,255,.9),
+                     0 0 55px rgba(255,53,198,.4);
     }
 }
 
@@ -270,24 +175,24 @@ button {
 
 .hero-subtitle {
     max-width: 620px;
-    margin: 20px auto 0;
+    margin: 20px auto;
     color: var(--muted);
     font-size: 1.2rem;
-    letter-spacing: .6px;
     line-height: 1.6;
 }
 
 .hero-line {
-    width: 90px;
+    width: 100px;
     height: 3px;
-    margin: 30px auto 0;
+    margin: 28px auto;
     background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
-    box-shadow: 0 0 15px rgba(0,245,255,.35);
+    box-shadow: 0 0 18px var(--cyan);
 }
 
-/* SECTION HEADINGS */
+/* SECTIONS */
 
-.section {
+.section,
+.audio-section {
     margin-bottom: 65px;
 }
 
@@ -295,15 +200,15 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 18px;
+    gap: 15px;
     margin-bottom: 25px;
     padding-bottom: 17px;
-    border-bottom: 1px solid rgba(0,245,255,.15);
+    border-bottom: 1px solid rgba(0,245,255,.2);
 }
 
 .section-heading h2 {
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.15rem, 3vw, 1.65rem);
+    font-size: clamp(1.1rem, 3vw, 1.65rem);
     letter-spacing: 1px;
 }
 
@@ -315,7 +220,7 @@ button {
     color: var(--muted);
     font-family: 'Orbitron', sans-serif;
     font-size: .65rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 /* WATCHED LIST */
@@ -327,42 +232,37 @@ button {
 }
 
 .watched-item {
-    position: relative;
-    min-height: 100px;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 15px;
     padding: 20px;
     background: var(--panel);
     border: 1px solid rgba(255,255,255,.09);
-    transition: .25s ease;
-    overflow: hidden;
+    transition: .25s;
 }
 
 .watched-item:hover {
     border-color: var(--cyan);
     transform: translateY(-4px);
-    background: var(--panel-light);
 }
 
 .watched-index {
-    font-family: 'Orbitron', sans-serif;
     color: var(--cyan);
-    font-size: 1.15rem;
-    font-weight: 800;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
 }
 
 .watched-name {
+    font-size: 1rem;
     font-weight: 700;
-    font-size: 1.02rem;
-    letter-spacing: .6px;
 }
 
 .watched-status {
     display: inline-block;
     margin-top: 5px;
     color: var(--muted);
-    font-size: .78rem;
+    font-size: .8rem;
     letter-spacing: 1px;
 }
 
@@ -370,46 +270,41 @@ button {
 
 .anime-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
 }
 
 .anime-card {
     --accent: var(--cyan);
+    overflow: hidden;
     position: relative;
     background: var(--panel);
-    border: 1px solid rgba(255,255,255,.10);
-    overflow: hidden;
-    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    border: 1px solid rgba(255,255,255,.12);
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+    cursor: pointer;
 }
 
-.anime-card:hover {
+.anime-card.eren { --accent: var(--cyan); }
+.anime-card.jinwoo { --accent: var(--purple); }
+.anime-card.sukuna { --accent: var(--pink); }
+
+.anime-card:hover,
+.anime-card:focus-visible {
     transform: translateY(-7px);
     border-color: var(--accent);
-    box-shadow: 0 12px 35px rgba(0,0,0,.25);
-}
-
-.anime-card.eren {
-    --accent: var(--cyan);
-}
-
-.anime-card.jinwoo {
-    --accent: var(--purple);
-}
-
-.anime-card.sukuna {
-    --accent: var(--pink);
+    box-shadow: 0 0 28px color-mix(in srgb, var(--accent) 25%, transparent);
+    outline: none;
 }
 
 .card-topline {
     height: 3px;
     background: var(--accent);
-    box-shadow: 0 0 14px var(--accent);
+    box-shadow: 0 0 15px var(--accent);
 }
 
 .anime-image-wrap {
-    position: relative;
     height: 280px;
+    position: relative;
     overflow: hidden;
     background: #080d1c;
 }
@@ -427,12 +322,11 @@ button {
     height: 100%;
     display: block;
     object-fit: cover;
-    object-position: center;
-    transition: transform .6s ease;
+    transition: transform .6s;
 }
 
 .anime-card:hover .anime-image {
-    transform: scale(1.055);
+    transform: scale(1.06);
 }
 
 .card-number {
@@ -443,10 +337,9 @@ button {
     padding: 7px 10px;
     color: var(--accent);
     border: 1px solid var(--accent);
-    background: rgba(3,6,17,.82);
+    background: rgba(3,6,17,.85);
     font-family: 'Orbitron', sans-serif;
     font-size: .65rem;
-    letter-spacing: 1px;
 }
 
 .card-rating {
@@ -456,49 +349,45 @@ button {
     z-index: 2;
     color: var(--accent);
     font-family: 'Orbitron', sans-serif;
-    font-size: 1rem;
-    font-weight: 800;
+    font-weight: 900;
     text-shadow: 0 0 15px var(--accent);
 }
 
 .anime-info {
-    padding: 23px 21px 24px;
+    padding: 23px 21px 25px;
 }
 
 .anime-kicker {
     color: var(--accent);
     font-family: 'Orbitron', sans-serif;
-    font-size: .62rem;
+    font-size: .65rem;
     letter-spacing: 2px;
     margin-bottom: 10px;
 }
 
 .anime-info h3 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.15rem;
-    line-height: 1.4;
-    margin-bottom: 15px;
+    font-size: 1.1rem;
+    margin-bottom: 17px;
 }
 
 .anime-details {
     display: grid;
     gap: 10px;
-    margin-bottom: 19px;
+    margin-bottom: 20px;
 }
 
 .detail-row {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: .95rem;
+    gap: 10px;
     padding-bottom: 8px;
-    border-bottom: 1px solid rgba(255,255,255,.055);
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    font-size: .92rem;
 }
 
 .detail-label {
     color: var(--muted);
-    flex-shrink: 0;
 }
 
 .detail-value {
@@ -523,55 +412,151 @@ button {
     font-weight: 700;
 }
 
-/* AUDIO PLAYERS */
-
-.audio-section {
-    margin-bottom: 70px;
+.watch-hint {
+    margin-top: 20px;
+    padding-top: 13px;
+    color: var(--accent);
+    border-top: 1px solid rgba(255,255,255,.08);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .7rem;
+    letter-spacing: 1px;
 }
+
+/* YOUTUBE VIDEO POPUP */
+
+.video-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(1,4,14,.92);
+    backdrop-filter: blur(14px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: .3s;
+}
+
+.video-popup-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.video-popup-box {
+    --video-accent: var(--cyan);
+    width: min(900px, 100%);
+    padding: 16px;
+    background: linear-gradient(145deg, #101d38, #030611);
+    border: 1px solid var(--video-accent);
+    box-shadow: 0 0 35px color-mix(in srgb, var(--video-accent) 30%, transparent);
+    transform: translateY(15px) scale(.98);
+    transition: .3s;
+}
+
+.video-popup-overlay.is-open .video-popup-box {
+    transform: translateY(0) scale(1);
+}
+
+.video-popup-topline {
+    height: 3px;
+    margin: -16px -16px 16px;
+    background: var(--video-accent);
+    box-shadow: 0 0 18px var(--video-accent);
+}
+
+.video-popup-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.video-popup-kicker {
+    color: var(--video-accent);
+    font-family: 'Orbitron', sans-serif;
+    font-size: .7rem;
+    letter-spacing: 2px;
+}
+
+.video-popup-title {
+    margin-top: 6px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+}
+
+.video-popup-close {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    color: var(--video-accent);
+    border: 1px solid var(--video-accent);
+    background: transparent;
+    font-size: 1.6rem;
+    transition: .2s;
+}
+
+.video-popup-close:hover {
+    color: #030611;
+    background: var(--video-accent);
+    transform: rotate(90deg);
+}
+
+.video-frame-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid var(--video-accent);
+}
+
+.video-frame-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.video-popup-hint {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: .8rem;
+}
+
+/* AUDIO PLAYERS */
 
 .audio-intro {
     color: var(--muted);
+    margin: -10px 0 25px;
     font-size: 1.05rem;
-    margin-top: -12px;
-    margin-bottom: 25px;
 }
 
 .audio-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
 }
 
 .audio-card {
     --audio-accent: var(--cyan);
-    position: relative;
     padding: 22px;
     background: var(--panel);
-    border: 1px solid rgba(255,255,255,.10);
-    overflow: hidden;
-    transition: border-color .25s, transform .25s;
+    border: 1px solid rgba(255,255,255,.1);
+    transition: .25s;
 }
 
-.audio-card.eren-audio {
-    --audio-accent: var(--cyan);
-}
-
-.audio-card.jinwoo-audio {
-    --audio-accent: var(--purple);
-}
-
-.audio-card.sukuna-audio {
-    --audio-accent: var(--pink);
-}
+.audio-card.jinwoo-audio { --audio-accent: var(--purple); }
+.audio-card.sukuna-audio { --audio-accent: var(--pink); }
 
 .audio-card:hover,
 .audio-card.is-playing {
     border-color: var(--audio-accent);
     transform: translateY(-3px);
-}
-
-.audio-card.is-playing {
-    box-shadow: 0 0 24px rgba(0,245,255,.08);
+    box-shadow: 0 0 25px color-mix(in srgb, var(--audio-accent) 15%, transparent);
 }
 
 .audio-header {
@@ -586,25 +571,21 @@ button {
     height: 46px;
     display: grid;
     place-items: center;
-    flex-shrink: 0;
     color: var(--audio-accent);
-    background: rgba(0,0,0,.2);
     border: 1px solid var(--audio-accent);
     font-family: 'Orbitron', sans-serif;
-    font-size: .8rem;
-    font-weight: 800;
+    font-weight: 900;
 }
 
 .audio-title {
     font-family: 'Orbitron', sans-serif;
     font-size: .85rem;
-    line-height: 1.5;
 }
 
 .audio-subtitle {
+    margin-top: 5px;
     color: var(--muted);
-    font-size: .88rem;
-    margin-top: 4px;
+    font-size: .85rem;
 }
 
 .audio-visualizer {
@@ -613,48 +594,30 @@ button {
     align-items: center;
     justify-content: center;
     gap: 4px;
-    margin: 0 0 20px;
-    padding: 8px 12px;
-    background: rgba(0,0,0,.17);
+    margin-bottom: 20px;
+    padding: 8px;
+    background: rgba(0,0,0,.2);
 }
 
 .audio-visualizer span {
     width: 4px;
     height: 5px;
-    border-radius: 2px;
+    border-radius: 3px;
     background: var(--audio-accent);
-    opacity: .65;
 }
 
 .audio-card.is-playing .audio-visualizer span {
-    animation: equalize .65s ease-in-out infinite alternate;
-    opacity: 1;
-    box-shadow: 0 0 7px var(--audio-accent);
+    animation: equalize .55s ease-in-out infinite alternate;
+    box-shadow: 0 0 8px var(--audio-accent);
 }
 
-.audio-visualizer span:nth-child(3n) {
-    animation-delay: -.25s;
-}
-
-.audio-visualizer span:nth-child(4n) {
-    animation-delay: -.45s;
-}
-
-.audio-visualizer span:nth-child(5n) {
-    animation-delay: -.15s;
-}
-
-.audio-visualizer span:nth-child(2n) {
-    animation-delay: -.35s;
-}
+.audio-visualizer span:nth-child(3n) { animation-delay: -.2s; }
+.audio-visualizer span:nth-child(4n) { animation-delay: -.4s; }
+.audio-visualizer span:nth-child(2n) { animation-delay: -.3s; }
 
 @keyframes equalize {
-    from {
-        height: 5px;
-    }
-    to {
-        height: 24px;
-    }
+    from { height: 5px; }
+    to { height: 25px; }
 }
 
 .audio-controls {
@@ -666,14 +629,11 @@ button {
 .play-button {
     width: 43px;
     height: 43px;
-    display: grid;
-    place-items: center;
     flex-shrink: 0;
-    border: 1px solid var(--audio-accent);
     color: var(--audio-accent);
+    border: 1px solid var(--audio-accent);
     background: transparent;
     font-size: 1.1rem;
-    transition: .2s;
 }
 
 .play-button:hover {
@@ -686,88 +646,37 @@ button {
     min-width: 0;
 }
 
-.seek-bar {
+.seek-bar,
+.volume-bar {
     width: 100%;
-    height: 5px;
-    display: block;
-    appearance: none;
-    -webkit-appearance: none;
-    background: rgba(255,255,255,.14);
+    accent-color: var(--audio-accent);
     cursor: pointer;
-    border-radius: 5px;
-}
-
-.seek-bar::-webkit-slider-thumb {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: var(--audio-accent);
-}
-
-.seek-bar::-moz-range-thumb {
-    width: 11px;
-    height: 11px;
-    border: none;
-    border-radius: 50%;
-    background: var(--audio-accent);
 }
 
 .time-row {
     display: flex;
     justify-content: space-between;
+    margin-top: 5px;
     color: var(--muted);
-    font-size: .78rem;
-    margin-top: 8px;
+    font-size: .8rem;
 }
 
 .audio-volume {
     display: flex;
     align-items: center;
-    gap: 9px;
-    margin-top: 17px;
+    gap: 10px;
+    margin-top: 15px;
 }
 
-.volume-label {
+.volume-label,
+.audio-status {
     color: var(--muted);
-    font-size: .78rem;
-}
-
-.volume-bar {
-    width: 100%;
-    height: 4px;
-    flex: 1;
-    appearance: none;
-    -webkit-appearance: none;
-    background: rgba(255,255,255,.14);
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.volume-bar::-webkit-slider-thumb {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--audio-accent);
-}
-
-.volume-bar::-moz-range-thumb {
-    width: 9px;
-    height: 9px;
-    border: none;
-    border-radius: 50%;
-    background: var(--audio-accent);
+    font-size: .8rem;
 }
 
 .audio-status {
-    min-height: 18px;
     margin-top: 13px;
-    color: var(--muted);
-    font-size: .8rem;
-    letter-spacing: .3px;
+    min-height: 18px;
 }
 
 .audio-status.error {
@@ -777,32 +686,31 @@ button {
 /* FOOTER */
 
 .footer {
-    padding: 28px 0 35px;
-    border-top: 1px solid rgba(0,245,255,.13);
+    padding: 30px 0 40px;
+    border-top: 1px solid rgba(0,245,255,.17);
     text-align: center;
 }
 
 .footer-title {
     color: var(--cyan);
     font-family: 'Orbitron', sans-serif;
-    font-size: .78rem;
+    font-size: .8rem;
     letter-spacing: 3px;
 }
 
 .footer p {
-    margin-top: 9px;
+    margin-top: 10px;
     color: var(--muted);
-    font-size: .9rem;
 }
 
 .footer-line {
     width: 45px;
     height: 2px;
+    margin: 16px auto 0;
     background: var(--purple);
-    margin: 15px auto 0;
 }
 
-/* RESPONSIVE DESIGN */
+/* RESPONSIVE */
 
 @media (max-width: 900px) {
     .anime-grid,
@@ -810,36 +718,14 @@ button {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .anime-card:last-child,
-    .audio-card:last-child {
-        grid-column: 1 / -1;
-    }
-
     .watched-list {
         grid-template-columns: 1fr;
-    }
-
-    .hero::before,
-    .hero::after {
-        display: none;
     }
 }
 
 @media (max-width: 600px) {
     .hero {
-        padding: 65px 0 38px;
-    }
-
-    .hero h1 {
-        letter-spacing: -1px;
-    }
-
-    .hero-subtitle {
-        font-size: 1.05rem;
-    }
-
-    .section {
-        margin-bottom: 48px;
+        padding: 65px 0 40px;
     }
 
     .section-heading {
@@ -847,8 +733,8 @@ button {
     }
 
     .section-code {
-        font-size: .55rem;
         text-align: right;
+        font-size: .55rem;
     }
 
     .anime-grid,
@@ -856,17 +742,20 @@ button {
         grid-template-columns: 1fr;
     }
 
-    .anime-card:last-child,
-    .audio-card:last-child {
-        grid-column: auto;
-    }
-
     .anime-image-wrap {
         height: 300px;
     }
 
-    .audio-card {
-        padding: 19px;
+    .video-popup-overlay {
+        padding: 10px;
+    }
+
+    .video-popup-box {
+        padding: 11px;
+    }
+
+    .video-popup-topline {
+        margin: -11px -11px 12px;
     }
 }
 
@@ -876,143 +765,59 @@ button {
     *::after {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
         transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
     }
 }
-
-
-/* VERSION 4: CINEMATIC MOTION UPGRADE */
-.hero .eyebrow,
-.hero h1,
-.hero-subtitle,
-.hero-line {
-    animation: heroEntrance .85s cubic-bezier(.2,.75,.25,1) both, titleGlow 4s ease-in-out infinite alternate;
-}
-.hero .eyebrow { animation-delay: .05s, 0s; }
-.hero h1 { animation-delay: .16s, 0s; }
-.hero-subtitle { animation: heroEntrance .85s .28s cubic-bezier(.2,.75,.25,1) both; }
-.hero-line { animation: lineEntrance .9s .4s ease both; }
-
-@keyframes heroEntrance {
-    from { opacity: 0; transform: translateY(22px); filter: blur(5px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-@keyframes lineEntrance {
-    from { opacity: 0; transform: scaleX(.15); }
-    to { opacity: 1; transform: scaleX(1); }
-}
-
-.watched-item,
-.anime-card,
-.audio-card {
-    will-change: transform;
-}
-.watched-item {
-    animation: cardArrive .65s both;
-}
-.watched-item:nth-child(2) { animation-delay: .1s; }
-.watched-item:nth-child(3) { animation-delay: .2s; }
-
-.anime-card,
-.audio-card {
-    transform-style: preserve-3d;
-}
-.anime-card:hover {
-    box-shadow: 0 14px 38px color-mix(in srgb, var(--accent) 18%, transparent),
-                0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent);
-}
-.anime-card:hover .card-topline {
-    animation: accentPulse 1.2s ease-in-out infinite alternate;
-}
-.audio-card:hover,
-.audio-card.is-playing {
-    box-shadow: 0 8px 28px color-mix(in srgb, var(--audio-accent) 13%, transparent);
-}
-.play-button:active,
-.popup-button:active {
-    transform: scale(.96);
-}
-.play-button:focus-visible,
-.popup-button:focus-visible,
-input:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 4px;
-}
-@keyframes accentPulse {
-    from { filter: brightness(1); }
-    to { filter: brightness(1.8); }
-}
-@keyframes cardArrive {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Reveal content gently as it enters the viewport */
-.js-reveal .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1);
-}
-.js-reveal .reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Ambient particle canvas sits behind the content and never blocks clicks */
-#electricParticles {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    opacity: .72;
-}
-.hero, main, .footer {
-    position: relative;
-    z-index: 1;
-}
-.custom-alert-overlay {
-    z-index: 1000;
-}
-@media (max-width: 600px) {
-    #electricParticles { opacity: .4; }
-}
-@media (prefers-reduced-motion: reduce) {
-    .hero .eyebrow, .hero h1, .hero-subtitle, .hero-line,
-    .watched-item, .anime-card, .audio-card {
-        animation: none !important;
-    }
-    .js-reveal .reveal-on-scroll {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- OPENING AUDIO POPUP (same cyberpunk theme) -->
+<!-- GOJO AUDIO POPUP -->
 
 <div class="custom-alert-overlay" id="noticePopup">
     <div class="custom-alert-box">
-        <audio id="gojoIntroAudio" src="./muryo-kusho-made-with-Voicemod.mp3" preload="auto" autoplay></audio>
+        <audio
+            id="gojoIntroAudio"
+            src="./muryo-kusho-made-with-Voicemod.mp3"
+            preload="auto"
+            autoplay>
+        </audio>
 
-        <button class="popup-button" id="understoodButton">
+        <button class="popup-button" id="understoodButton" type="button">
             ENTER THE DOMAIN
         </button>
     </div>
+</div>
+
+<!-- YOUTUBE VIDEO POPUP -->
+
+<div class="video-popup-overlay" id="animeVideoPopup" aria-hidden="true">
+    <section class="video-popup-box" role="dialog" aria-modal="true"
+             aria-labelledby="animeVideoTitle">
+
+        <div class="video-popup-topline"></div>
+
+        <div class="video-popup-heading">
+            <div>
+                <div class="video-popup-kicker">ANIME VIDEO // PLAYBACK</div>
+                <h2 class="video-popup-title" id="animeVideoTitle">ANIME CLIP</h2>
+            </div>
+
+            <button class="video-popup-close" id="closeAnimeVideo"
+                    type="button" aria-label="Close video popup">&times;</button>
+        </div>
+
+        <div class="video-frame-wrap" id="animeVideoFrame"></div>
+        <p class="video-popup-hint">ESC // CLOSE VIDEO</p>
+    </section>
 </div>
 
 <!-- HERO -->
 
 <header class="hero">
     <div class="container">
-
         <div class="eyebrow">
             <span class="status-dot"></span>
             MY ANIME COLLECTION • 2026
@@ -1026,7 +831,6 @@ input:focus-visible {
         </p>
 
         <div class="hero-line"></div>
-
     </div>
 </header>
 
@@ -1035,14 +839,12 @@ input:focus-visible {
     <!-- WATCHED LIST -->
 
     <section class="section">
-
         <div class="section-heading">
             <h2>WATCHED <span>LIST</span></h2>
             <span class="section-code">MY COLLECTION</span>
         </div>
 
         <div class="watched-list">
-
             <div class="watched-item">
                 <span class="watched-index">01</span>
                 <div>
@@ -1066,48 +868,45 @@ input:focus-visible {
                     <span class="watched-status">COMPLETED</span>
                 </div>
             </div>
-
         </div>
     </section>
 
     <!-- ANIME DATABASE -->
 
     <section class="section">
-
         <div class="section-heading">
             <h2>ANIME <span>DATABASE</span></h2>
+            <span class="section-code">SELECT A CARD TO PLAY</span>
         </div>
 
         <div class="anime-grid">
 
             <!-- ATTACK ON TITAN -->
 
-            <article class="anime-card eren">
+            <article class="anime-card eren"
+                data-video-id="3orkdcYMw_k"
+                data-video-title="ATTACK ON TITAN"
+                data-video-accent="#00f5ff"
+                tabindex="0" role="button"
+                aria-label="Play Attack on Titan video">
 
                 <div class="card-topline"></div>
 
                 <div class="anime-image-wrap">
-
-                    <img
-                        class="anime-image"
-                        src="eren Yeager founding titan.jfif"
-                        alt="Eren Yeager and the Founding Titan"
-                        loading="lazy"
-                    >
+                    <img class="anime-image"
+                         src="./eren Yeager founding titan.jfif"
+                         alt="Eren Yeager and the Founding Titan"
+                         loading="lazy">
 
                     <span class="card-number">ENTRY_01</span>
                     <span class="card-rating">8/10</span>
-
                 </div>
 
                 <div class="anime-info">
-
                     <div class="anime-kicker">ATTACK ON TITAN</div>
-
                     <h3>Attack on Titan</h3>
 
                     <div class="anime-details">
-
                         <div class="detail-row">
                             <span class="detail-label">Started</span>
                             <span class="detail-value">FEB 26, 2026</span>
@@ -1122,43 +921,40 @@ input:focus-visible {
                             <span class="detail-label">Rating</span>
                             <span class="detail-value accent">8/10</span>
                         </div>
-
                     </div>
 
                     <div class="character-label">FAVOURITE CHARACTER</div>
                     <div class="character-name">EREN JAEGER</div>
-
+                    <div class="watch-hint">▶ CLICK TO WATCH CLIP</div>
                 </div>
             </article>
 
             <!-- SOLO LEVELING -->
 
-            <article class="anime-card jinwoo">
+            <article class="anime-card jinwoo"
+                data-video-id="IrHTT2IEKpE"
+                data-video-title="SOLO LEVELING"
+                data-video-accent="#a855f7"
+                tabindex="0" role="button"
+                aria-label="Play Solo Leveling video">
 
                 <div class="card-topline"></div>
 
                 <div class="anime-image-wrap">
-
-                    <img
-                        class="anime-image"
-                        src="./2026-02-26%20(18).png"
-                        alt="Sung Jin Woo from Solo Leveling"
-                        loading="lazy"
-                    >
+                    <img class="anime-image"
+                         src="./2026-02-26%20(18).png"
+                         alt="Sung Jin Woo from Solo Leveling"
+                         loading="lazy">
 
                     <span class="card-number">ENTRY_02</span>
                     <span class="card-rating">11/10</span>
-
                 </div>
 
                 <div class="anime-info">
-
                     <div class="anime-kicker">SOLO LEVELING</div>
-
                     <h3>Solo Leveling</h3>
 
                     <div class="anime-details">
-
                         <div class="detail-row">
                             <span class="detail-label">Started</span>
                             <span class="detail-value">MAR 22, 2026</span>
@@ -1173,43 +969,40 @@ input:focus-visible {
                             <span class="detail-label">Rating</span>
                             <span class="detail-value accent">11/10</span>
                         </div>
-
                     </div>
 
                     <div class="character-label">FAVOURITE CHARACTER</div>
                     <div class="character-name">SUNG JIN WOO</div>
-
+                    <div class="watch-hint">▶ CLICK TO WATCH CLIP</div>
                 </div>
             </article>
 
             <!-- JUJUTSU KAISEN -->
 
-            <article class="anime-card sukuna">
+            <article class="anime-card sukuna"
+                data-video-id="ghDo2pMtbHs"
+                data-video-title="JUJUTSU KAISEN"
+                data-video-accent="#ff35c6"
+                tabindex="0" role="button"
+                aria-label="Play Jujutsu Kaisen video">
 
                 <div class="card-topline"></div>
 
                 <div class="anime-image-wrap">
-
-                    <img
-                        class="anime-image"
-                        src="./2026-08-23%20(5).png"
-                        alt="Ryomen Sukuna from Jujutsu Kaisen"
-                        loading="lazy"
-                    >
+                    <img class="anime-image"
+                         src="./2026-08-23%20(5).png"
+                         alt="Ryomen Sukuna from Jujutsu Kaisen"
+                         loading="lazy">
 
                     <span class="card-number">ENTRY_03</span>
                     <span class="card-rating">10/10</span>
-
                 </div>
 
                 <div class="anime-info">
-
                     <div class="anime-kicker">JUJUTSU KAISEN</div>
-
                     <h3>Jujutsu Kaisen</h3>
 
                     <div class="anime-details">
-
                         <div class="detail-row">
                             <span class="detail-label">Started</span>
                             <span class="detail-value">JUL 3, 2026</span>
@@ -1224,12 +1017,11 @@ input:focus-visible {
                             <span class="detail-label">Rating</span>
                             <span class="detail-value accent">10/10</span>
                         </div>
-
                     </div>
 
                     <div class="character-label">FAVOURITE CHARACTER</div>
                     <div class="character-name">RYOMEN SUKUNA</div>
-
+                    <div class="watch-hint">▶ CLICK TO WATCH CLIP</div>
                 </div>
             </article>
 
@@ -1239,25 +1031,20 @@ input:focus-visible {
     <!-- ICONIC SOUNDS -->
 
     <section class="audio-section">
-
         <div class="section-heading">
             <h2>ICONIC <span>SOUNDS</span></h2>
             <span class="section-code">AUDIO SYSTEM ONLINE</span>
         </div>
 
-        <p class="audio-intro">
-            Select a track to play its iconic audio.
-        </p>
+        <p class="audio-intro">Select a track to play its iconic audio.</p>
 
         <div class="audio-grid">
 
             <!-- EREN AUDIO -->
 
             <article class="audio-card eren-audio" data-audio-card>
-
                 <div class="audio-header">
                     <div class="audio-icon">01</div>
-
                     <div>
                         <div class="audio-title">ATTACK TITAN</div>
                         <div class="audio-subtitle">Eren Yeager • Attack on Titan</div>
@@ -1276,18 +1063,14 @@ input:focus-visible {
                 <audio preload="metadata" src="./tatakae-eren.mp3"></audio>
 
                 <div class="audio-controls">
-
                     <button class="play-button" type="button" aria-label="Play Eren audio">▶</button>
-
                     <div class="audio-timeline">
                         <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Eren audio">
-
                         <div class="time-row">
                             <span class="current-time">0:00</span>
                             <span class="duration">0:00</span>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="audio-volume">
@@ -1296,16 +1079,13 @@ input:focus-visible {
                 </div>
 
                 <p class="audio-status" aria-live="polite">READY TO PLAY</p>
-
             </article>
 
-            <!-- SUNG JIN WOO AUDIO -->
+            <!-- JIN WOO AUDIO -->
 
             <article class="audio-card jinwoo-audio" data-audio-card>
-
                 <div class="audio-header">
                     <div class="audio-icon">02</div>
-
                     <div>
                         <div class="audio-title">SHADOW MONARCH</div>
                         <div class="audio-subtitle">Sung Jin Woo • Solo Leveling</div>
@@ -1324,36 +1104,29 @@ input:focus-visible {
                 <audio preload="metadata" src="./jinwoo.mp3?v=2"></audio>
 
                 <div class="audio-controls">
-
-                    <button class="play-button" type="button" aria-label="Play Sung Jin Woo audio">▶</button>
-
+                    <button class="play-button" type="button" aria-label="Play Jin Woo audio">▶</button>
                     <div class="audio-timeline">
-                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Sung Jin Woo audio">
-
+                        <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Jin Woo audio">
                         <div class="time-row">
                             <span class="current-time">0:00</span>
                             <span class="duration">0:00</span>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="audio-volume">
                     <span class="volume-label">VOL</span>
-                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Sung Jin Woo audio volume">
+                    <input class="volume-bar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Jin Woo audio volume">
                 </div>
 
                 <p class="audio-status" aria-live="polite">READY TO PLAY</p>
-
             </article>
 
             <!-- SUKUNA AUDIO -->
 
             <article class="audio-card sukuna-audio" data-audio-card>
-
                 <div class="audio-header">
                     <div class="audio-icon">03</div>
-
                     <div>
                         <div class="audio-title">KING OF CURSES</div>
                         <div class="audio-subtitle">Ryomen Sukuna • Jujutsu Kaisen</div>
@@ -1372,18 +1145,14 @@ input:focus-visible {
                 <audio preload="metadata" src="./sukuna.mp3"></audio>
 
                 <div class="audio-controls">
-
                     <button class="play-button" type="button" aria-label="Play Sukuna audio">▶</button>
-
                     <div class="audio-timeline">
                         <input class="seek-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek Sukuna audio">
-
                         <div class="time-row">
                             <span class="current-time">0:00</span>
                             <span class="duration">0:00</span>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="audio-volume">
@@ -1392,7 +1161,6 @@ input:focus-visible {
                 </div>
 
                 <p class="audio-status" aria-live="polite">READY TO PLAY</p>
-
             </article>
 
         </div>
@@ -1404,28 +1172,26 @@ input:focus-visible {
 
 <footer class="footer">
     <div class="container">
-
-        <div class="footer-title">ANIME COLLECTION // 2026</div>
-
-        <p>Personal collection • Built with passion for anime</p>
-
+        <div class="footer-title">ANIMES WATCHED</div>
+        <p>MY COLLECTION • MY RATINGS • MY WORLD</p>
         <div class="footer-line"></div>
-
     </div>
 </footer>
 
 <script>
-/* OPENING AUDIO POPUP */
+/* =========================================
+   OPENING GOJO AUDIO POPUP
+========================================= */
 
 const popup = document.getElementById("noticePopup");
-const understoodButton = document.getElementById("understoodButton");
 const gojoIntroAudio = document.getElementById("gojoIntroAudio");
+const understoodButton = document.getElementById("understoodButton");
 
-/* Try to autoplay when the website opens.
-   Browsers may require the visitor to click the button first. */
 gojoIntroAudio.volume = 0.8;
+
+/* Browsers may block autoplay until the visitor interacts. */
 gojoIntroAudio.play().catch(() => {
-    /* The Enter the Domain button is the fallback if autoplay is blocked. */
+    // The Enter the Domain button lets the visitor start the audio.
 });
 
 understoodButton.addEventListener("click", async () => {
@@ -1434,17 +1200,97 @@ understoodButton.addEventListener("click", async () => {
             await gojoIntroAudio.play();
         }
     } catch (error) {
-        /* The browser may still block audio until another interaction. */
+        console.log("Audio playback needs browser permission.");
     }
 
     popup.classList.add("hide");
 });
 
-/* The opening popup appears on every fresh website load. */
+/* =========================================
+   YOUTUBE NEON VIDEO POPUP
+========================================= */
 
-/* AUDIO PLAYERS */
+const animeVideoPopup = document.getElementById("animeVideoPopup");
+const animeVideoFrame = document.getElementById("animeVideoFrame");
+const animeVideoTitle = document.getElementById("animeVideoTitle");
+const closeAnimeVideo = document.getElementById("closeAnimeVideo");
 
-const audioCards = [...document.querySelectorAll("[data-audio-card]")];
+const animeCardsWithVideos =
+    document.querySelectorAll(".anime-card[data-video-id]");
+
+function openAnimeVideo(card) {
+    const videoId = card.dataset.videoId;
+    const title = card.dataset.videoTitle || "Anime Clip";
+    const accent = card.dataset.videoAccent || "#00f5ff";
+
+    if (!videoId) return;
+
+    animeVideoTitle.textContent = title;
+    animeVideoPopup.style.setProperty("--video-accent", accent);
+
+    /* Remove the previous iframe so its video stops. */
+    animeVideoFrame.replaceChildren();
+
+    const iframe = document.createElement("iframe");
+
+    iframe.src =
+        "https://www.youtube.com/embed/" +
+        encodeURIComponent(videoId) +
+        "?autoplay=1&rel=0";
+
+    iframe.title = title + " YouTube video";
+    iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.allowFullscreen = true;
+
+    animeVideoFrame.appendChild(iframe);
+
+    animeVideoPopup.classList.add("is-open");
+    animeVideoPopup.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    closeAnimeVideo.focus();
+}
+
+function closeAnimeVideoPopup() {
+    animeVideoPopup.classList.remove("is-open");
+    animeVideoPopup.setAttribute("aria-hidden", "true");
+
+    /* Removing the iframe stops video playback. */
+    animeVideoFrame.replaceChildren();
+
+    document.body.style.overflow = "";
+}
+
+animeCardsWithVideos.forEach(card => {
+    card.addEventListener("click", () => {
+        openAnimeVideo(card);
+    });
+
+    card.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openAnimeVideo(card);
+        }
+    });
+});
+
+closeAnimeVideo.addEventListener("click", closeAnimeVideoPopup);
+
+animeVideoPopup.addEventListener("click", event => {
+    if (event.target === animeVideoPopup) {
+        closeAnimeVideoPopup();
+    }
+});
+
+/* =========================================
+   CUSTOM AUDIO PLAYER CONTROLS
+========================================= */
+
+const audioCards = [
+    ...document.querySelectorAll("[data-audio-card]")
+];
 
 function formatTime(seconds) {
     if (!Number.isFinite(seconds) || seconds < 0) {
@@ -1454,10 +1300,11 @@ function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
 
-    return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+    return minutes + ":" +
+        String(remainingSeconds).padStart(2, "0");
 }
 
-function setStatus(card, message, isError = false) {
+function setAudioStatus(card, message, isError = false) {
     const status = card.querySelector(".audio-status");
 
     status.textContent = message;
@@ -1518,7 +1365,7 @@ audioCards.forEach(card => {
         if (!audio.paused) {
             audio.pause();
             updatePlayButton(card);
-            setStatus(card, "PAUSED");
+            setAudioStatus(card, "PAUSED");
             return;
         }
 
@@ -1526,13 +1373,11 @@ audioCards.forEach(card => {
 
         try {
             await audio.play();
-
             updatePlayButton(card);
-            setStatus(card, "NOW PLAYING");
+            setAudioStatus(card, "NOW PLAYING");
         } catch (error) {
             updatePlayButton(card);
-
-            setStatus(
+            setAudioStatus(
                 card,
                 "COULD NOT PLAY — CHECK THE AUDIO FILE",
                 true
@@ -1542,7 +1387,7 @@ audioCards.forEach(card => {
 
     audio.addEventListener("loadedmetadata", () => {
         updateTimeline(card);
-        setStatus(card, "READY TO PLAY");
+        setAudioStatus(card, "READY TO PLAY");
     });
 
     audio.addEventListener("timeupdate", () => {
@@ -1551,7 +1396,7 @@ audioCards.forEach(card => {
 
     audio.addEventListener("play", () => {
         updatePlayButton(card);
-        setStatus(card, "NOW PLAYING");
+        setAudioStatus(card, "NOW PLAYING");
     });
 
     audio.addEventListener("pause", () => {
@@ -1561,13 +1406,12 @@ audioCards.forEach(card => {
     audio.addEventListener("ended", () => {
         updatePlayButton(card);
         updateTimeline(card);
-        setStatus(card, "PLAYBACK COMPLETE");
+        setAudioStatus(card, "PLAYBACK COMPLETE");
     });
 
     audio.addEventListener("error", () => {
         updatePlayButton(card);
-
-        setStatus(
+        setAudioStatus(
             card,
             "AUDIO FILE NOT FOUND — CHECK FILENAME",
             true
@@ -1576,7 +1420,9 @@ audioCards.forEach(card => {
 
     seek.addEventListener("input", () => {
         if (Number.isFinite(audio.duration) && audio.duration > 0) {
-            audio.currentTime = (Number(seek.value) / 100) * audio.duration;
+            audio.currentTime =
+                (Number(seek.value) / 100) * audio.duration;
+
             updateTimeline(card);
         }
     });
@@ -1589,105 +1435,55 @@ audioCards.forEach(card => {
     updateTimeline(card);
 });
 
-/* CLOSE POPUP WITH ESCAPE */
+/* =========================================
+   CLOSE POPUPS WITH ESCAPE
+========================================= */
 
 document.addEventListener("keydown", event => {
     if (event.key === "Escape") {
         popup.classList.add("hide");
+
+        if (animeVideoPopup.classList.contains("is-open")) {
+            closeAnimeVideoPopup();
+        }
     }
 });
 
-
-/* VERSION 4: SCROLL REVEAL + AMBIENT ELECTRIC PARTICLES */
-document.documentElement.classList.add("js-reveal");
+/* =========================================
+   SCROLL REVEAL ANIMATIONS
+========================================= */
 
 const revealTargets = document.querySelectorAll(
-    ".section-heading, .watched-item, .anime-card, .audio-card, .audio-intro, .footer-title, .footer p"
+    ".section-heading, .watched-item, .anime-card, .audio-card, .footer-title, .footer p"
 );
+
 revealTargets.forEach((element, index) => {
-    element.classList.add("reveal-on-scroll");
-    element.style.transitionDelay = `${(index % 3) * 70}ms`;
+    element.style.opacity = "0";
+    element.style.transform = "translateY(20px)";
+    element.style.transition =
+        "opacity .7s ease, transform .7s ease";
+    element.style.transitionDelay = (index % 3) * 70 + "ms";
 });
 
 if ("IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
+    }, { threshold: 0.12 });
 
     revealTargets.forEach(element => revealObserver.observe(element));
 } else {
-    revealTargets.forEach(element => element.classList.add("is-visible"));
+    revealTargets.forEach(element => {
+        element.style.opacity = "1";
+        element.style.transform = "translateY(0)";
+    });
 }
-
-/* Lightweight canvas particles; automatically respects reduced-motion settings. */
-(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) return;
-
-    const canvas = document.createElement("canvas");
-    canvas.id = "electricParticles";
-    canvas.setAttribute("aria-hidden", "true");
-    document.body.prepend(canvas);
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) {
-        canvas.remove();
-        return;
-    }
-
-    let width = 0, height = 0, particles = [];
-    const particleCount = () => Math.min(55, Math.max(22, Math.floor(window.innerWidth / 25)));
-
-    function resizeCanvas() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        particles = Array.from({ length: particleCount() }, () => ({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            radius: Math.random() * 1.6 + .4,
-            speedX: (Math.random() - .5) * .28,
-            speedY: (Math.random() - .5) * .28,
-            alpha: Math.random() * .45 + .15
-        }));
-    }
-
-    function animateParticles() {
-        ctx.clearRect(0, 0, width, height);
-        for (const particle of particles) {
-            particle.x += particle.speedX;
-            particle.y += particle.speedY;
-            if (particle.x < 0) particle.x = width;
-            if (particle.x > width) particle.x = 0;
-            if (particle.y < 0) particle.y = height;
-            if (particle.y > height) particle.y = 0;
-
-            ctx.beginPath();
-            ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0, 245, 255, ${particle.alpha})`;
-            ctx.shadowBlur = 9;
-            ctx.shadowColor = "rgba(0, 245, 255, .55)";
-            ctx.fill();
-        }
-        ctx.shadowBlur = 0;
-        requestAnimationFrame(animateParticles);
-    }
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas, { passive: true });
-    animateParticles();
-})();
-
 </script>
 
 </body>
 </html>
-can iadd a pop up at the openong of website feuturing some audio
