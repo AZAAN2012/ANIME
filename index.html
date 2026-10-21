@@ -1,3 +1,4 @@
+```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,6 +88,17 @@ button {
 .container {
     width: min(1180px, 92%);
     margin: auto;
+}
+
+/* Minimal intro popup: keep only the Enter the Domain button visible */
+.custom-alert-box.enter-domain-only {
+    width: min(420px, 92vw);
+    text-align: center;
+    padding: 30px;
+}
+.custom-alert-box.enter-domain-only .popup-button {
+    width: 100%;
+    margin: 0;
 }
 
 /* ORIGINAL WORK POPUP */
@@ -522,6 +534,9 @@ button {
     font-size: 1.15rem;
     font-weight: 700;
 }
+
+
+
 
 /* AUDIO PLAYERS */
 
@@ -992,452 +1007,169 @@ input:focus-visible {
 }
 
 
-/* YOUTUBE NEON VIDEO POPUP */
-.video-popup-overlay{position:fixed;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(1,4,14,.88);backdrop-filter:blur(12px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s ease}
-.video-popup-overlay.is-open{opacity:1;visibility:visible;pointer-events:auto}
-.video-popup-box{position:relative;width:min(900px,100%);padding:16px;border:1px solid var(--video-accent,var(--cyan));background:linear-gradient(145deg,rgba(9,18,38,.98),rgba(3,6,17,.98));box-shadow:0 0 22px color-mix(in srgb,var(--video-accent,var(--cyan)) 30%,transparent),0 0 70px rgba(0,0,0,.65),inset 0 0 24px rgba(255,255,255,.025);transform:translateY(14px) scale(.985);transition:transform .28s ease}
-.video-popup-overlay.is-open .video-popup-box{transform:translateY(0) scale(1)}
-.video-popup-topline{height:3px;margin:-16px -16px 16px;background:var(--video-accent,var(--cyan));box-shadow:0 0 18px var(--video-accent,var(--cyan))}
-.video-popup-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
-.video-popup-kicker{color:var(--video-accent,var(--cyan));font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:2px}
-.video-popup-title{margin-top:5px;color:var(--text);font-family:'Orbitron',sans-serif;font-size:clamp(1rem,3vw,1.45rem);font-weight:800}
-.video-popup-close{flex:0 0 auto;width:42px;height:42px;border:1px solid var(--video-accent,var(--cyan));color:var(--video-accent,var(--cyan));background:rgba(0,0,0,.35);font-size:1.55rem;line-height:1;transition:background .2s ease,color .2s ease,transform .2s ease}
-.video-popup-close:hover{color:#050816;background:var(--video-accent,var(--cyan));transform:rotate(90deg)}
-.video-frame-wrap{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid color-mix(in srgb,var(--video-accent,var(--cyan)) 55%,transparent);background:#000;box-shadow:0 0 24px color-mix(in srgb,var(--video-accent,var(--cyan)) 16%,transparent)}
-.video-frame-wrap iframe{display:block;width:100%;height:100%;border:0}
-.video-popup-hint{margin-top:12px;color:var(--muted);font-size:.82rem;letter-spacing:.6px}
-.anime-card[data-video-id]{cursor:pointer}
-.anime-card[data-video-id]:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-@media(max-width:600px){.video-popup-overlay{padding:12px}.video-popup-box{padding:11px}.video-popup-topline{margin:-11px -11px 12px}.video-popup-close{width:38px;height:38px}}
-@media(prefers-reduced-motion:reduce){.video-popup-overlay,.video-popup-box,.video-popup-close{transition:none}}
+
+/* NEON YOUTUBE VIDEO POPUP — added without changing the original audio styling */
+.anime-card[data-video-id] { cursor: pointer; }
+.anime-card[data-video-id]:focus-visible { outline: 2px solid var(--accent, var(--cyan)); outline-offset: 4px; }
+.anime-video-popup {
+    --video-accent: var(--cyan);
+    position: fixed; inset: 0; z-index: 2000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 18px; background: rgba(0, 2, 12, .92);
+    backdrop-filter: blur(14px); opacity: 0; visibility: hidden;
+    pointer-events: none; transition: opacity .25s ease, visibility .25s ease;
+}
+.anime-video-popup.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+.anime-video-box {
+    width: min(900px, 100%); padding: 16px; position: relative;
+    background: linear-gradient(145deg, rgba(12,22,44,.98), rgba(3,6,17,.98));
+    border: 1px solid var(--video-accent);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--video-accent) 35%, transparent), 0 0 60px rgba(0,0,0,.45);
+}
+.anime-video-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:13px; }
+.anime-video-heading h2 { color:var(--video-accent); font-family:'Orbitron',sans-serif; font-size:clamp(.9rem,3vw,1.25rem); letter-spacing:1px; }
+.close-anime-video { width:38px; height:38px; flex-shrink:0; color:var(--video-accent); background:transparent; border:1px solid var(--video-accent); font-size:1.5rem; line-height:1; }
+.close-anime-video:hover { color:#030611; background:var(--video-accent); }
+.anime-video-frame { width:100%; aspect-ratio:16/9; background:#000; border:1px solid color-mix(in srgb, var(--video-accent) 40%, transparent); }
+.anime-video-frame iframe { width:100%; height:100%; display:block; border:0; }
+.anime-video-caption { margin-top:10px; color:var(--muted); font-size:.8rem; letter-spacing:1.5px; }
+@media(max-width:600px) { .anime-video-popup { padding:10px; } .anime-video-box { padding:11px; } }
 
 
-
-/* SHADOW MONARCH VISUAL UPGRADE — CSS-only enhancement layer */
+/* ELECTRIC BLUE DOMAIN — visual-only override; original content and functionality preserved */
 :root {
-  --bg: #03040b;
-  --panel: rgba(7, 10, 24, .88);
-  --panel-light: rgba(13, 17, 39, .9);
-  --cyan: #8b7cff;
-  --blue: #5b5cff;
-  --purple: #8d5cff;
-  --pink: #b45cff;
-  --green: #7af7d5;
-  --text: #f4f1ff;
-  --muted: #aaa6c8;
-  --border: rgba(139, 124, 255, .32);
+    --bg: #020817;
+    --panel: rgba(4, 14, 38, 0.88);
+    --panel-light: rgba(7, 24, 58, 0.92);
+    --cyan: #168bff;
+    --blue: #00b7ff;
+    --purple: #5c6cff;
+    --pink: #4d9dff;
+    --green: #6be7ff;
+    --text: #f3f8ff;
+    --muted: #a4badb;
+    --border: rgba(22, 139, 255, 0.38);
 }
 body {
-  background:
-    radial-gradient(ellipse at 12% 8%, rgba(87, 69, 194, .24), transparent 35%),
-    radial-gradient(ellipse at 88% 24%, rgba(93, 55, 168, .19), transparent 37%),
-    radial-gradient(ellipse at 50% 100%, rgba(31, 126, 126, .10), transparent 38%),
-    linear-gradient(rgba(3,4,11,.76), rgba(3,4,11,.90)),
-    url("./2026-07-28%20(8).png") center / cover fixed no-repeat;
-  background-color: var(--bg);
+    background:
+        radial-gradient(ellipse at 15% 0%, rgba(0, 145, 255, .16), transparent 38%),
+        radial-gradient(ellipse at 90% 22%, rgba(64, 86, 255, .13), transparent 38%),
+        linear-gradient(rgba(2, 7, 20, .42), rgba(2, 7, 20, .68)),
+        url("./2026-07-28%20(8).png") center / cover fixed no-repeat;
+    background-color: var(--bg);
 }
 body::before {
-  background-image: linear-gradient(rgba(139,124,255,.045) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(139,124,255,.045) 1px, transparent 1px);
+    background-image:
+        linear-gradient(rgba(0,145,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,145,255,.045) 1px, transparent 1px);
 }
 .custom-alert-overlay {
-  background: radial-gradient(ellipse at center, rgba(33,25,78,.52), rgba(1,2,9,.97) 72%);
-  backdrop-filter: blur(18px);
+    background:
+        radial-gradient(ellipse at center, rgba(0, 94, 255, .20), transparent 55%),
+        rgba(0, 3, 15, .94);
+    backdrop-filter: blur(16px);
 }
-.custom-alert-box {
-  position: relative;
-  isolation: isolate;
-  width: min(520px, 100%);
-  padding: 46px 30px 34px;
-  border: 1px solid rgba(151,135,255,.82);
-  background: linear-gradient(145deg, rgba(16,15,43,.97), rgba(4,6,18,.98));
-  clip-path: none;
-  border-radius: 20px;
-  box-shadow: 0 0 0 1px rgba(116,89,255,.12), 0 0 45px rgba(103,78,255,.26), inset 0 0 38px rgba(96,69,201,.10);
-  overflow: hidden;
-}
-.custom-alert-box::before {
-  content: "SHADOW MONARCH // GATE OPENING";
-  display: block;
-  color: #a99aff;
-  font: 700 .7rem 'Orbitron', sans-serif;
-  letter-spacing: 3px;
-  margin-bottom: 22px;
-  text-shadow: 0 0 15px #745dff;
-}
-.custom-alert-box::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: linear-gradient(115deg, transparent 20%, rgba(135,113,255,.09) 48%, transparent 70%);
-  transform: translateX(-100%);
-  animation: monarchSweep 4s ease-in-out infinite;
-}
-@keyframes monarchSweep { 55%,100% { transform: translateX(100%); } }
-.popup-button {
-  border-radius: 8px;
-  color: #080615;
-  background: linear-gradient(100deg, #a99aff, #6f7dff 55%, #b99aff);
-  box-shadow: 0 0 24px rgba(128,105,255,.28);
-  position: relative;
-  z-index: 1;
-}
-.popup-button:hover { background: #f4f0ff; box-shadow: 0 0 34px rgba(149,128,255,.75); }
-.hero {
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  width: 520px; height: 520px;
-  top: -280px; left: 50%; transform: translateX(-50%);
-  border: 1px solid rgba(139,124,255,.13);
-  border-radius: 50%;
-  box-shadow: 0 0 0 42px rgba(139,124,255,.025), 0 0 0 84px rgba(139,124,255,.02);
-  pointer-events: none;
-}
-.hero h1 { text-shadow: 0 0 24px rgba(139,124,255,.26); }
-.hero h1 span, .section-heading h2 span { color: #a99aff; }
-.status-dot { background: #9b8aff !important; box-shadow: 0 0 13px #9b8aff !important; }
-.hero-line, .footer-line { background: linear-gradient(90deg, transparent, #8978ff, #75e9d2, transparent) !important; }
-/* Animated collection stats */
-.monarch-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  max-width: 760px;
-  margin: 32px auto 0;
-}
-.monarch-stat {
-  position: relative;
-  padding: 20px 12px 17px;
-  overflow: hidden;
-  text-align: center;
-  background: linear-gradient(145deg, rgba(16,17,43,.88), rgba(6,8,22,.92));
-  border: 1px solid rgba(139,124,255,.30);
-  border-radius: 12px;
-  box-shadow: inset 0 0 22px rgba(117,91,255,.06);
-  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-}
-.monarch-stat:hover { transform: translateY(-4px); border-color: #a99aff; box-shadow: 0 0 25px rgba(139,124,255,.16); }
-.monarch-stat::after { content:""; position:absolute; left:18%; right:18%; bottom:0; height:2px; background:linear-gradient(90deg,transparent,#9a88ff,#7af7d5,transparent); }
-.monarch-stat-number { display:block; color:#b4a8ff; font:800 clamp(1.5rem,4vw,2.25rem) 'Orbitron',sans-serif; text-shadow:0 0 18px rgba(139,124,255,.45); }
-.monarch-stat-label { display:block; margin-top:8px; color:var(--muted); font:600 .65rem 'Orbitron',sans-serif; letter-spacing:1.4px; }
-/* Cinematic cards */
-.anime-grid { gap: 24px; }
-.anime-card {
-  position:relative;
-  border:1px solid color-mix(in srgb, var(--accent) 42%, transparent);
-  border-radius:14px;
-  background:linear-gradient(155deg, rgba(15,15,36,.96), rgba(4,6,17,.97));
-  box-shadow:0 12px 38px rgba(0,0,0,.25);
-  transform:translateZ(0);
-  transition:transform .38s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .35s;
-}
-.anime-card::before {
-  content:""; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:0;
-  background:linear-gradient(120deg, transparent 20%, color-mix(in srgb, var(--accent) 12%, transparent) 50%, transparent 78%);
-  transition:opacity .35s;
-}
-.anime-card:hover { transform:translateY(-9px) scale(1.012); border-color:var(--accent); box-shadow:0 18px 46px rgba(0,0,0,.42), 0 0 30px color-mix(in srgb, var(--accent) 22%, transparent); }
-.anime-card:hover::before { opacity:1; }
-.anime-image-wrap { height:300px; }
-.anime-image { filter:saturate(1.06) contrast(1.04); }
-.anime-image-wrap::after { inset:20% 0 0; background:linear-gradient(180deg,transparent 10%,rgba(3,4,13,.22) 50%,rgba(3,4,13,.98)); }
-.card-number { border-radius:5px; backdrop-filter:blur(8px); }
-.card-rating { text-shadow:0 0 8px var(--accent), 0 0 22px var(--accent); }
-.anime-info { position:relative; z-index:1; }
-/* Neon audio decks — native audio controls and original MP3 sources stay intact */
-.audio-grid { gap:20px; }
-.audio-card {
-  border-radius:13px;
-  background:linear-gradient(145deg, rgba(15,16,40,.95), rgba(5,7,20,.96));
-  border:1px solid color-mix(in srgb, var(--audio-accent) 35%, transparent);
-  box-shadow:inset 0 0 26px color-mix(in srgb, var(--audio-accent) 5%, transparent), 0 12px 32px rgba(0,0,0,.18);
-  transition:transform .28s ease, border-color .28s ease, box-shadow .28s ease;
-}
-.audio-card::before { content:""; position:absolute; top:0; left:12%; right:12%; height:2px; background:linear-gradient(90deg,transparent,var(--audio-accent),transparent); box-shadow:0 0 14px var(--audio-accent); }
-.audio-card:hover, .audio-card.is-playing { border-color:var(--audio-accent); box-shadow:0 0 28px color-mix(in srgb, var(--audio-accent) 15%, transparent); }
-.audio-card.is-playing { transform:translateY(-4px); }
-.audio-card audio { accent-color:var(--audio-accent); }
-.audio-play-button { box-shadow:0 0 16px color-mix(in srgb, var(--audio-accent) 22%, transparent); }
-.audio-seek, .volume-bar { accent-color:var(--audio-accent); }
-.video-popup-box {
-  border-radius:15px !important;
-  border-color:rgba(139,124,255,.62) !important;
-  box-shadow:0 0 55px rgba(95,75,255,.24) !important;
-  background:linear-gradient(145deg,rgba(14,14,36,.98),rgba(3,5,16,.99)) !important;
-}
-.section-heading h2 { text-shadow:0 0 20px rgba(139,124,255,.12); }
-.watched-item { border-color:rgba(139,124,255,.18) !important; }
-.footer-title { color:#b4a8ff !important; }
-@media (max-width:620px) {
-  .monarch-stats { gap:8px; margin-top:24px; }
-  .monarch-stat { padding:15px 5px 13px; }
-  .monarch-stat-label { font-size:.55rem; letter-spacing:.7px; }
-  .anime-image-wrap { height:250px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .custom-alert-box::after { animation:none; }
-  .monarch-stat, .anime-card, .audio-card { transition:none !important; }
-}
-
-
-
-/* GOJO'S INFINITE VOID DOMAIN — popup and clean opening hero */
-.custom-alert-box {
-    border-color: #78d7ff !important;
-    background: radial-gradient(ellipse at 50% 0%, rgba(92, 89, 255, .25), transparent 62%),
-                linear-gradient(145deg, rgba(12, 14, 42, .98), rgba(3, 5, 20, .99)) !important;
-    box-shadow: 0 0 30px rgba(65, 126, 255, .25), 0 0 75px rgba(109, 73, 255, .18),
-                inset 0 0 35px rgba(61, 108, 255, .08) !important;
-    animation: gojoDomainEnter .65s cubic-bezier(.2,.8,.2,1);
-}
-@keyframes gojoDomainEnter {
-    from { opacity: 0; transform: scale(.92); filter: blur(8px); }
-    to { opacity: 1; transform: scale(1); filter: blur(0); }
+.custom-alert-box.enter-domain-only {
+    background: linear-gradient(145deg, rgba(3, 24, 68, .98), rgba(1, 8, 28, .99));
+    border: 1px solid #168bff;
+    box-shadow:
+        0 0 12px rgba(0, 145, 255, .72),
+        0 0 35px rgba(0, 110, 255, .48),
+        inset 0 0 28px rgba(0, 145, 255, .12);
+    animation: popupIn .45s ease, domainPulse 2.6s ease-in-out infinite alternate;
 }
 .popup-button {
-    color: #f8fbff !important;
-    background: linear-gradient(100deg, #255dff, #7657ff 55%, #35cfff) !important;
-    border: 1px solid rgba(174, 220, 255, .8) !important;
-    box-shadow: 0 0 18px rgba(73, 127, 255, .4), inset 0 0 16px rgba(255,255,255,.1);
+    color: #ffffff;
+    background: linear-gradient(100deg, #006bff, #00aaff);
+    border: 1px solid #76d8ff;
+    box-shadow: 0 0 16px rgba(0, 145, 255, .7), inset 0 0 12px rgba(255,255,255,.12);
+    text-shadow: 0 0 8px rgba(255,255,255,.45);
 }
 .popup-button:hover {
-    background: linear-gradient(100deg, #4c7cff, #8d78ff 55%, #66e0ff) !important;
-    box-shadow: 0 0 28px rgba(93, 157, 255, .65), 0 0 55px rgba(117, 82, 255, .25) !important;
+    color: #ffffff;
+    background: linear-gradient(100deg, #008cff, #32c8ff);
+    box-shadow: 0 0 22px #168bff, 0 0 48px rgba(0,145,255,.6);
 }
-.gojo-domain-title {
-    margin: 0 auto;
-    text-align: center;
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(2.1rem, 7vw, 5.3rem);
-    font-weight: 900;
-    letter-spacing: clamp(1px, .7vw, 7px);
-    line-height: 1.15;
-    text-shadow: 0 0 18px rgba(98, 111, 255, .3), 0 0 48px rgba(75, 114, 255, .14);
+.popup-button small { color: #d7f3ff; }
+@keyframes domainPulse {
+    from { box-shadow: 0 0 12px rgba(0,145,255,.55), 0 0 28px rgba(0,110,255,.28), inset 0 0 22px rgba(0,145,255,.08); }
+    to { box-shadow: 0 0 20px rgba(0,170,255,.8), 0 0 48px rgba(0,110,255,.48), inset 0 0 30px rgba(0,145,255,.16); }
 }
-.gojo-domain-title span {
-    color: #8baaff !important;
-    text-shadow: 0 0 12px rgba(88, 137, 255, .85), 0 0 32px rgba(117, 82, 255, .5);
+.hero h1, .section-heading h2, .anime-info h3, .audio-title, .footer-title {
+    text-shadow: 0 0 12px rgba(0, 145, 255, .20);
 }
-.hero .hero-line {
-    background: linear-gradient(90deg, transparent, #5d82ff, #91dfff, #7657ff, transparent) !important;
-    box-shadow: 0 0 18px rgba(103, 128, 255, .55) !important;
+.hero-line, .footer-line {
+    background: linear-gradient(90deg, #087bff, #00d5ff, #6478ff);
+    box-shadow: 0 0 16px rgba(0,145,255,.4);
 }
-
-
-/* GOJO DOMAIN THEME ONLY — no content or functionality added */
-:root {
-    --cyan: #9be7ff;
-    --blue: #5b8cff;
-    --purple: #8874ff;
-    --pink: #b7a5ff;
-    --border: rgba(132, 174, 255, .28);
+.watched-item, .anime-card, .audio-card {
+    border-color: rgba(60, 145, 255, .22);
+    box-shadow: 0 8px 26px rgba(0, 8, 28, .20);
+    backdrop-filter: blur(8px);
 }
-
-.section-heading h2,
-.footer-title,
-.audio-title,
-.anime-kicker,
-.watched-name,
-.monarch-stat-number {
-    color: #eaf5ff;
-    text-shadow: 0 0 8px rgba(112, 158, 255, .52),
-                 0 0 20px rgba(106, 92, 255, .30);
+.watched-item:hover, .anime-card:hover, .audio-card:hover, .audio-card.is-playing {
+    border-color: #168bff;
+    box-shadow: 0 0 24px rgba(0, 119, 255, .22);
 }
-.section-heading h2 span,
-.anime-info h3,
-.character-name {
-    color: #a9c9ff !important;
-    text-shadow: 0 0 8px rgba(100, 154, 255, .8),
-                 0 0 22px rgba(117, 91, 255, .48);
+.anime-card.eren, .anime-card.jinwoo, .anime-card.sukuna,
+.audio-card.eren-audio, .audio-card.jinwoo-audio, .audio-card.sukuna-audio {
+    --accent: #168bff;
+    --audio-accent: #168bff;
 }
-.section-heading::after,
-.card-topline,
-.hero .hero-line {
-    background: linear-gradient(90deg, transparent, #7a9dff, #c1edff, #8b78ff, transparent) !important;
-    box-shadow: 0 0 15px rgba(104, 142, 255, .55) !important;
+.card-topline {
+    background: linear-gradient(90deg, #006bff, #00d5ff);
 }
-.anime-card,
-.audio-card,
-.watched-item,
-.monarch-stat {
-    border-color: rgba(133, 163, 255, .28) !important;
-    box-shadow: inset 0 0 22px rgba(83, 105, 255, .045),
-                0 0 18px rgba(84, 117, 255, .07);
-}
-#electricParticles { opacity: .58; }
+.audio-visualizer span { background: var(--audio-accent); }
+.seek-bar, .volume-bar { accent-color: #168bff; }
 @media (prefers-reduced-motion: reduce) {
-    #electricParticles { display: none; }
+    .custom-alert-box.enter-domain-only { animation: none; }
 }
-
-
-/* FINAL GOJO INFINITE VOID PALETTE — theme-only styling */
-:root {
-  --bg: #030516;
-  --panel: rgba(8, 12, 38, .9);
-  --panel-light: rgba(17, 22, 62, .86);
-  --cyan: #b8f0ff;
-  --blue: #477cff;
-  --purple: #8a6dff;
-  --pink: #c9baff;
-  --border: rgba(121, 157, 255, .32);
-}
-body {
-  background-image:
-    radial-gradient(ellipse at 50% 12%, rgba(91, 111, 255, .18), transparent 38%),
-    radial-gradient(ellipse at 12% 55%, rgba(91, 177, 255, .09), transparent 34%),
-    radial-gradient(ellipse at 88% 72%, rgba(139, 92, 246, .12), transparent 36%),
-    linear-gradient(rgba(3, 5, 22, .58), rgba(3, 5, 22, .78)),
-    url("./2026-07-28%20(8).png") center / cover fixed no-repeat !important;
-}
-.anime-card, .audio-card, .watched-item, .monarch-stat {
-  background: linear-gradient(145deg, rgba(14, 19, 55, .94), rgba(3, 5, 22, .97)) !important;
-  border-color: rgba(133, 164, 255, .38) !important;
-}
-.anime-card:hover, .audio-card:hover, .audio-card.is-playing, .monarch-stat:hover {
-  border-color: #9dcaff !important;
-  box-shadow: 0 0 28px rgba(77, 126, 255, .22), 0 0 50px rgba(133, 92, 255, .12) !important;
-}
-.anime-info h3, .character-name, .audio-title, .watched-name,
-.section-heading h2, .footer-title {
-  color: #edf7ff !important;
-  text-shadow: 0 0 9px rgba(113, 166, 255, .72), 0 0 24px rgba(111, 91, 255, .42) !important;
-}
-.section-heading h2 span, .anime-kicker, .monarch-stat-number {
-  color: #a8caff !important;
-  text-shadow: 0 0 12px rgba(91, 148, 255, .75), 0 0 26px rgba(130, 100, 255, .35) !important;
-}
-.audio-visualizer span { background: linear-gradient(to top, #557bff, #bcefff) !important; box-shadow: 0 0 8px rgba(115, 157, 255, .48) !important; }
-
-
-
-/* GOJO INFINITE VOID — stronger visual finish; keep existing fullscreen background image */
-:root {
-  --cyan: #c7f5ff;
-  --blue: #3d7dff;
-  --purple: #8f68ff;
-  --pink: #c3b7ff;
-  --border: rgba(142, 181, 255, .48);
-}
-body::before {
-  opacity: .72 !important;
-  background-image:
-    radial-gradient(ellipse at 50% 18%, rgba(91, 130, 255, .18), transparent 45%),
-    repeating-linear-gradient(0deg, transparent 0 47px, rgba(141, 177, 255, .035) 48px 49px),
-    repeating-linear-gradient(90deg, transparent 0 47px, rgba(141, 177, 255, .035) 48px 49px) !important;
-}
-.hero { position: relative; }
-.hero .hero-line, .section-heading::after, .card-topline {
-  height: 2px !important;
-  background: linear-gradient(90deg, transparent, #477dff 22%, #d4f8ff 50%, #9870ff 78%, transparent) !important;
-  box-shadow: 0 0 12px rgba(100, 153, 255, .75), 0 0 28px rgba(132, 93, 255, .28) !important;
-}
-.monarch-stat, .watched-item, .anime-card, .audio-card {
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(136, 176, 255, .45) !important;
-  background: linear-gradient(135deg, rgba(13, 24, 66, .91), rgba(5, 7, 27, .96) 58%, rgba(28, 15, 66, .86)) !important;
-  box-shadow: inset 0 1px 0 rgba(218, 244, 255, .08), 0 10px 32px rgba(0, 0, 0, .22), 0 0 18px rgba(75, 122, 255, .10) !important;
-  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease !important;
-}
-.monarch-stat::before, .watched-item::before, .anime-card::before, .audio-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto auto 12%;
-  width: 76%;
-  height: 1px;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgba(198, 239, 255, .9), rgba(145, 113, 255, .9), transparent);
-  box-shadow: 0 0 13px rgba(100, 150, 255, .42);
-}
-.monarch-stat:hover, .watched-item:hover, .anime-card:hover, .audio-card:hover, .audio-card.is-playing {
-  transform: translateY(-5px);
-  border-color: rgba(191, 231, 255, .9) !important;
-  box-shadow: inset 0 0 24px rgba(97, 134, 255, .10), 0 0 24px rgba(70, 126, 255, .25), 0 0 46px rgba(139, 93, 255, .16) !important;
-}
-.anime-info h3, .character-name, .audio-title, .watched-name, .section-heading h2, .footer-title {
-  color: #edf9ff !important;
-  text-shadow: 0 0 8px rgba(119, 174, 255, .82), 0 0 22px rgba(132, 105, 255, .42) !important;
-}
-.section-heading h2 span, .anime-kicker, .monarch-stat-number, .character-label {
-  color: #a9caff !important;
-  text-shadow: 0 0 12px rgba(83, 143, 255, .72) !important;
-}
-.popup-button {
-  letter-spacing: 2px !important;
-  background: linear-gradient(105deg, #315fff, #7b5cff 52%, #48d9ff) !important;
-  box-shadow: 0 0 20px rgba(68, 119, 255, .55), 0 0 42px rgba(119, 86, 255, .25), inset 0 0 15px rgba(255,255,255,.12) !important;
-}
-.audio-card audio { accent-color: #8b78ff; }
-.audio-visualizer span {
-  background: linear-gradient(to top, #3974ff 0%, #8b70ff 55%, #d6f7ff 100%) !important;
-  box-shadow: 0 0 10px rgba(117, 158, 255, .68) !important;
-}
-::selection { color: #fff; background: rgba(88, 119, 255, .62); }
-@media (prefers-reduced-motion: reduce) {
-  .monarch-stat, .watched-item, .anime-card, .audio-card { transition: none !important; }
-}
-
-
-/* FINAL REQUEST: clean Gojo intro and electric-blue entry button */
-.monarch-stats { display: none !important; }
-.custom-alert-box { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; width: min(92vw, 460px) !important; }
-.custom-alert-box::before, .custom-alert-box::after { display: none !important; }
-.popup-button {
-  display: block !important; margin: 0 auto !important; color: #ffffff !important;
-  background: #087bff !important; border: 1px solid #65c7ff !important;
-  border-radius: 10px !important; padding: 19px 34px !important;
-  font-family: 'Orbitron', sans-serif !important; font-size: clamp(15px, 2.8vw, 20px) !important;
-  font-weight: 900 !important; letter-spacing: 2px !important;
-  box-shadow: 0 0 14px #087bff, 0 0 32px rgba(0,123,255,.72), inset 0 0 14px rgba(255,255,255,.18) !important;
-  animation: electricBluePulse 1.8s ease-in-out infinite alternate !important;
-}
-.popup-button:hover { background: #168dff !important; box-shadow: 0 0 20px #168dff, 0 0 48px rgba(0,145,255,.9) !important; }
-@keyframes electricBluePulse { from { filter: brightness(.92); box-shadow: 0 0 10px #087bff, 0 0 24px rgba(0,123,255,.55); } to { filter: brightness(1.16); box-shadow: 0 0 20px #087bff, 0 0 44px rgba(0,145,255,.88); } }
 
 </style>
 </head>
 
 <body>
 
-<!-- OPENING AUDIO POPUP (same cyberpunk theme) -->
-
+<!-- MINIMAL GOJO INTRO POPUP: only the ENTER THE DOMAIN button -->
 <div class="custom-alert-overlay" id="noticePopup">
-    <div class="custom-alert-box">
+    <div class="custom-alert-box enter-domain-only">
         <audio id="gojoIntroAudio" src="./muryo-kusho-made-with-Voicemod.mp3" preload="auto"></audio>
-
-        <button class="popup-button" id="understoodButton">
+        <button class="popup-button" id="understoodButton" aria-label="Enter the domain and play Gojo voice">
             ENTER THE DOMAIN
         </button>
     </div>
 </div>
 
-<!-- YOUTUBE NEON VIDEO POPUP -->
-<div class="video-popup-overlay" id="animeVideoPopup" aria-hidden="true">
-  <section class="video-popup-box" role="dialog" aria-modal="true" aria-labelledby="animeVideoTitle">
-    <div class="video-popup-topline"></div>
-    <div class="video-popup-heading">
-      <div><div class="video-popup-kicker">ANIME VIDEO // PLAYBACK</div><h2 class="video-popup-title" id="animeVideoTitle">ANIME CLIP</h2></div>
-      <button class="video-popup-close" id="closeAnimeVideo" type="button" aria-label="Close video popup">&times;</button>
+<!-- NEON YOUTUBE VIDEO POPUP -->
+<div class="anime-video-popup" id="animeVideoPopup" aria-hidden="true">
+    <div class="anime-video-box" role="dialog" aria-modal="true" aria-labelledby="animeVideoTitle">
+        <div class="anime-video-heading">
+            <h2 id="animeVideoTitle">ANIME CLIP</h2>
+            <button class="close-anime-video" id="closeAnimeVideo" type="button" aria-label="Close video">×</button>
+        </div>
+        <div class="anime-video-frame" id="animeVideoFrame"></div>
+        <div class="anime-video-caption">VIDEO TRANSMISSION // NEON DOMAIN</div>
     </div>
-    <div class="video-frame-wrap" id="animeVideoFrame"></div>
-    <p class="video-popup-hint">ESC // CLOSE VIDEO</p>
-  </section>
 </div>
 
 <!-- HERO -->
 
 <header class="hero">
     <div class="container">
-<div class="hero-line"></div>
 
+        <div class="eyebrow">
+            <span class="status-dot"></span>
+            MY ANIME COLLECTION • 2026
+        </div>
 
+        <h1>ANIMES <span>WATCHED</span></h1>
+
+        <p class="hero-subtitle">
+            A personal collection of anime, favourite characters,
+            ratings & iconic sounds.
+        </p>
+
+        <div class="hero-line"></div>
 
     </div>
 </header>
@@ -1494,7 +1226,7 @@ body::before {
 
             <!-- ATTACK ON TITAN -->
 
-            <article class="anime-card eren" data-video-id="3orkdcYMw_k" data-video-title="Attack on Titan" data-video-accent="#22d3ee" role="button" tabindex="0" aria-label="Play Attack on Titan video">
+            <article class="anime-card eren" data-video-id="3orkdcYMw_k" data-video-title="Attack on Titan" data-video-accent="#00f5ff" role="button" tabindex="0" aria-label="Play Attack on Titan video">
 
                 <div class="card-topline"></div>
 
@@ -1545,7 +1277,7 @@ body::before {
 
             <!-- SOLO LEVELING -->
 
-            <article class="anime-card jinwoo" data-video-id="IrHTT2IEKpE" data-video-title="Solo Leveling" data-video-accent="#8b5cf6" role="button" tabindex="0" aria-label="Play Solo Leveling video">
+            <article class="anime-card jinwoo" data-video-id="IrHTT2IEKpE" data-video-title="Solo Leveling" data-video-accent="#a855f7" role="button" tabindex="0" aria-label="Play Solo Leveling video">
 
                 <div class="card-topline"></div>
 
@@ -1596,7 +1328,7 @@ body::before {
 
             <!-- JUJUTSU KAISEN -->
 
-            <article class="anime-card sukuna" data-video-id="vyYYTCxDXaA" data-video-title="Jujutsu Kaisen" data-video-accent="#ff4fd8" role="button" tabindex="0" aria-label="Play Jujutsu Kaisen video">
+            <article class="anime-card sukuna" data-video-id="vyYYTCxDXaA" data-video-title="Sukuna" data-video-accent="#ff35c6" role="button" tabindex="0" aria-label="Play latest Sukuna video">
 
                 <div class="card-topline"></div>
 
@@ -1651,7 +1383,13 @@ body::before {
     <!-- ICONIC SOUNDS -->
 
     <section class="audio-section">
-<p class="audio-intro">
+
+        <div class="section-heading">
+            <h2>ICONIC <span>SOUNDS</span></h2>
+            <span class="section-code">AUDIO SYSTEM ONLINE</span>
+        </div>
+
+        <p class="audio-intro">
             Select a track to play its iconic audio.
         </p>
 
@@ -1821,43 +1559,23 @@ body::before {
 </footer>
 
 <script>
-/* OPENING AUDIO POPUP */
 
-const popup = document.getElementById("noticePopup");
-const understoodButton = document.getElementById("understoodButton");
-const gojoIntroAudio = document.getElementById("gojoIntroAudio");
-
-/* Play Gojo's domain audio only after the visitor clicks the button. */
-gojoIntroAudio.volume = 0.8;
-understoodButton.addEventListener("click", async () => {
-    try {
-        await gojoIntroAudio.play();
-    } catch (error) {
-        /* Keep the page usable if the audio file cannot be played. */
-    }
-    popup.classList.add("hide");
-});
-
-/* The opening popup appears on every fresh website load. */
-
-/* USER'S YOUTUBE VIDEOS IN THE NEON POPUP */
+/* LATEST SUKUNA YOUTUBE CLIP — separate from the MP3 audio players */
 const animeVideoPopup = document.getElementById("animeVideoPopup");
 const animeVideoFrame = document.getElementById("animeVideoFrame");
 const animeVideoTitle = document.getElementById("animeVideoTitle");
 const closeAnimeVideo = document.getElementById("closeAnimeVideo");
-const animeCardsWithVideos = document.querySelectorAll(".anime-card[data-video-id]");
+const videoCards = document.querySelectorAll(".anime-card[data-video-id]");
 
 function openAnimeVideo(card) {
     const videoId = card.dataset.videoId;
-    const title = card.dataset.videoTitle || "Anime Clip";
-    const accent = card.dataset.videoAccent || "#22d3ee";
     if (!videoId) return;
-    animeVideoTitle.textContent = title;
-    animeVideoPopup.style.setProperty("--video-accent", accent);
+    animeVideoTitle.textContent = card.dataset.videoTitle || "Anime Clip";
+    animeVideoPopup.style.setProperty("--video-accent", card.dataset.videoAccent || "#00f5ff");
     animeVideoFrame.replaceChildren();
     const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
-    iframe.title = `${title} YouTube video`;
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(videoId) + "?autoplay=1&rel=0";
+    iframe.title = (card.dataset.videoTitle || "Anime") + " YouTube video";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
     iframe.allowFullscreen = true;
@@ -1871,11 +1589,11 @@ function openAnimeVideo(card) {
 function closeAnimeVideoPopup() {
     animeVideoPopup.classList.remove("is-open");
     animeVideoPopup.setAttribute("aria-hidden", "true");
-    animeVideoFrame.replaceChildren(); // Removing the iframe stops playback.
+    animeVideoFrame.replaceChildren();
     document.body.style.overflow = "";
 }
 
-animeCardsWithVideos.forEach(card => {
+videoCards.forEach(card => {
     card.addEventListener("click", () => openAnimeVideo(card));
     card.addEventListener("keydown", event => {
         if (event.key === "Enter" || event.key === " ") {
@@ -1887,6 +1605,30 @@ animeCardsWithVideos.forEach(card => {
 closeAnimeVideo.addEventListener("click", closeAnimeVideoPopup);
 animeVideoPopup.addEventListener("click", event => {
     if (event.target === animeVideoPopup) closeAnimeVideoPopup();
+});
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && animeVideoPopup.classList.contains("is-open")) closeAnimeVideoPopup();
+});
+
+
+
+/* GOJO INTRO AUDIO POPUP */
+
+const popup = document.getElementById("noticePopup");
+const understoodButton = document.getElementById("understoodButton");
+const gojoIntroAudio = document.getElementById("gojoIntroAudio");
+gojoIntroAudio.volume = 0.8;
+
+understoodButton.addEventListener("click", async () => {
+    // User click permits browser audio playback; use the exact Gojo intro MP3 in the repo.
+    try {
+        gojoIntroAudio.currentTime = 0;
+        await gojoIntroAudio.play();
+    } catch (error) {
+        // If the MP3 path is unavailable, the popup still closes; check the file name/path in GitHub.
+        console.error("Gojo intro audio could not play:", error);
+    }
+    popup.classList.add("hide");
 });
 
 /* AUDIO PLAYERS */
@@ -2041,37 +1783,9 @@ audioCards.forEach(card => {
 document.addEventListener("keydown", event => {
     if (event.key === "Escape") {
         popup.classList.add("hide");
-        if (animeVideoPopup.classList.contains("is-open")) closeAnimeVideoPopup();
     }
 });
 
-
-/* SHADOW MONARCH: animated stats count-up */
-(() => {
-    const counters = document.querySelectorAll("[data-count]");
-    const animateCounter = element => {
-        const target = Number(element.dataset.count || 0);
-        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (reduceMotion) { element.textContent = String(target); return; }
-        const duration = 950;
-        const start = performance.now();
-        const tick = now => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            element.textContent = String(Math.round(target * eased));
-            if (progress < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-    };
-    if ("IntersectionObserver" in window) {
-        const statsObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) { animateCounter(entry.target); observer.unobserve(entry.target); }
-            });
-        }, { threshold: 0.45 });
-        counters.forEach(counter => statsObserver.observe(counter));
-    } else { counters.forEach(animateCounter); }
-})();
 
 /* VERSION 4: SCROLL REVEAL + AMBIENT ELECTRIC PARTICLES */
 document.documentElement.classList.add("js-reveal");
@@ -2116,7 +1830,7 @@ if ("IntersectionObserver" in window) {
     }
 
     let width = 0, height = 0, particles = [];
-    const particleCount = () => Math.min(42, Math.max(18, Math.floor(window.innerWidth / 34)));
+    const particleCount = () => Math.min(55, Math.max(22, Math.floor(window.innerWidth / 25)));
 
     function resizeCanvas() {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -2128,10 +1842,10 @@ if ("IntersectionObserver" in window) {
         particles = Array.from({ length: particleCount() }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
-            radius: Math.random() * .85 + .25,
+            radius: Math.random() * 1.6 + .4,
             speedX: (Math.random() - .5) * .28,
             speedY: (Math.random() - .5) * .28,
-            alpha: Math.random() * .30 + .10
+            alpha: Math.random() * .45 + .15
         }));
     }
 
@@ -2147,10 +1861,9 @@ if ("IntersectionObserver" in window) {
 
             ctx.beginPath();
             ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-            const glow = Math.random() > .72 ? `rgba(151, 125, 255, ${particle.alpha})` : `rgba(143, 220, 255, ${particle.alpha})`;
-            ctx.fillStyle = glow;
-            ctx.shadowBlur = 6;
-            ctx.shadowColor = "rgba(105, 145, 255, .45)";
+            ctx.fillStyle = `rgba(0, 245, 255, ${particle.alpha})`;
+            ctx.shadowBlur = 9;
+            ctx.shadowColor = "rgba(0, 245, 255, .55)";
             ctx.fill();
         }
         ctx.shadowBlur = 0;
@@ -2166,3 +1879,4 @@ if ("IntersectionObserver" in window) {
 
 </body>
 </html>
+```
