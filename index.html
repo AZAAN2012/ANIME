@@ -1208,6 +1208,69 @@ body::before {
   .custom-alert-box.enter-domain-only::before { animation: none; }
 }
 
+
+
+/* HEADING HIGHLIGHT UPGRADE — CSS ONLY; all original content and scripts stay intact */
+.hero h1 {
+    color: #f4fbff;
+    text-shadow: 0 0 3px #ffffff, 0 0 12px rgba(0, 153, 255, .95),
+                 0 0 28px rgba(0, 119, 255, .78), 0 0 58px rgba(0, 82, 255, .42);
+    -webkit-text-stroke: .45px rgba(111, 210, 255, .65);
+}
+.hero h1 span {
+    color: #38c8ff;
+    text-shadow: 0 0 5px #b9efff, 0 0 14px #16aaff,
+                 0 0 32px rgba(0, 132, 255, .95), 0 0 58px rgba(0, 76, 255, .65);
+}
+.section-heading {
+    position: relative;
+    border-bottom: 1px solid rgba(34, 171, 255, .55);
+    box-shadow: 0 7px 18px -16px #00aaff;
+}
+.section-heading h2 {
+    color: #f2f9ff;
+    letter-spacing: 1.8px;
+    text-shadow: 0 0 4px rgba(255,255,255,.5), 0 0 13px rgba(0,145,255,.8),
+                 0 0 27px rgba(0,100,255,.48);
+}
+.section-heading h2 span {
+    color: #35c9ff;
+    text-shadow: 0 0 5px rgba(207,246,255,.9), 0 0 13px #009dff,
+                 0 0 27px rgba(0,119,255,.9);
+}
+.section-heading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: clamp(65px, 16%, 150px);
+    height: 2px;
+    background: linear-gradient(90deg, #eafaff, #21baff, #145cff, transparent);
+    box-shadow: 0 0 8px #168fff, 0 0 18px rgba(0,132,255,.8);
+}
+.anime-info h3 {
+    color: #f2f9ff;
+    text-shadow: 0 0 5px rgba(255,255,255,.32), 0 0 14px rgba(0,145,255,.75),
+                 0 0 25px rgba(0,90,255,.35);
+}
+.audio-title {
+    color: #eaf7ff;
+    text-shadow: 0 0 5px rgba(255,255,255,.25), 0 0 12px rgba(0,153,255,.85),
+                 0 0 24px rgba(0,102,255,.5);
+}
+.footer-title, .anime-video-heading h2 {
+    color: #47caff;
+    text-shadow: 0 0 5px rgba(225,248,255,.65), 0 0 14px #008fff,
+                 0 0 28px rgba(0,89,255,.7);
+}
+@media (prefers-reduced-motion: no-preference) {
+    .hero h1 span { animation: headingBluePulse 3s ease-in-out infinite alternate; }
+    @keyframes headingBluePulse {
+        from { text-shadow: 0 0 5px #b9efff, 0 0 14px #16aaff, 0 0 30px rgba(0,132,255,.78); }
+        to { text-shadow: 0 0 8px #ffffff, 0 0 20px #25baff, 0 0 42px rgba(0,100,255,1); }
+    }
+}
+
 </style>
 </head>
 
