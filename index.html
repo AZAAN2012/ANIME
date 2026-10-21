@@ -1384,6 +1384,23 @@ body::before {
   .monarch-stat, .watched-item, .anime-card, .audio-card { transition: none !important; }
 }
 
+
+/* FINAL REQUEST: clean Gojo intro and electric-blue entry button */
+.monarch-stats { display: none !important; }
+.custom-alert-box { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; width: min(92vw, 460px) !important; }
+.custom-alert-box::before, .custom-alert-box::after { display: none !important; }
+.popup-button {
+  display: block !important; margin: 0 auto !important; color: #ffffff !important;
+  background: #087bff !important; border: 1px solid #65c7ff !important;
+  border-radius: 10px !important; padding: 19px 34px !important;
+  font-family: 'Orbitron', sans-serif !important; font-size: clamp(15px, 2.8vw, 20px) !important;
+  font-weight: 900 !important; letter-spacing: 2px !important;
+  box-shadow: 0 0 14px #087bff, 0 0 32px rgba(0,123,255,.72), inset 0 0 14px rgba(255,255,255,.18) !important;
+  animation: electricBluePulse 1.8s ease-in-out infinite alternate !important;
+}
+.popup-button:hover { background: #168dff !important; box-shadow: 0 0 20px #168dff, 0 0 48px rgba(0,145,255,.9) !important; }
+@keyframes electricBluePulse { from { filter: brightness(.92); box-shadow: 0 0 10px #087bff, 0 0 24px rgba(0,123,255,.55); } to { filter: brightness(1.16); box-shadow: 0 0 20px #087bff, 0 0 44px rgba(0,145,255,.88); } }
+
 </style>
 </head>
 
@@ -1393,7 +1410,7 @@ body::before {
 
 <div class="custom-alert-overlay" id="noticePopup">
     <div class="custom-alert-box">
-        <audio id="gojoIntroAudio" src="./muryo-kusho-made-with-Voicemod.mp3" preload="auto" autoplay></audio>
+        <audio id="gojoIntroAudio" src="./muryo-kusho-made-with-Voicemod.mp3" preload="auto"></audio>
 
         <button class="popup-button" id="understoodButton">
             ENTER THE DOMAIN
@@ -1420,11 +1437,7 @@ body::before {
     <div class="container">
 <div class="hero-line"></div>
 
-        <div class="monarch-stats" aria-label="Anime collection statistics">
-            <div class="monarch-stat"><span class="monarch-stat-number" data-count="3">0</span><span class="monarch-stat-label">ANIME SERIES</span></div>
-            <div class="monarch-stat"><span class="monarch-stat-number" data-count="3">0</span><span class="monarch-stat-label">ICONIC CHARACTERS</span></div>
-            <div class="monarch-stat"><span class="monarch-stat-number" data-count="3">0</span></div>
-        </div>
+
 
     </div>
 </header>
@@ -1814,22 +1827,14 @@ const popup = document.getElementById("noticePopup");
 const understoodButton = document.getElementById("understoodButton");
 const gojoIntroAudio = document.getElementById("gojoIntroAudio");
 
-/* Try to autoplay when the website opens.
-   Browsers may require the visitor to click the button first. */
+/* Play Gojo's domain audio only after the visitor clicks the button. */
 gojoIntroAudio.volume = 0.8;
-gojoIntroAudio.play().catch(() => {
-    /* The Enter the Domain button is the fallback if autoplay is blocked. */
-});
-
 understoodButton.addEventListener("click", async () => {
     try {
-        if (gojoIntroAudio.paused) {
-            await gojoIntroAudio.play();
-        }
+        await gojoIntroAudio.play();
     } catch (error) {
-        /* The browser may still block audio until another interaction. */
+        /* Keep the page usable if the audio file cannot be played. */
     }
-
     popup.classList.add("hide");
 });
 
