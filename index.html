@@ -1,4 +1,3 @@
-```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1036,93 +1035,177 @@ input:focus-visible {
 @media(max-width:600px) { .anime-video-popup { padding:10px; } .anime-video-box { padding:11px; } }
 
 
-/* ELECTRIC BLUE DOMAIN — visual-only override; original content and functionality preserved */
+
+/* ELECTRIC BLUE DOMAIN — styling-only skin. Original markup, content and scripts remain unchanged. */
 :root {
-    --bg: #020817;
-    --panel: rgba(4, 14, 38, 0.88);
-    --panel-light: rgba(7, 24, 58, 0.92);
-    --cyan: #168bff;
-    --blue: #00b7ff;
-    --purple: #5c6cff;
-    --pink: #4d9dff;
-    --green: #6be7ff;
-    --text: #f3f8ff;
-    --muted: #a4badb;
-    --border: rgba(22, 139, 255, 0.38);
+  --bg: #020817;
+  --panel: rgba(3, 15, 39, .88);
+  --panel-light: rgba(5, 28, 65, .94);
+  --cyan: #168bff;
+  --blue: #00c8ff;
+  --purple: #527bff;
+  --pink: #4be5ff;
+  --green: #62dfff;
+  --text: #f2f8ff;
+  --muted: #a4c0e8;
+  --border: rgba(0, 153, 255, .38);
 }
+
 body {
-    background:
-        radial-gradient(ellipse at 15% 0%, rgba(0, 145, 255, .16), transparent 38%),
-        radial-gradient(ellipse at 90% 22%, rgba(64, 86, 255, .13), transparent 38%),
-        linear-gradient(rgba(2, 7, 20, .42), rgba(2, 7, 20, .68)),
-        url("./2026-07-28%20(8).png") center / cover fixed no-repeat;
-    background-color: var(--bg);
+  background-color: #020817;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 126, 255, .20), transparent 42%),
+    linear-gradient(180deg, rgba(1, 6, 20, .24), rgba(1, 5, 18, .60)),
+    url("./2026-07-28%20(8).png");
+  background-position: center, center, center;
+  background-size: cover, cover, cover;
+  background-attachment: fixed, fixed, fixed;
 }
+
 body::before {
-    background-image:
-        linear-gradient(rgba(0,145,255,.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,145,255,.045) 1px, transparent 1px);
+  background-image:
+    linear-gradient(rgba(0, 145, 255, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 145, 255, .055) 1px, transparent 1px);
+  background-size: 46px 46px;
 }
+
 .custom-alert-overlay {
-    background:
-        radial-gradient(ellipse at center, rgba(0, 94, 255, .20), transparent 55%),
-        rgba(0, 3, 15, .94);
-    backdrop-filter: blur(16px);
+  background: radial-gradient(ellipse at center, rgba(0, 71, 174, .24), rgba(0, 3, 17, .96) 68%);
+  backdrop-filter: blur(16px) saturate(125%);
 }
 .custom-alert-box.enter-domain-only {
-    background: linear-gradient(145deg, rgba(3, 24, 68, .98), rgba(1, 8, 28, .99));
-    border: 1px solid #168bff;
-    box-shadow:
-        0 0 12px rgba(0, 145, 255, .72),
-        0 0 35px rgba(0, 110, 255, .48),
-        inset 0 0 28px rgba(0, 145, 255, .12);
-    animation: popupIn .45s ease, domainPulse 2.6s ease-in-out infinite alternate;
+  position: relative;
+  padding: 12px;
+  background: linear-gradient(145deg, rgba(0, 25, 67, .96), rgba(1, 7, 27, .98));
+  border: 1px solid rgba(0, 145, 255, .95);
+  clip-path: none;
+  border-radius: 5px;
+  box-shadow: 0 0 12px rgba(0, 132, 255, .65), 0 0 42px rgba(0, 106, 255, .36), inset 0 0 26px rgba(0, 128, 255, .12);
+}
+.custom-alert-box.enter-domain-only::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(109, 219, 255, .6);
+  pointer-events: none;
+  border-radius: inherit;
+  animation: domainBorderPulse 2.4s ease-in-out infinite alternate;
 }
 .popup-button {
-    color: #ffffff;
-    background: linear-gradient(100deg, #006bff, #00aaff);
-    border: 1px solid #76d8ff;
-    box-shadow: 0 0 16px rgba(0, 145, 255, .7), inset 0 0 12px rgba(255,255,255,.12);
-    text-shadow: 0 0 8px rgba(255,255,255,.45);
+  position: relative;
+  overflow: hidden;
+  min-height: 58px;
+  color: #fff;
+  border: 1px solid #8feaff;
+  border-radius: 3px;
+  background: linear-gradient(100deg, #0057ff 0%, #008cff 48%, #00cfff 100%);
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(.82rem, 2.7vw, 1rem);
+  font-weight: 900;
+  letter-spacing: 2.4px;
+  text-shadow: 0 0 10px rgba(255,255,255,.7);
+  box-shadow: 0 0 14px rgba(0, 145, 255, .9), 0 0 32px rgba(0, 119, 255, .48), inset 0 1px 0 rgba(255,255,255,.45);
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+.popup-button::after {
+  content: "";
+  position: absolute;
+  top: -50%; left: -35%;
+  width: 24%; height: 200%;
+  background: rgba(255,255,255,.32);
+  transform: rotate(24deg);
+  transition: left .55s ease;
 }
 .popup-button:hover {
-    color: #ffffff;
-    background: linear-gradient(100deg, #008cff, #32c8ff);
-    box-shadow: 0 0 22px #168bff, 0 0 48px rgba(0,145,255,.6);
+  color: #fff;
+  background: linear-gradient(100deg, #0871ff, #00cfff);
+  box-shadow: 0 0 20px #008cff, 0 0 48px rgba(0, 145, 255, .72);
+  filter: brightness(1.12);
+  transform: translateY(-2px);
 }
-.popup-button small { color: #d7f3ff; }
-@keyframes domainPulse {
-    from { box-shadow: 0 0 12px rgba(0,145,255,.55), 0 0 28px rgba(0,110,255,.28), inset 0 0 22px rgba(0,145,255,.08); }
-    to { box-shadow: 0 0 20px rgba(0,170,255,.8), 0 0 48px rgba(0,110,255,.48), inset 0 0 30px rgba(0,145,255,.16); }
+.popup-button:hover::after { left: 120%; }
+.popup-button small { color: #d7f6ff; }
+@keyframes domainBorderPulse {
+  from { opacity: .35; box-shadow: 0 0 5px rgba(0,145,255,.2); }
+  to { opacity: 1; box-shadow: 0 0 18px rgba(0,145,255,.55); }
 }
-.hero h1, .section-heading h2, .anime-info h3, .audio-title, .footer-title {
-    text-shadow: 0 0 12px rgba(0, 145, 255, .20);
+
+.hero h1 {
+  color: #f6fbff;
+  text-shadow: 0 0 8px rgba(0, 155, 255, .85), 0 0 26px rgba(0, 110, 255, .58), 0 0 58px rgba(0, 196, 255, .24);
 }
+.hero h1 span, .section-heading h2 span { color: #42c9ff; }
 .hero-line, .footer-line {
-    background: linear-gradient(90deg, #087bff, #00d5ff, #6478ff);
-    box-shadow: 0 0 16px rgba(0,145,255,.4);
+  background: linear-gradient(90deg, transparent, #087bff, #5ceaff, #087bff, transparent);
+  box-shadow: 0 0 18px rgba(0, 151, 255, .68);
 }
+.eyebrow {
+  border-color: rgba(0, 154, 255, .42);
+  background: rgba(0, 113, 255, .09);
+  box-shadow: inset 0 0 18px rgba(0, 119, 255, .06);
+}
+.section-heading { border-bottom-color: rgba(0, 145, 255, .34); }
+.section-heading h2, .anime-info h3, .audio-title { text-shadow: 0 0 16px rgba(0, 132, 255, .18); }
 .watched-item, .anime-card, .audio-card {
-    border-color: rgba(60, 145, 255, .22);
-    box-shadow: 0 8px 26px rgba(0, 8, 28, .20);
-    backdrop-filter: blur(8px);
+  background: linear-gradient(145deg, rgba(4, 19, 48, .94), rgba(2, 8, 26, .91));
+  border-color: rgba(66, 158, 255, .25);
+  box-shadow: inset 0 1px 0 rgba(156, 218, 255, .055), 0 12px 30px rgba(0, 0, 0, .12);
+  backdrop-filter: blur(8px);
 }
-.watched-item:hover, .anime-card:hover, .audio-card:hover, .audio-card.is-playing {
-    border-color: #168bff;
-    box-shadow: 0 0 24px rgba(0, 119, 255, .22);
+.watched-item::before, .anime-card::before, .audio-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(91, 207, 255, .85), transparent);
+  opacity: .75;
+  pointer-events: none;
 }
-.anime-card.eren, .anime-card.jinwoo, .anime-card.sukuna,
-.audio-card.eren-audio, .audio-card.jinwoo-audio, .audio-card.sukuna-audio {
-    --accent: #168bff;
-    --audio-accent: #168bff;
+.watched-item:hover {
+  border-color: #168bff;
+  box-shadow: 0 0 24px rgba(0, 125, 255, .2), inset 0 0 24px rgba(0, 125, 255, .07);
 }
-.card-topline {
-    background: linear-gradient(90deg, #006bff, #00d5ff);
+.anime-card { --accent: #16a0ff; }
+.anime-card.jinwoo { --accent: #6b8cff; }
+.anime-card.sukuna { --accent: #37d9ff; }
+.anime-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 18px 42px rgba(0, 8, 25, .48), 0 0 25px color-mix(in srgb, var(--accent) 26%, transparent);
 }
-.audio-visualizer span { background: var(--audio-accent); }
+.card-topline { background: linear-gradient(90deg, var(--accent), #b5f4ff, var(--accent)); }
+.card-number { backdrop-filter: blur(8px); }
+.anime-image-wrap::after {
+  background: linear-gradient(180deg, transparent 35%, rgba(2, 8, 25, .25) 58%, rgba(2, 8, 25, .98));
+}
+.audio-card { --audio-accent: #16a0ff; }
+.audio-card.jinwoo-audio { --audio-accent: #6b8cff; }
+.audio-card.sukuna-audio { --audio-accent: #37d9ff; }
+.audio-card:hover, .audio-card.is-playing {
+  border-color: var(--audio-accent);
+  box-shadow: 0 0 26px color-mix(in srgb, var(--audio-accent) 22%, transparent), inset 0 0 22px rgba(0, 110, 255, .055);
+}
+.audio-icon, .play-button {
+  box-shadow: inset 0 0 16px rgba(0, 126, 255, .09), 0 0 12px color-mix(in srgb, var(--audio-accent) 18%, transparent);
+}
+.audio-visualizer {
+  border: 1px solid rgba(0, 145, 255, .13);
+  background: linear-gradient(90deg, rgba(0, 72, 185, .14), rgba(0, 196, 255, .09), rgba(0, 72, 185, .14));
+}
+.audio-visualizer span { background: linear-gradient(180deg, #b6f6ff, var(--audio-accent)); }
 .seek-bar, .volume-bar { accent-color: #168bff; }
+.seek-bar::-webkit-slider-thumb, .volume-bar::-webkit-slider-thumb { box-shadow: 0 0 10px var(--audio-accent); }
+.footer { border-top-color: rgba(0, 145, 255, .28); }
+.footer-title { text-shadow: 0 0 14px rgba(0, 145, 255, .5); }
+.anime-video-box {
+  background: linear-gradient(145deg, rgba(3, 21, 55, .99), rgba(1, 5, 20, .99));
+  box-shadow: 0 0 30px rgba(0, 126, 255, .25), 0 0 70px rgba(0,0,0,.5);
+}
+@media (max-width: 600px) {
+  .custom-alert-box.enter-domain-only { padding: 10px; }
+  .popup-button { min-height: 54px; letter-spacing: 1.6px; }
+}
 @media (prefers-reduced-motion: reduce) {
-    .custom-alert-box.enter-domain-only { animation: none; }
+  .custom-alert-box.enter-domain-only::before { animation: none; }
 }
 
 </style>
@@ -1879,4 +1962,3 @@ if ("IntersectionObserver" in window) {
 
 </body>
 </html>
-```
