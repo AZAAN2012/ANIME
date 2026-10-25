@@ -1855,7 +1855,7 @@ if ("IntersectionObserver" in window) {
         } catch (error) {
             console.warn('Closing audio could not play:', error);
             if (domainClosingOverlay) {
-                domainClosingOverlay.textContent = 'DOMAIN CLOSED — AUDIO BLOCKED';
+                domainClosingOverlay.textContent = 'YOU ARE WEAK — AUDIO BLOCKED';
             }
             return false;
         }
@@ -1867,7 +1867,7 @@ if ("IntersectionObserver" in window) {
             const playback = playClosingAudio(true);
             if (domainClosingOverlay) domainClosingOverlay.classList.add('is-visible');
             closeDomainButton.disabled = true;
-            closeDomainButton.textContent = 'DOMAIN CLOSED';
+            closeDomainButton.textContent = 'YOU ARE WEAK';
             await playback;
         });
     }
