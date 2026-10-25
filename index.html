@@ -1833,41 +1833,48 @@ if ("IntersectionObserver" in window) {
 
 
 
-/* CLOSING AUDIO FEATURE — exit button plus best-effort page-leave detection */
+/* CLOSING AUDIO FEATURE — reliable user-click playback */
 (() => {
     const closingAudio = document.getElementById('closingDomainAudio');
     const closeDomainButton = document.getElementById('closeDomainButton');
     const domainClosingOverlay = document.getElementById('domainClosingOverlay');
-    let closingStarted = false;
 
-    function playClosingAudio() {
-        if (!closingAudio || closingStarted) return;
-        closingStarted = true;
+    async function playClosingAudio(fromButton = false) {
+        if (!closingAudio) return false;
         try {
-            closingAudio.currentTime = 0;
-            const playback = closingAudio.play();
-            if (playback && typeof playback.catch === 'function') {
-                playback.catch(() => { /* Browsers may block audio during page exit. */ });
+            // Retry playback on every intentional button click; don't let a page-hide
+            // attempt prevent the user's click from trying again.
+            if (fromButton) {
+                closingAudio.pause();
+                closingAudio.currentTime = 0;
             }
-        } catch (_) { /* Page-exit audio is best-effort only. */ }
+            closingAudio.volume = 1;
+            const result = closingAudio.play();
+            if (result && typeof result.then === 'function') await result;
+            return true;
+        } catch (error) {
+            console.warn('Closing audio could not play:', error);
+            if (domainClosingOverlay) {
+                domainClosingOverlay.textContent = 'DOMAIN CLOSED — AUDIO BLOCKED';
+            }
+            return false;
+        }
     }
 
     if (closeDomainButton) {
-        closeDomainButton.addEventListener('click', () => {
-            playClosingAudio();
+        closeDomainButton.addEventListener('click', async () => {
+            // Call play() immediately within the user gesture before changing the UI.
+            const playback = playClosingAudio(true);
             if (domainClosingOverlay) domainClosingOverlay.classList.add('is-visible');
             closeDomainButton.disabled = true;
             closeDomainButton.textContent = 'DOMAIN CLOSED';
-            // Browsers generally prevent scripts from closing tabs they did not open.
+            await playback;
         });
     }
 
-    // Best effort only: most browsers interrupt audio when a tab is closed or navigated away.
-    window.addEventListener('pagehide', playClosingAudio, { capture: true });
-    window.addEventListener('beforeunload', playClosingAudio, { capture: true });
-    document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden') playClosingAudio();
-    });
+    // Leaving-page playback is best-effort; browsers may stop it immediately.
+    window.addEventListener('pagehide', () => { playClosingAudio(false); }, { capture: true });
+    window.addEventListener('beforeunload', () => { playClosingAudio(false); }, { capture: true });
 })();
 
 </script>
