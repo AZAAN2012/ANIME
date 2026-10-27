@@ -1079,6 +1079,40 @@ input:focus-visible {
 #domainClosingOverlay.is-visible { display: grid; }
 @media (max-width: 600px) { #closeDomainButton { right: 10px; bottom: 10px; padding: 10px 12px; font-size: .68rem; } }
 
+
+
+/* GOJO DOMAIN UPGRADE — cosmic depth, animated stats, polished cards and responsive controls */
+:root { --domain-glow: rgba(34, 211, 238, .24); }
+body { background-attachment: fixed; }
+body::before { background-image: radial-gradient(circle at 18% 18%, rgba(34,211,238,.07), transparent 28%), radial-gradient(circle at 82% 30%, rgba(139,92,246,.10), transparent 30%), linear-gradient(rgba(0,245,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,245,255,.035) 1px, transparent 1px); }
+.domain-stats { width: min(760px, 100%); margin: 28px auto 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.domain-stat { position: relative; overflow: hidden; padding: 17px 10px 15px; border: 1px solid rgba(34,211,238,.24); background: linear-gradient(135deg, rgba(6,18,42,.82), rgba(28,12,57,.66)); box-shadow: inset 0 0 22px rgba(34,211,238,.035), 0 0 22px rgba(139,92,246,.05); backdrop-filter: blur(8px); }
+.domain-stat::after { content: ""; position: absolute; left: 18%; right: 18%; bottom: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), transparent); opacity: .85; }
+.domain-stat-number { display: block; color: #fff; font: 800 clamp(1.45rem, 4vw, 2.25rem)/1.2 'Orbitron', sans-serif; text-shadow: 0 0 15px rgba(34,211,238,.55); }
+.domain-stat-label { display: block; margin-top: 7px; color: var(--muted); font: 700 clamp(.52rem, 1.5vw, .68rem)/1.4 'Orbitron', sans-serif; letter-spacing: 1.2px; }
+.domain-stat-number.counted { animation: statFlash .55s ease-out; }
+@keyframes statFlash { 0% { filter: brightness(2.2); transform: translateY(4px); } 100% { filter: brightness(1); transform: translateY(0); } }
+.anime-card { isolation: isolate; }
+.anime-card::before { content: ""; position: absolute; inset: 3px; z-index: 0; pointer-events: none; opacity: 0; border: 1px solid var(--accent); box-shadow: inset 0 0 24px color-mix(in srgb, var(--accent) 12%, transparent); transition: opacity .3s ease; }
+.anime-card:hover::before, .anime-card:focus-visible::before { opacity: 1; }
+.anime-info, .anime-image-wrap, .card-topline { position: relative; z-index: 1; }
+.audio-card { background-image: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--audio-accent) 9%, transparent), transparent 55%); }
+.audio-card.is-playing .audio-visualizer span { filter: drop-shadow(0 0 4px var(--audio-accent)); }
+#electricParticles { opacity: .58; }
+#closeDomainButton { max-width: calc(100vw - 20px); backdrop-filter: blur(10px); }
+@media (max-width: 600px) {
+  .domain-stats { gap: 7px; margin-top: 22px; }
+  .domain-stat { padding: 13px 5px 12px; }
+  .domain-stat-label { letter-spacing: .4px; }
+  .anime-image-wrap { height: clamp(220px, 68vw, 300px); }
+  .section-heading { gap: 10px; flex-wrap: wrap; }
+  .section-code { max-width: 45%; line-height: 1.5; }
+  .audio-controls { gap: 9px; }
+  .play-button { width: 44px; height: 44px; }
+}
+@media (hover: none) { .anime-card:hover, .audio-card:hover, .watched-item:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .domain-stat-number.counted { animation: none; } }
+
 </style>
 </head>
 
@@ -1126,6 +1160,13 @@ input:focus-visible {
         <h1>ANIMES <span>WATCHED</span></h1>
 
         <div class="hero-line"></div>
+
+        <!-- DOMAIN STATS UPGRADE: calculated from the existing anime cards -->
+        <div class="domain-stats" aria-label="Anime collection statistics">
+            <div class="domain-stat"><span class="domain-stat-number" data-stat="total">0</span><span class="domain-stat-label">ANIME ENTRIES</span></div>
+            <div class="domain-stat"><span class="domain-stat-number" data-stat="completed">0</span><span class="domain-stat-label">COMPLETED</span></div>
+            <div class="domain-stat"><span class="domain-stat-number" data-stat="paused">0</span><span class="domain-stat-label">IN PROGRESS / PAUSED</span></div>
+        </div>
 
     </div>
 </header>
@@ -1875,6 +1916,33 @@ if ("IntersectionObserver" in window) {
     // Leaving-page playback is best-effort; browsers may stop it immediately.
     window.addEventListener('pagehide', () => { playClosingAudio(false); }, { capture: true });
     window.addEventListener('beforeunload', () => { playClosingAudio(false); }, { capture: true });
+})();
+
+
+
+/* DOMAIN STATS — values are derived from the existing collection, not hard-coded */
+(() => {
+    const cards = [...document.querySelectorAll('.anime-card')];
+    const listItems = [...document.querySelectorAll('.watched-item')];
+    const completed = listItems.filter(item => /COMPLETED/i.test(item.querySelector('.watched-status')?.textContent || '')).length;
+    const paused = cards.filter(card => /PAUSED|REMAINING|IN PROGRESS/i.test(card.querySelector('.anime-details')?.textContent || '')).length;
+    const values = { total: cards.length, completed, paused };
+    const counters = [...document.querySelectorAll('[data-stat]')];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    counters.forEach(el => {
+        const target = Number(values[el.dataset.stat] ?? 0);
+        if (reduceMotion) { el.textContent = String(target); return; }
+        const start = performance.now();
+        const duration = 850;
+        function tick(now) {
+            const progress = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = String(Math.round(target * eased));
+            if (progress < 1) requestAnimationFrame(tick);
+            else el.classList.add('counted');
+        }
+        requestAnimationFrame(tick);
+    });
 })();
 
 </script>
