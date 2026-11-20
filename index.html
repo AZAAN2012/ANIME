@@ -1701,6 +1701,7 @@ const animeVideoFrame = document.getElementById("animeVideoFrame");
 const animeVideoTitle = document.getElementById("animeVideoTitle");
 const closeAnimeVideo = document.getElementById("closeAnimeVideo");
 const videoCards = document.querySelectorAll(".anime-card[data-video-id]");
+let resumeBackgroundMusicAfterVideo = false;
 
 function openAnimeVideo(card) {
     const videoId = card.dataset.videoId;
@@ -1726,6 +1727,15 @@ function closeAnimeVideoPopup() {
     animeVideoPopup.setAttribute("aria-hidden", "true");
     animeVideoFrame.replaceChildren();
     document.body.style.overflow = "";
+
+    // Resume the domain background music only if it was playing before the video opened.
+    const music = document.getElementById("backgroundMusic");
+    if (resumeBackgroundMusicAfterVideo && music) {
+        music.play().catch(error => {
+            console.error("Background music could not resume:", error);
+        });
+    }
+    resumeBackgroundMusicAfterVideo = false;
 }
 
 function stopDomainBackgroundMusic() {
@@ -1739,6 +1749,8 @@ function stopDomainBackgroundMusic() {
 videoCards.forEach(card => {
     card.addEventListener("click", () => {
         animeCardMagicOpened = true;
+        const music = document.getElementById("backgroundMusic");
+        resumeBackgroundMusicAfterVideo = Boolean(music && !music.paused);
         stopDomainBackgroundMusic();
         openAnimeVideo(card);
     });
@@ -1746,6 +1758,8 @@ videoCards.forEach(card => {
         if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             animeCardMagicOpened = true;
+            const music = document.getElementById("backgroundMusic");
+            resumeBackgroundMusicAfterVideo = Boolean(music && !music.paused);
             stopDomainBackgroundMusic();
             openAnimeVideo(card);
         }
