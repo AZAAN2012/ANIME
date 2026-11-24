@@ -1095,6 +1095,16 @@ input:focus-visible {
     text-shadow: 0 0 18px rgba(34, 211, 238, .8);
 }
 #domainClosingOverlay.is-visible { display: grid; }
+body.sukuna-mode #domainClosingOverlay {
+    color: #ff354d;
+    background: rgba(18, 0, 5, .96);
+    text-shadow: 0 0 10px rgba(255, 25, 55, .95), 0 0 28px rgba(255, 25, 55, .7);
+}
+body.sukuna-mode #closeDomainButton {
+    border-color: #ff354d;
+    color: #ffe5e8;
+    box-shadow: 0 0 12px rgba(255, 25, 55, .5), inset 0 0 10px rgba(255, 25, 55, .12);
+}
 @media (max-width: 600px) { #closeDomainButton { right: 10px; bottom: 10px; padding: 10px 12px; font-size: .68rem; } }
 
 
@@ -1369,6 +1379,7 @@ body:not(.sukuna-mode) #domainLoadingScreen .void-loading-line:after{background:
         <audio id="backgroundMusic" src="./BACKGROUND%20MUSIC.mp3.mp3" preload="auto" loop></audio>
         <audio id="sukunaModeIntro" src="./gambale.mp3" preload="auto"></audio>
         <audio id="sukunaBackgroundMusic" src="./SPECIALZ_.mp3" preload="auto" loop></audio>
+        <audio id="sukunaClosingAudio" src="./sukuna-saying-know-your-place-fool-made-with-Voicemod.mp3" preload="auto"></audio>
         <button class="popup-button" id="understoodButton" aria-label="Enter the domain and play Gojo voice">
             ENTER THE DOMAIN
         </button>
@@ -2158,30 +2169,33 @@ if ("IntersectionObserver" in window) {
 
 
 
-/* CLOSING AUDIO FEATURE — reliable user-click playback */
+/* GOJO / SUKUNA CLOSING AUDIO — mode-aware close button */
 (() => {
-    const closingAudio = document.getElementById('closingDomainAudio');
+    const gojoClosingAudio = document.getElementById('closingDomainAudio');
+    const sukunaClosingAudio = document.getElementById('sukunaClosingAudio');
     const closeDomainButton = document.getElementById('closeDomainButton');
     const domainClosingOverlay = document.getElementById('domainClosingOverlay');
 
     async function playClosingAudio(fromButton = false) {
-        if (!closingAudio) return false;
+        const isSukuna = document.body.classList.contains('sukuna-mode');
+        const audio = isSukuna ? sukunaClosingAudio : gojoClosingAudio;
+        if (!audio) return false;
         try {
-            // Retry playback on every intentional button click; don't let a page-hide
-            // attempt prevent the user's click from trying again.
             if (fromButton) {
-                [document.getElementById('backgroundMusic'), document.getElementById('sukunaBackgroundMusic')].forEach(a => { if (a) { a.pause(); a.currentTime = 0; } });
-                closingAudio.pause();
-                closingAudio.currentTime = 0;
+                [document.getElementById('backgroundMusic'), document.getElementById('sukunaBackgroundMusic')].forEach(a => {
+                    if (a) { a.pause(); a.currentTime = 0; }
+                });
+                audio.pause();
+                audio.currentTime = 0;
             }
-            closingAudio.volume = 1;
-            const result = closingAudio.play();
+            audio.volume = 1;
+            const result = audio.play();
             if (result && typeof result.then === 'function') await result;
             return true;
         } catch (error) {
             console.warn('Closing audio could not play:', error);
             if (domainClosingOverlay) {
-                domainClosingOverlay.textContent = 'YOU ARE WEAK — AUDIO BLOCKED';
+                domainClosingOverlay.textContent = isSukuna ? 'KNOW YOUR PLACE, FOOL — AUDIO BLOCKED' : 'YOU ARE WEAK — AUDIO BLOCKED';
             }
             return false;
         }
@@ -2189,19 +2203,18 @@ if ("IntersectionObserver" in window) {
 
     if (closeDomainButton) {
         closeDomainButton.addEventListener('click', async () => {
-            // Stop the looping background music immediately when the domain closes.
-            const backgroundMusic = document.getElementById('backgroundMusic');
-            if (backgroundMusic) {
-                backgroundMusic.pause();
-                backgroundMusic.currentTime = 0;
+            const isSukuna = document.body.classList.contains('sukuna-mode');
+            const closingText = isSukuna ? 'KNOW YOUR PLACE, FOOL' : 'YOU ARE WEAK';
+            [document.getElementById('backgroundMusic'), document.getElementById('sukunaBackgroundMusic')].forEach(a => {
+                if (a) { a.pause(); a.currentTime = 0; }
+            });
+            if (domainClosingOverlay) {
+                domainClosingOverlay.textContent = closingText;
+                domainClosingOverlay.classList.add('is-visible');
             }
-
-            // Then play the existing Yowaimo closing voice from this button click.
-            const playback = playClosingAudio(true);
-            if (domainClosingOverlay) domainClosingOverlay.classList.add('is-visible');
             closeDomainButton.disabled = true;
-            closeDomainButton.textContent = 'YOU ARE WEAK';
-            await playback;
+            closeDomainButton.textContent = closingText;
+            await playClosingAudio(true);
         });
     }
 
@@ -2209,7 +2222,6 @@ if ("IntersectionObserver" in window) {
     window.addEventListener('pagehide', () => { playClosingAudio(false); }, { capture: true });
     window.addEventListener('beforeunload', () => { playClosingAudio(false); }, { capture: true });
 })();
-
 
 
 /* DOMAIN STATS — values are derived from the existing collection, not hard-coded */
